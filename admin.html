@@ -921,7 +921,7 @@ window.closeMo = function(id) {
 // Global click listener to close modals when clicking outside
 document.addEventListener('click', e => {
   if(e.target.classList.contains('mo')) {
-      if (e.target.id !== 'moProduct' && e.target.id !== 'moRental') {
+      if (e.target.id !== 'moProduct' && e.target.id !== 'moRental' && e.target.id !== 'moCareerPost') {
           e.target.classList.remove('open');
       }
   }
@@ -930,7 +930,7 @@ document.addEventListener('click', e => {
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape') {
      document.querySelectorAll('.mo.open').forEach(m => {
-       if(m.id !== 'moProduct' && m.id !== 'moRental') m.classList.remove('open');
+       if(m.id !== 'moProduct' && m.id !== 'moRental' && m.id !== 'moCareerPost') m.classList.remove('open');
      });
   }
 });

@@ -27,8 +27,26 @@
             <!-- Desktop Menu -->
             <ul class="nav-menu">
                 <li><a href="about.html" class="nav-link"><i class="fa-solid fa-circle-info"></i> <span data-translate="nav_about">Our Story</span></a></li>
-                <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> <span data-translate="nav_services">Services</span></a></li>
-                <li><a href="products.html" class="nav-link"><i class="fa-solid fa-shop"></i> <span data-translate="nav_shop">Shop</span></a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-link"><i class="fa-solid fa-building"></i> <span data-translate="nav_business">Our Business</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="products.html" class="nav-dropdown-item">
+                            <i class="fa-solid fa-shop"></i>
+                            <div>
+                                <div data-translate="nav_shop" style="font-weight: 600;">Shop</div>
+                                <div style="font-size: 0.8em; color: #888; margin-top: 2px;" data-translate="nav_manufacturing_desc">CNC parts & office furniture</div>
+                            </div>
+                        </a>
+                        <a href="building-rental.html" class="nav-dropdown-item">
+                            <i class="fa-solid fa-industry"></i>
+                            <div>
+                                <div data-translate="nav_rental" style="font-weight: 600;">Factory & Office Rental</div>
+                                <div style="font-size: 0.8em; color: #888; margin-top: 2px;" data-translate="nav_rental_desc">Premium industrial spaces</div>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> <span data-translate="nav_services">Careers</span></a></li>
                 <li><a href="contact.html" class="nav-link"><i class="fa-solid fa-envelope"></i> <span data-translate="nav_contact">Contact</span></a></li>
             </ul>
 
@@ -67,381 +85,258 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero hero-ikea-split">
-        <div class="hero-content container">
-            <div class="ikea-split home-hero-grid">
-                <a class="ikea-tile ikea-tile-image fade-in" href="products.html" style="background-image:url('images/cabinet.jpg');" data-bg-key="h_hero_bg">
-                    <div class="ikea-image-overlay">
-                        <div class="hero-feature-badge">
-                            <span class="hero-feature-dot"></span>
-                            <span>Smart Manufacturing</span>
-                        </div>
-                        <div class="ikea-kicker" data-translate="about_sub">Leading the way in Cambodian Manufacturing</div>
-                        <h1 data-translate="hero_title">Precision Metal &amp; <span class="highlight">Office Solutions</span></h1>
-                        <p class="ikea-hero-desc" data-translate="hero_desc">From industrial CNC parts to premium steel office furniture. Quality manufacturing made in Cambodia.</p>
-                        <div class="hero-quick-actions">
-                            <span class="hero-mini-pill"><i class="fa-solid fa-shield-halved"></i> ISO Ready</span>
-                            <span class="hero-mini-pill"><i class="fa-solid fa-bolt"></i> Fast Turnaround</span>
-                            <span class="hero-mini-pill"><i class="fa-solid fa-location-dot"></i> Cambodia</span>
-                        </div>
-                        <div class="hero-vertical-buttons">
-                            <a href="products.html" class="vert-btn vert-btn-primary" data-translate="btn_shop">Shop Products</a>
-                            <a href="contact.html" class="vert-btn vert-btn-outline" data-translate="btn_get_quote">Get Free Quote</a>
-                        </div>
-                        <!-- Floating stats removed -->
-                        <div class="ikea-slide-dots" aria-label="Hero slides"></div>
+    <!-- Cinematic Hero Section -->
+    <section class="sailun-hero fade-in">
+        <div class="sailun-hero-bg hero-slideshow" id="heroSlideshow">
+            <div class="slide active" style="background-image:url('images/backgroud_1.png')" data-bg-key="h_hero_bg"></div>
+        </div>
+        <div class="sailun-hero-overlay"></div>
+        <div class="container sailun-hero-content">
+            <h1 class="fade-in-scale" data-translate="hero_title">Precision Metal & Office Solutions</h1>
+            <p class="fade-in" data-translate="hero_desc">From industrial CNC parts to premium steel office furniture. Quality manufacturing made in Cambodia.</p>
+            <div class="sailun-hero-actions fade-in">
+                <a href="about.html" class="btn btn-outline sailun-outline" data-translate="about_preview_btn">Read Our Story</a>
+            </div>
+        </div>
+        
+        <div class="sailun-hero-stats-bar fade-in">
+            <div class="container">
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <strong class="stat-number">500+</strong>
+                        <span class="stat-label" data-translate="stat_projects">Projects Completed</span>
                     </div>
-                </a>
-                <div class="ikea-tile ikea-tile-cta fade-in">
-                    <div class="ikea-cta-wrap">
-                        <div class="ikea-cta-top">
-                            <div class="ikea-cta-label" data-translate="about_preview_title">About LittleMaker</div>
-                            <a class="ikea-cta-round" href="about.html" aria-label="About"><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                        <p class="ikea-cta-desc" data-translate="about_preview_desc">We are Cambodia's leading manufacturer of precision metal components and modern office furniture. With years of experience, we deliver quality that exceeds expectations.</p>
-                        <div class="home-side-highlights">
-                            <div class="home-side-card">
-                                <i class="fa-solid fa-award"></i>
-                                <div>
-                                    <strong data-translate="why_quality">Premium Quality</strong>
-                                    <span data-translate="why_quality_desc">Every product undergoes strict quality control with ISO 9001 standards.</span>
-                                </div>
-                            </div>
-                            <div class="home-side-card">
-                                <i class="fa-solid fa-gears"></i>
-                                <div>
-                                    <strong data-translate="why_custom">Custom Solutions</strong>
-                                    <span data-translate="why_custom_desc">We design and manufacture to your exact specifications and requirements.</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ikea-chips" aria-label="Categories">
-                            <a class="ikea-chip" href="products.html?category=tables"><span data-translate="filter_tables">Tables</span></a>
-                            <a class="ikea-chip" href="products.html?category=cabinets"><span data-translate="filter_cabinets">Cabinets</span></a>
-                            <a class="ikea-chip" href="products.html?category=grills"><span data-translate="filter_grills">Grills</span></a>
-                            <a class="ikea-chip" href="careers.html"><span data-translate="feat_ind">Industrial Parts</span></a>
-                        </div>
-
+                    <div class="stat-item">
+                        <strong class="stat-number">10+</strong>
+                        <span class="stat-label" data-translate="stat_years">Years Experience</span>
                     </div>
-                    <div class="ikea-cta-bottom modern-stats-container">
-                        <div class="modern-stat-card">
-                            <strong>500+</strong>
-                            <span data-translate="stat_projects">Projects Completed</span>
-                        </div>
-                        <div class="modern-stat-card">
-                            <strong>10+</strong>
-                            <span data-translate="stat_years">Years Experience</span>
-                        </div>
+                    <div class="stat-item">
+                        <strong class="stat-number">ISO</strong>
+                        <span class="stat-label">9001 Compliant</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="home-spotlight-band">
-        <div class="container">
-            <div class="home-spotlight-grid">
-                <a href="careers.html" class="home-spotlight-card fade-in">
-                    <span class="spotlight-icon"><i class="fa-solid fa-gears"></i></span>
-                    <strong data-translate="feat_ind">Industrial Parts</strong>
-                    <p data-translate="feat_ind_desc">CNC machining and custom metal fabrication.</p>
-                </a>
-                <a href="products.html" class="home-spotlight-card fade-in">
-                    <span class="spotlight-icon"><i class="fa-solid fa-shop"></i></span>
-                    <strong data-translate="feat_off">Office Furniture</strong>
+    <!-- Brand Matrix & Products Grid -->
+    <section class="sailun-matrix">
+        <div class="matrix-grid">
+            <a href="products.html" class="matrix-card fade-in">
+                <div class="matrix-bg" style="background-image: url('images/cabinet.jpg');" data-bg-key="h_feat_off_bg"></div>
+                <div class="matrix-content">
+                    <h2 data-translate="feat_off">Office Furniture</h2>
                     <p data-translate="feat_off_desc">Modern desks, cabinets, and storage.</p>
-                </a>
-                <a href="building-rental.html" class="home-spotlight-card fade-in">
-                    <span class="spotlight-icon"><i class="fa-solid fa-building"></i></span>
-                    <strong data-translate="serv_rental">Building Rental</strong>
-                    <p data-translate="serv_rental_desc">Premium commercial buildings and factory spaces for rent with flexible terms.</p>
-                </a>
+                    <span class="matrix-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <a href="careers.html" class="matrix-card fade-in">
+                <div class="matrix-bg" style="background-image: url('images/Husky1.png');" data-bg-key="h_feat_ind_bg"></div>
+                <div class="matrix-content">
+                    <h2 data-translate="nav_careers">Careers</h2>
+                    <p data-translate="car_sub">Build your career with Cambodia's leading manufacturer</p>
+                    <span class="matrix-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <a href="building-rental.html" class="matrix-card fade-in">
+                <div class="matrix-bg" style="background-image: url('images/backgroud_1.png');" data-bg-key="h_serv_rental_bg"></div>
+                <div class="matrix-content">
+                    <h2 data-translate="serv_rental">Building Rental</h2>
+                    <p data-translate="serv_rental_desc">Premium commercial buildings and factory spaces for rent.</p>
+                    <span class="matrix-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Core Values & Culture (Split Layout) -->
+    <section class="sailun-split-section">
+        <div class="split-image fade-in-left">
+            <div class="split-bg" style="background-image: url('images/R2.png');" data-bg-key="h_about_img"></div>
+        </div>
+        <div class="split-text fade-in-right">
+            <h4 class="sub-heading" data-translate="about_who">Corporate Culture</h4>
+            <h2 data-translate="why_sub">Trust, Respect & Quality</h2>
+            <p data-translate="about_preview_desc">We are Cambodia's leading manufacturer of precision metal components and modern office furniture. With years of experience, we deliver quality that exceeds expectations.</p>
+            
+            <div class="split-features">
+                <div class="split-feature-item">
+                    <i class="fa-solid fa-medal"></i>
+                    <div>
+                        <strong data-translate="why_quality">Premium Quality</strong>
+                        <p data-translate="why_quality_desc">Every product undergoes strict quality control with ISO 9001 standards.</p>
+                    </div>
+                </div>
+                <div class="split-feature-item">
+                    <i class="fa-solid fa-gears"></i>
+                    <div>
+                        <strong data-translate="why_custom">Custom Solutions</strong>
+                        <p data-translate="why_custom_desc">We design and manufacture to your exact specifications and requirements.</p>
+                    </div>
+                </div>
+                <div class="split-feature-item">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <div>
+                        <strong data-translate="why_fast">Fast Delivery</strong>
+                        <p data-translate="why_fast_desc">Quick turnaround times with reliable delivery across Cambodia.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Company Intro -->
-    <section class="company-intro">
-        <div class="container">
-            <div class="company-intro-grid">
-                <div class="company-intro-text fade-in-left">
-                    <h4 class="sub-heading" data-translate="about_who">Who We Are</h4>
-                    <h2 data-translate="about_title">Leading Metal Solutions in Cambodia</h2>
-                    <p data-translate="about_p1">LITTLEMAKER CAMBODIA is a premier manufacturing partner specializing in high-quality metal components and modern office furniture. We combine local expertise with international manufacturing standards.</p>
-                    <div class="company-intro-actions">
-                        <a href="about.html" class="btn btn-primary" data-translate="about_preview_btn">Read Our Story</a>
-                        <a href="contact.html" class="btn btn-outline company-outline-dark" data-translate="btn_contact">Contact Us Today</a>
-                    </div>
-                </div>
-                <div class="company-intro-cards fade-in-right">
-                    <div class="company-mini-card">
-                        <div class="company-mini-icon"><i class="fa-solid fa-award"></i></div>
-                        <div>
-                            <h3 data-translate="why_quality">Premium Quality</h3>
-                            <p data-translate="why_quality_desc">Every product undergoes strict quality control with ISO 9001 standards.</p>
-                        </div>
-                    </div>
-                    <div class="company-mini-card">
-                        <div class="company-mini-icon"><i class="fa-solid fa-gears"></i></div>
-                        <div>
-                            <h3 data-translate="why_custom">Custom Solutions</h3>
-                            <p data-translate="why_custom_desc">We design and manufacture to your exact specifications and requirements.</p>
-                        </div>
-                    </div>
-                    <div class="company-mini-card">
-                        <div class="company-mini-icon"><i class="fa-solid fa-truck-fast"></i></div>
-                        <div>
-                            <h3 data-translate="why_fast">Fast Delivery</h3>
-                            <p data-translate="why_fast_desc">Quick turnaround times with reliable delivery across Cambodia.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Product Matrix & Video Section -->
+    <section class="sailun-matrix-section fade-in">
+        <div class="matrix-video-wrapper">
+            <!-- Video background (Admin can replace the src, or use the poster as fallback) -->
+            <video class="matrix-bg-video" autoplay loop muted playsinline poster="images/matrix_bg.png" data-bg-key="h_matrix_video">
+                <!-- Replace src with actual video URL -->
+                <source src="images/Video1.mp4" type="video/mp4">
+            </video>
+            <!-- Fallback image (if video fails) -->
+            <div class="matrix-bg-image" style="background-image: url('images/matrix_bg.png');" data-bg-key="h_matrix_bg"></div>
         </div>
-    </section>
-
-    <section class="home-promo-banner">
-        <div class="container">
-            <div class="home-promo-wrap fade-in">
-                <div class="home-promo-left">
-                    <div class="home-promo-kicker" data-translate="promo_kicker">Quick Access</div>
-                    <h2 data-translate="promo_title">Shop Products or Explore Rentals</h2>
-                    <p data-translate="promo_desc">Choose what you need today — browse our best-selling products or view available buildings & factory spaces for rent.</p>
-                    <div class="home-promo-actions">
-                        <a href="products.html" class="btn btn-primary"><i class="fa-solid fa-shop"></i> <span data-translate="btn_shop">Shop Products</span></a>
-                        <a href="building-rental.html" class="btn btn-outline home-promo-outline"><i class="fa-solid fa-building"></i> <span data-translate="btn_explore_rental">Explore Properties</span></a>
-                    </div>
-                </div>
-                <div class="home-promo-right">
-                    <a class="home-promo-tile" href="products.html">
-                        <div class="home-promo-ic"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <div>
-                            <strong data-translate="promo_tile_shop">Browse Products</strong>
-                            <span data-translate="promo_tile_shop_desc">Tables, cabinets, grills & more.</span>
-                        </div>
-                        <i class="fa-solid fa-arrow-right home-promo-arrow"></i>
+        
+        <div class="container matrix-container">
+            <div class="matrix-overlay-panel fade-in-left">
+                <h2 data-translate="matrix_title" style="margin-top:0">Product Matrix</h2>
+                <p data-translate="matrix_desc">LittleMaker boasts a diverse portfolio of manufacturing solutions and maintains a comprehensive product portfolio spanning major categories: Precision Metal Components, Modern Office Furniture, and Custom Steel Structures.</p>
+                
+                <div class="matrix-categories">
+                    <a href="products.html" class="matrix-brand-logo">
+                        <i class="fa-solid fa-gears"></i> <span data-translate="cat_metal">Metal Components</span>
                     </a>
-                    <a class="home-promo-tile" href="building-rental.html">
-                        <div class="home-promo-ic"><i class="fa-solid fa-industry"></i></div>
-                        <div>
-                            <strong data-translate="promo_tile_rental">Building & Factory Rental</strong>
-                            <span data-translate="promo_tile_rental_desc">Flexible terms in strategic zones.</span>
-                        </div>
-                        <i class="fa-solid fa-arrow-right home-promo-arrow"></i>
+                    <a href="products.html" class="matrix-brand-logo">
+                        <i class="fa-solid fa-chair"></i> <span data-translate="cat_office">Office Furniture</span>
+                    </a>
+                    <a href="products.html" class="matrix-brand-logo">
+                        <i class="fa-solid fa-building"></i> <span data-translate="cat_steel">Steel Structures</span>
+                    </a>
+                    <a href="products.html" class="matrix-brand-logo">
+                        <i class="fa-solid fa-layer-group"></i> <span data-translate="cat_custom">Custom OEM</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Categories -->
-    <section class="section-padding">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h4 class="sub-heading" data-translate="feat_title">What We Do</h4>
-                <h2 data-translate="feat_sub">Our Core Specialties</h2>
+    <!-- Featured Products Carousel -->
+    <section class="home-featured-section fade-in">
+        <div class="container relative">
+            <div class="section-header text-center" style="margin-bottom: 40px;">
+                <h4 class="sub-heading" data-translate="featured_products_sub">Our Best Selling Items</h4>
+                <h2 data-translate="featured_products">Featured Products</h2>
             </div>
-            <div class="row">
-                <div class="col-half fade-in">
-                    <div class="feature-box" style="background-image: url('images/cabinet.jpg');" data-bg-key="h_feat_off_bg">
-                        <div class="box-overlay">
-                            <h3 data-translate="feat_off">Office Furniture</h3>
-                            <p data-translate="feat_off_desc">Modern desks, cabinets, and storage.</p>
-                            <a href="products.html" class="btn-link" data-translate="btn_view_cat">View Catalog <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-half fade-in">
-                    <div class="feature-box" style="background-image: url('images/Husky1.png');" data-bg-key="h_feat_ind_bg">
-                        <div class="box-overlay">
-                            <h3 data-translate="feat_ind">Industrial Parts</h3>
-                            <p data-translate="feat_ind_desc">CNC machining and custom metal fabrication.</p>
-                            <a href="careers.html" class="btn-link" data-translate="btn_learn">Learn More <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
+            
+            <!-- Carousel Controls & Track -->
+            <div class="product-carousel-wrapper">
+                <button type="button" class="carousel-btn prev-btn" id="carouselPrev"><i class="fa-solid fa-chevron-left"></i></button>
+                
+                <!-- Products will be injected here by loadHomeProducts() in main.js -->
+                <div id="home-featured-products" class="products-carousel-track"></div>
+                
+                <button type="button" class="carousel-btn next-btn" id="carouselNext"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="products.html" class="btn btn-primary" data-translate="btn_view_cat">View Catalog <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers Cards Section -->
+    <section class="home-careers-section" style="padding: 60px 0; background: var(--bg);">
+        <div class="container">
+            <div class="section-header text-center" style="margin-bottom: 40px;">
+                <h4 class="sub-heading" data-translate="car_sub">Build your career</h4>
+                <h2 data-translate="car_header">Join Our Team</h2>
+            </div>
+            
+            <div class="product-carousel-wrapper">
+                <button type="button" class="carousel-btn prev-btn" id="careerPrev"><i class="fa-solid fa-chevron-left"></i></button>
+                
+                <div id="dynamic-careers-feed" class="products-carousel-track">
+                    <!-- Posts will be injected here dynamically by js/careers.js -->
                 </div>
                 
-                <!-- Building Rental -->
-                <div class="col-half fade-in" style="width: 100%; margin-top: 24px;">
-                    <div class="feature-box" style="background-image: url('images/backgroud_1.png'); height: 320px;" data-bg-key="h_serv_rental_bg">
-                        <div class="box-overlay">
-                            <h3 data-translate="serv_rental">Building Rental</h3>
-                            <p data-translate="serv_rental_desc">Premium commercial buildings and factory spaces for rent with flexible terms.</p>
-                            <a href="contact.html" class="btn-link" data-translate="btn_contact">Contact Us Today <i class="fa-solid fa-arrow-right"></i></a>
+                <button type="button" class="carousel-btn next-btn" id="careerNext"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regional Presence (Interactive Map) -->
+    <section class="sailun-map-section fade-in">
+        <div class="container map-container">
+            <div class="map-text fade-in-left">
+                <h4 class="sub-heading" data-translate="map_sub">Global Presence</h4>
+                <h2 data-translate="map_title">Our Journey & Expansion</h2>
+                <p data-translate="map_desc">From our humble beginnings to our strategic expansion across Southeast Asia, we have continuously grown to meet global manufacturing demands.</p>
+                <ul class="map-list" style="margin-top: 24px;">
+                    <li><i class="fa-solid fa-flag"></i> <strong data-translate="map_t1">First established in 1993 in Taiwan</strong></li>
+                    <li><i class="fa-solid fa-industry"></i> <strong data-translate="map_v1">Established second factory in Vietnam in 2005</strong></li>
+                    <li><i class="fa-solid fa-location-dot"></i> <strong data-translate="map_c1">Established third factory in Cambodia in 2025</strong></li>
+                </ul>
+                <a href="about.html" class="btn btn-primary" style="margin-top: 20px;" data-translate="map_btn">Read Full Story</a>
+            </div>
+            <div class="map-graphic fade-in-right" style="display: flex; justify-content: center;">
+                <!-- 3D Interactive WebGL Globe -->
+                <div id="globeViz" style="margin: 0 auto; cursor: grab; border-radius: 50%; overflow: hidden; box-shadow: 0 0 50px rgba(0, 150, 255, 0.2);"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FB Lightbox Modal -->
+    <div id="fbLightbox" class="fb-lightbox">
+        <div class="fb-close" onclick="closeFbLightbox()"><i class="fa-solid fa-xmark"></i></div>
+        <div class="fb-lightbox-content">
+            <div class="fb-lightbox-img-wrapper">
+                <img id="fbLightboxImg" src="" alt="Full image">
+            </div>
+            <div class="fb-lightbox-sidebar">
+                <div class="fb-post-header">
+                    <img src="images/Logo.png" alt="LittleMaker" class="fb-avatar">
+                    <div class="fb-header-info">
+                        <strong>LittleMaker Cambodia</strong>
+                        <span id="fbLightboxTime"><i class="fa-solid fa-earth-americas"></i> Just now</span>
+                    </div>
+                </div>
+                <div class="fb-post-content" id="fbLightboxText" style="overflow-y:auto; flex:1;">
+                    <!-- Text injected here -->
+                </div>
+                <div class="fb-post-footer">
+                    <div class="fb-stats">
+                        <div class="fb-reactions"><i class="fa-solid fa-thumbs-up" style="color:#0866ff"></i> <span>2.1K</span></div>
+                        <div class="fb-comments"><span>340</span> Comments</div>
+                    </div>
+                    <div class="fb-actions" style="border-bottom: 1px solid #ced0d4; padding-bottom: 12px; margin-bottom: 16px;">
+                        <div class="fb-like-wrapper">
+                            <button class="fb-btn" onclick="toggleFbLike(this)"><i class="fa-regular fa-thumbs-up"></i> <span>Like</span></button>
+                            <div class="fb-reaction-box">
+                                <div class="fb-reaction-icon r-like" onclick="setReaction(event, this, null, 'like')"><i class="fa-solid fa-thumbs-up"></i></div>
+                                <div class="fb-reaction-icon r-love" onclick="setReaction(event, this, null, 'love')"><i class="fa-solid fa-heart"></i></div>
+                                <div class="fb-reaction-icon r-haha" onclick="setReaction(event, this, null, 'haha')"><i class="fa-regular fa-face-laugh-squint"></i></div>
+                                <div class="fb-reaction-icon r-wow" onclick="setReaction(event, this, null, 'wow')"><i class="fa-solid fa-face-surprise"></i></div>
+                                <div class="fb-reaction-icon r-sad" onclick="setReaction(event, this, null, 'sad')"><i class="fa-regular fa-face-sad-tear"></i></div>
+                                <div class="fb-reaction-icon r-angry" onclick="setReaction(event, this, null, 'angry')"><i class="fa-solid fa-face-angry"></i></div>
+                            </div>
                         </div>
+                        <button class="fb-btn" onclick="toggleFbComment(this)"><i class="fa-regular fa-comment"></i> <span>Comment</span></button>
+                        <button class="fb-btn" onclick="shareFbPost(this)"><i class="fa-solid fa-share"></i> <span>Share</span></button>
                     </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-
-    <!-- About Preview Section -->
-    <section class="section-padding about-preview-section">
-        <div class="container">
-            <div class="about-preview-grid">
-                <div class="about-preview-image fade-in-left">
-                    <img src="images/R2.png" alt="LittleMaker Factory" data-bg-key="h_about_img">
-                    <div class="about-experience-badge">
-                        <span class="exp-number">10+</span>
-                        <span class="exp-text">Years</span>
+                    <!-- Comments Section (Hidden) in Lightbox -->
+                    <div class="fb-comments-section" style="display:none; margin-bottom: 16px;">
+                        <div style="display: flex; gap: 8px;">
+                            <div style="width:32px; height:32px; border-radius:50%; background:var(--blue); color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:bold; flex-shrink:0;">Me</div>
+                            <input type="text" class="fb-comment-input" placeholder="Write a comment..." style="flex: 1; border-radius: 20px; border: 1px solid #ced0d4; padding: 8px 16px; outline: none; background: #f0f2f5;" onkeypress="handleFbComment(event, this)">
+                        </div>
+                        <div class="fb-comments-list" style="margin-top: 12px; font-size: 0.9rem; max-height: 150px; overflow-y:auto;"></div>
                     </div>
-                </div>
-                <div class="about-preview-content fade-in-right">
-                    <h4 class="sub-heading" data-translate="about_preview_title">About LittleMaker</h4>
-                    <h2 data-translate="about_header">About Our Company</h2>
-                    <p data-translate="about_preview_desc">We are Cambodia's leading manufacturer of precision metal components and modern office furniture.</p>
-                    <ul class="about-features-list">
-                        <li><i class="fa-solid fa-circle-check"></i> <span data-translate="feat_iso">ISO 9001 Compliant Processes</span></li>
-                        <li><i class="fa-solid fa-circle-check"></i> <span data-translate="feat_high">High Quality Office Furniture</span></li>
-                        <li><i class="fa-solid fa-circle-check"></i> <span data-translate="feat_fast">Fast Delivery in Cambodia</span></li>
-                        <li><i class="fa-solid fa-circle-check"></i> <span data-translate="why_custom">Custom Solutions</span></li>
-                    </ul>
-                    <a href="about.html" class="btn btn-primary" data-translate="about_preview_btn">Read Our Story</a>
+                    <a href="contact.html" class="fb-btn fb-btn-primary" style="width:100%; justify-content:center; padding: 12px 0; font-size: 1.05rem;"><i class="fa-solid fa-paper-plane"></i> Apply For This Position</a>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Featured Products Section -->
-    <section class="section-padding bg-light">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h4 class="sub-heading" data-translate="featured_products">Featured Products</h4>
-                <h2 data-translate="featured_products_sub">Our Best Selling Items</h2>
-            </div>
-            <div class="carousel-container">
-                <button class="carousel-btn carousel-prev" id="carouselPrev"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="products-grid carousel-track" id="home-featured-products">
-                    <!-- Dynamic products will be loaded here -->
-                </div>
-                <button class="carousel-btn carousel-next" id="carouselNext"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
-            <div class="text-center fade-in" style="margin-top:48px;">
-                <a href="products.html" class="btn btn-primary"><i class="fa-solid fa-shop"></i> <span data-translate="btn_shop">Shop Products</span></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Overview -->
-    <section class="section-padding bg-light">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h4 class="sub-heading" data-translate="serv_header">Our Capabilities</h4>
-                <h2 data-translate="serv_sub">Advanced Technology Meets Skilled Craftsmanship</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card fade-in">
-                    <div class="icon-box"><i class="fa-solid fa-gears"></i></div>
-                    <h3 data-translate="serv_cnc">CNC Machining</h3>
-                    <p data-translate="serv_cnc_desc">High-precision milling and turning for complex geometries.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="icon-box"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                    <h3 data-translate="serv_laser">Laser Cutting</h3>
-                    <p data-translate="serv_laser_desc">State-of-the-art fiber laser cutting for sheet metal.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="icon-box"><i class="fa-solid fa-fire"></i></div>
-                    <h3 data-translate="serv_weld">Welding & Fab</h3>
-                    <p data-translate="serv_weld_desc">MIG, TIG, and Spot welding services by certified welders.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="icon-box"><i class="fa-solid fa-paint-roller"></i></div>
-                    <h3 data-translate="serv_finish">Finishing</h3>
-                    <p data-translate="serv_finish_desc">Powder coating, anodizing, and galvanizing.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="icon-box"><i class="fa-solid fa-drafting-compass"></i></div>
-                    <h3 data-translate="serv_cad">CAD Design</h3>
-                    <p data-translate="serv_cad_desc">Professional engineering design services.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="icon-box"><i class="fa-solid fa-briefcase"></i></div>
-                    <h3 data-translate="serv_ass">Assembly</h3>
-                    <p data-translate="serv_ass_desc">Full product assembly and packaging services.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us -->
-    <section class="section-padding">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h4 class="sub-heading" data-translate="why_title">Why Choose Us</h4>
-                <h2 data-translate="why_sub">Trusted by Businesses Across Cambodia</h2>
-            </div>
-            <div class="why-grid">
-                <div class="why-card fade-in">
-                    <div class="why-icon"><i class="fa-solid fa-medal"></i></div>
-                    <h3 data-translate="why_quality">Premium Quality</h3>
-                    <p data-translate="why_quality_desc">Every product undergoes strict quality control with ISO 9001 standards.</p>
-                </div>
-                <div class="why-card fade-in">
-                    <div class="why-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
-                    <h3 data-translate="why_custom">Custom Solutions</h3>
-                    <p data-translate="why_custom_desc">We design and manufacture to your exact specifications and requirements.</p>
-                </div>
-                <div class="why-card fade-in">
-                    <div class="why-icon"><i class="fa-solid fa-truck-fast"></i></div>
-                    <h3 data-translate="why_fast">Fast Delivery</h3>
-                    <p data-translate="why_fast_desc">Quick turnaround times with reliable delivery across Cambodia.</p>
-                </div>
-                <div class="why-card fade-in">
-                    <div class="why-icon"><i class="fa-solid fa-headset"></i></div>
-                    <h3 data-translate="why_support">24/7 Support</h3>
-                    <p data-translate="why_support_desc">Our team is always available to assist you with any questions or issues.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Building Rental Section -->
-    <section class="section-padding rental-home-section" style="background-image: url('images/backgroud_1.png');" data-bg-key="h_rental_home_bg">
-        <div class="rental-home-overlay"></div>
-        <div class="container" style="position:relative; z-index:1;">
-            <div class="rental-home-content text-center fade-in">
-                <h4 class="sub-heading" data-translate="rental_section_title">Building & Factory Rental</h4>
-                <h2 data-translate="rental_section_desc">Premium commercial spaces for your business growth</h2>
-                <p class="rental-home-desc" data-translate="rental_p1">We offer high-standard factory spaces and commercial buildings for rent in strategic locations across Cambodia.</p>
-                <div class="rental-features-row">
-                    <div class="rental-feature-item">
-                        <i class="fa-solid fa-building"></i>
-                        <span data-translate="rental_f1">Flexible Leasing Terms</span>
-                    </div>
-                    <div class="rental-feature-item">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <span data-translate="rental_f2">24/7 Security & Maintenance</span>
-                    </div>
-                    <div class="rental-feature-item">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span data-translate="rental_f3">Strategic Industrial Zones</span>
-                    </div>
-                </div>
-                <div class="hero-buttons" style="justify-content:center; margin-top:32px;">
-                    <a href="building-rental.html" class="btn btn-primary" data-translate="btn_explore_rental">Explore Properties</a>
-                    <a href="contact.html" class="btn btn-outline" style="border-color:#fff; color:#fff;" data-translate="btn_contact">Contact Us Today</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section section-padding bg-dark">
-        <div class="container text-center">
-            <h2 class="text-white fade-in" data-translate="cta_title_2">Ready to Start Your Project?</h2>
-            <p class="text-grey fade-in" data-translate="cta_desc_2">Get in touch with us today for a free consultation and quote. We respond within 24 hours.</p>
-            <br>
-            <div class="hero-buttons fade-in" style="justify-content:center;">
-                <a href="contact.html" class="btn btn-primary" data-translate="btn_get_quote">Get Free Quote</a>
-                <a href="tel:+855719716888" class="btn btn-outline"><i class="fa-solid fa-phone"></i> <span data-translate="cont_phone">Phone</span></a>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -544,6 +439,19 @@
         });
       }
 
+      /* ── Career Carousel Logic ── */
+      var cTrack = document.getElementById('dynamic-careers-feed');
+      var cPrev = document.getElementById('careerPrev');
+      var cNext = document.getElementById('careerNext');
+      if (cTrack && cPrev && cNext) {
+        cPrev.addEventListener('click', function() {
+          cTrack.scrollBy({ left: -344, behavior: 'smooth' });
+        });
+        cNext.addEventListener('click', function() {
+          cTrack.scrollBy({ left: 344, behavior: 'smooth' });
+        });
+      }
+
       /* ── Hero Particles ── */
       var particlesContainer = document.getElementById('heroParticles');
       if (particlesContainer) {
@@ -610,27 +518,40 @@
           tile.addEventListener('mouseleave', function(){ if (!tmr) tmr = setInterval(function(){ apply(idx + 1); }, 5200); });
         }
       }
+    })();
+    </script>
 
-      /* ── Counter animation ── */
+    <!-- Scripts -->
+    <script src="js/translations.js?v=2.0"></script>
+    <script src="js/cart.js?v=2.0"></script>
+    <script src="js/invoice.js?v=2.0"></script>
+    <script src="js/checkout.js?v=2.0"></script>
+    <script src="js/chat-widget.js?v=2.0"></script>
+    <script src="js/products.js?v=3.2"></script>
+    <script src="js/ui.js?v=3.2"></script>
+    <script src="js/main.js?v=10.0" type="module"></script>
+    
+    <!-- Count Up Animation Script -->
+    <script>
+    (function(){
+      var animated = false;
       function animateCounters() {
+        if(animated) return;
         var counters = document.querySelectorAll('.counter');
+        if(!counters.length) return;
+        animated = true;
         counters.forEach(function(counter) {
-          if (counter.dataset.animated) return;
-          var target = parseInt(counter.getAttribute('data-target'));
-          var duration = 2000;
-          var startTime = null;
-          function update(timestamp) {
-            if (!startTime) startTime = timestamp;
-            var progress = Math.min((timestamp - startTime) / duration, 1);
-            var eased = 1 - Math.pow(1 - progress, 3);
-            counter.textContent = Math.floor(eased * target) + '+';
-            if (progress < 1) requestAnimationFrame(update);
-          }
-          counter.dataset.animated = 'true';
-          requestAnimationFrame(update);
+          var target = +counter.getAttribute('data-target');
+          var duration = 2000; 
+          var stepTime = Math.abs(Math.floor(duration / target));
+          var current = 0;
+          var timer = setInterval(function() {
+            current += Math.ceil(target / 100);
+            if (current >= target) { current = target; clearInterval(timer); }
+            counter.innerText = current;
+          }, stepTime);
         });
       }
-
       /* ── Observe sections for animations ── */
       var sectionsToObserve = ['.stats-section'];
       sectionsToObserve.forEach(function(sel) {
@@ -703,6 +624,72 @@
         t=setTimeout(function(){n=0;},1200);
       });
     })();
+    </script>
+    
+    <script src="js/careers.js"></script>
+
+    <!-- 3D Interactive Globe (Google Earth style) -->
+    <script src="https://unpkg.com/globe.gl"></script>
+    <script>
+        const globeContainer = document.getElementById('globeViz');
+        if (globeContainer) {
+            const places = [
+                { name: 'Cambodia', lat: 12.5657, lng: 104.9910 },
+                { name: 'Vietnam', lat: 16.0583, lng: 108.2772 },
+                { name: 'Taiwan', lat: 23.6978, lng: 120.9605 }
+            ];
+
+            const world = Globe()
+                (globeContainer)
+                .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-day.jpg')
+                .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
+                .backgroundColor('rgba(0,0,0,0)')
+                .showAtmosphere(false)
+                .htmlElementsData(places)
+                .htmlElement(d => {
+                    const el = document.createElement('div');
+                    el.innerHTML = `<span style="color: #2b3a55; font-size: 14px; line-height: 1; vertical-align: middle; margin-right: 6px;">●</span><span style="vertical-align: middle;">${d.name}</span>`;
+                    el.style.background = '#fff';
+                    el.style.color = '#2b3a55';
+                    el.style.padding = '6px 14px';
+                    el.style.borderRadius = '20px';
+                    el.style.fontFamily = "'Barlow', sans-serif";
+                    el.style.fontSize = '14px';
+                    el.style.fontWeight = '700';
+                    el.style.boxShadow = '0 6px 16px rgba(0,0,0,0.15)';
+                    el.style.whiteSpace = 'nowrap';
+                    el.style.cursor = 'pointer';
+                    el.style.pointerEvents = 'auto';
+                    el.style.display = 'flex';
+                    el.style.alignItems = 'center';
+                    return el;
+                });
+
+            // Initial View (Focus on Southeast Asia directly)
+            world.pointOfView({ lat: 16, lng: 108, altitude: 1.5 });
+
+            // Auto-rotate
+            world.controls().autoRotate = true;
+            world.controls().autoRotateSpeed = 1.0;
+            world.controls().enableZoom = true; // Allow user to zoom in/out with scroll
+
+            // Responsive sizing
+            const resizeGlobe = () => {
+                const size = window.innerWidth > 992 ? 450 : (window.innerWidth > 500 ? 350 : 280);
+                world.width(size).height(size);
+                globeContainer.style.width = size + 'px';
+                globeContainer.style.height = size + 'px';
+            };
+            window.addEventListener('resize', resizeGlobe);
+            resizeGlobe();
+            
+            // Cursor interaction
+            globeContainer.addEventListener('mousedown', () => { 
+                globeContainer.style.cursor = 'grabbing'; 
+                world.controls().autoRotate = false; // Stop auto-rotate on drag
+            });
+            window.addEventListener('mouseup', () => globeContainer.style.cursor = 'grab');
+        }
     </script>
 </body>
 </html>

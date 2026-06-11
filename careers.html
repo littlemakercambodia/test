@@ -104,7 +104,17 @@
                         <div class="fb-comments"><span>340</span> Comments</div>
                     </div>
                     <div class="fb-actions" style="border-bottom: 1px solid #ced0d4; padding-bottom: 12px; margin-bottom: 16px;">
-                        <button class="fb-btn" onclick="toggleFbLike(this)"><i class="fa-regular fa-thumbs-up"></i> <span>Like</span></button>
+                        <div class="fb-like-wrapper">
+                            <button class="fb-btn" onclick="toggleFbLike(this)"><i class="fa-regular fa-thumbs-up"></i> <span>Like</span></button>
+                            <div class="fb-reaction-box">
+                                <div class="fb-reaction-icon r-like" onclick="setReaction(event, this, null, 'like')"><i class="fa-solid fa-thumbs-up"></i></div>
+                                <div class="fb-reaction-icon r-love" onclick="setReaction(event, this, null, 'love')"><i class="fa-solid fa-heart"></i></div>
+                                <div class="fb-reaction-icon r-haha" onclick="setReaction(event, this, null, 'haha')"><i class="fa-regular fa-face-laugh-squint"></i></div>
+                                <div class="fb-reaction-icon r-wow" onclick="setReaction(event, this, null, 'wow')"><i class="fa-solid fa-face-surprise"></i></div>
+                                <div class="fb-reaction-icon r-sad" onclick="setReaction(event, this, null, 'sad')"><i class="fa-regular fa-face-sad-tear"></i></div>
+                                <div class="fb-reaction-icon r-angry" onclick="setReaction(event, this, null, 'angry')"><i class="fa-solid fa-face-angry"></i></div>
+                            </div>
+                        </div>
                         <button class="fb-btn" onclick="toggleFbComment(this)"><i class="fa-regular fa-comment"></i> <span>Comment</span></button>
                         <button class="fb-btn" onclick="shareFbPost(this)"><i class="fa-solid fa-share"></i> <span>Share</span></button>
                     </div>
