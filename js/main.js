@@ -311,17 +311,27 @@ document.addEventListener('DOMContentLoaded', () => {
   loader.id = '_loader';
   loader.innerHTML = `
     <style>
-      #_loader{position:fixed;inset:0;background:#fff;z-index:99999;
-        display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;
-        transition:opacity .5s ease}
-      ._lgear{font-size:3rem;color:#004d99;animation:gearSpin 1s linear infinite}
-      ._lbar{width:200px;height:4px;background:#e5eaf2;border-radius:4px;overflow:hidden}
-      ._lfill{height:100%;background:linear-gradient(90deg,#004d99,#ff9900);
-        border-radius:4px;animation:_lf .9s ease forwards}
-      @keyframes _lf{from{width:0}to{width:100%}}
+      #_loader{position:fixed;inset:0;background:var(--bg, #ffffff);z-index:99999;
+        display:flex;align-items:center;justify-content:center;flex-direction:column;gap:35px;
+        transition:opacity .6s cubic-bezier(0.8, 0, 0.2, 1)}
+      ._logo_wrap{position:relative; width: 160px; display:flex; justify-content:center;}
+      ._logo_wrap img{width: 100%; height: auto; animation: floatLogo 2.5s ease-in-out infinite;}
+      ._spinner_container { position: relative; width: 180px; height: 3px; background: rgba(0,77,153,0.1); border-radius: 4px; overflow: hidden; }
+      ._spinner_bar { position: absolute; top: 0; left: 0; height: 100%; width: 40%; background: linear-gradient(90deg, transparent, var(--blue, #004d99), transparent); animation: loadingBar 1.2s infinite ease-in-out; border-radius: 4px; }
+      @keyframes floatLogo {
+          0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05)); }
+          50% { transform: translateY(-8px) scale(1.02); filter: drop-shadow(0 20px 20px rgba(0,0,0,0.1)); }
+      }
+      @keyframes loadingBar {
+          0% { left: -50%; }
+          100% { left: 100%; }
+      }
+      body.dark-mode #_loader { background: #050a15; }
+      body.dark-mode ._spinner_container { background: rgba(255,255,255,0.1); }
+      body.dark-mode ._spinner_bar { background: linear-gradient(90deg, transparent, var(--orange, #ff9900), transparent); }
     </style>
-    <div class="_lgear"><i class="fa-solid fa-gears"></i></div>
-    <div class="_lbar"><div class="_lfill"></div></div>`;
+    <div class="_logo_wrap"><img src="images/Logo.png" alt="Loading..."></div>
+    <div class="_spinner_container"><div class="_spinner_bar"></div></div>`;
   document.body.prepend(loader);
   window.addEventListener('load', () => {
     loader.style.opacity = '0';

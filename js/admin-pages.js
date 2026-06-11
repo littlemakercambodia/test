@@ -158,6 +158,16 @@ function servicesPageHTML() {
                   <div class="pg"><label>Location</label><input type="text" id="cpLocation"></div>
                   <div class="pg"><label>Job Type</label><input type="text" id="cpType"></div>
               </div>
+              <div style="display:flex; gap:12px; margin-top:12px;">
+                  <div class="pg" style="flex:1;"><label>Salary</label><input type="text" id="cpSalary" placeholder="e.g. $300 - $500"></div>
+                  <div class="pg" style="flex:0.5;"><label>Vacancies</label><input type="number" id="cpVacancies" min="1" value="1"></div>
+                  <div class="pg" style="flex:0.5;"><label>Status</label><select id="cpStatus" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;"><option value="Open">Open</option><option value="Closed">Closed</option></select></div>
+              </div>
+              <div style="display:flex; gap:12px; margin-top:12px;">
+                  <div class="pg" style="flex:1;"><label>Base Likes</label><input type="number" id="cpLikes" min="0"></div>
+                  <div class="pg" style="flex:1;"><label>Base Comments</label><input type="number" id="cpComments" min="0"></div>
+                  <div class="pg" style="flex:1;"><label>Base Shares</label><input type="number" id="cpShares" min="0"></div>
+              </div>
               <div class="pg pe-full" style="margin-top:12px;">
                   <label>Post Image</label>
                   ${muHTML('cpImg','cpImgPrev','cpImgPh','Post Image')}
@@ -186,7 +196,11 @@ window.renderCareerPostsTable = function() {
     tbody.innerHTML = adminCareerPosts.map(p => `
         <tr>
             <td><img src="${p.image || 'images/Logo.png'}" class="p-thumb"></td>
-            <td><strong>${p.title}</strong><br><small style="color:var(--mu)">${p.desc.substring(0,40)}...</small></td>
+            <td>
+                <strong>${p.title}</strong>
+                ${p.status === 'Closed' ? '<span style="color:red; font-size:10px; border:1px solid red; padding:2px 4px; border-radius:4px; margin-left:4px;">Closed</span>' : ''}
+                <br><small style="color:var(--mu)">${p.desc.substring(0,40)}...</small>
+            </td>
             <td>${p.location}</td>
             <td><span class="p-cat cat-tables">${p.type}</span></td>
             <td style="font-size:0.8rem; color:var(--mu)">
@@ -212,6 +226,12 @@ window.openCareerPostModal = function(id = null) {
     const img = document.getElementById('cpImg');
     const imgPrev = document.getElementById('cpImgPrev');
     const imgPh = document.getElementById('cpImgPh');
+    const likes = document.getElementById('cpLikes');
+    const comments = document.getElementById('cpComments');
+    const shares = document.getElementById('cpShares');
+    const salary = document.getElementById('cpSalary');
+    const vacancies = document.getElementById('cpVacancies');
+    const status = document.getElementById('cpStatus');
 
     if(id) {
         const post = adminCareerPosts.find(p => p.id === id);
@@ -223,6 +243,12 @@ window.openCareerPostModal = function(id = null) {
         loc.value = post.location;
         type.value = post.type;
         img.value = post.image || '';
+        likes.value = post.likes || 0;
+        comments.value = post.commentsCount || 0;
+        shares.value = post.shares || 0;
+        salary.value = post.salary || '';
+        vacancies.value = post.vacancies || 1;
+        status.value = post.status || 'Open';
         
         if(post.image) {
             imgPrev.src = post.image;
@@ -240,6 +266,12 @@ window.openCareerPostModal = function(id = null) {
         loc.value = 'Phnom Penh';
         type.value = 'Full Time';
         img.value = '';
+        likes.value = Math.floor(Math.random() * 50) + 10;
+        comments.value = Math.floor(Math.random() * 20);
+        shares.value = Math.floor(Math.random() * 10);
+        salary.value = 'Negotiable';
+        vacancies.value = 1;
+        status.value = 'Open';
         imgPrev.classList.remove('show');
         imgPh.style.display = 'flex';
     }
@@ -253,6 +285,12 @@ window.saveCareerPostForm = function() {
     const loc = document.getElementById('cpLocation').value.trim();
     const type = document.getElementById('cpType').value.trim();
     const img = document.getElementById('cpImg').value;
+    const likes = parseInt(document.getElementById('cpLikes').value) || 0;
+    const comments = parseInt(document.getElementById('cpComments').value) || 0;
+    const shares = parseInt(document.getElementById('cpShares').value) || 0;
+    const salary = document.getElementById('cpSalary').value.trim();
+    const vacancies = parseInt(document.getElementById('cpVacancies').value) || 1;
+    const status = document.getElementById('cpStatus').value;
 
     if(!title) { window.toast('Job Title is required!', 'error'); return; }
 
@@ -265,6 +303,12 @@ window.saveCareerPostForm = function() {
             post.location = loc;
             post.type = type;
             post.image = img;
+            post.likes = likes;
+            post.commentsCount = comments;
+            post.shares = shares;
+            post.salary = salary;
+            post.vacancies = vacancies;
+            post.status = status;
         }
     } else {
         // Add new
@@ -276,9 +320,12 @@ window.saveCareerPostForm = function() {
             type: type,
             image: img,
             timestamp: Date.now(),
-            likes: Math.floor(Math.random() * 50) + 10,
-            commentsCount: Math.floor(Math.random() * 20),
-            shares: Math.floor(Math.random() * 10)
+            likes: likes,
+            commentsCount: comments,
+            shares: shares,
+            salary: salary,
+            vacancies: vacancies,
+            status: status
         });
     }
     

@@ -66,6 +66,22 @@ function saveFbData() {
     localStorage.setItem('lm_fb_data', JSON.stringify(fbData));
 }
 
+const REACTION_UI = {
+    like: { icon: 'fa-solid fa-thumbs-up', text: 'Like', color: '#0866ff', class: 'liked' },
+    love: { icon: 'fa-solid fa-heart', text: 'Love', color: '#f33e58', class: 'loved' },
+    haha: { icon: 'fa-regular fa-face-laugh-squint', text: 'Haha', color: '#f7b125', class: 'haha' },
+    wow: { icon: 'fa-solid fa-face-surprise', text: 'Wow', color: '#f7b125', class: 'wow' },
+    sad: { icon: 'fa-regular fa-face-sad-tear', text: 'Sad', color: '#f7b125', class: 'sad' },
+    angry: { icon: 'fa-solid fa-face-angry', text: 'Angry', color: '#e9710f', class: 'angry' }
+};
+
+function getReactionUI(reaction) {
+    if (!reaction || !REACTION_UI[reaction]) {
+        return { icon: 'fa-regular fa-thumbs-up', text: 'Like', color: '', class: '' };
+    }
+    return REACTION_UI[reaction];
+}
+
 function timeAgo(time) {
     const diff = Math.floor((Date.now() - time) / 1000);
     if (diff < 60) return "Just now";
@@ -98,13 +114,19 @@ function renderCareersFeed() {
     feed.innerHTML = careerPosts.map(post => {
         // Init fbData for this post if not exists
         if (!fbData[post.id]) {
-            fbData[post.id] = { liked: false, comments: [] };
+            fbData[post.id] = { reaction: null, comments: [] };
+        } else if (fbData[post.id].liked !== undefined) {
+            // Migration from old schema
+            fbData[post.id].reaction = fbData[post.id].liked ? 'like' : null;
+            delete fbData[post.id].liked;
+            saveFbData();
         }
         
         const data = fbData[post.id];
-        const isLiked = data.liked;
+        const reaction = data.reaction;
         const totalComments = post.commentsCount + data.comments.length;
-        const totalLikes = post.likes + (isLiked ? 1 : 0);
+        const totalLikes = post.likes + (reaction ? 1 : 0);
+        const ui = getReactionUI(reaction);
 
         return `
         <div class="fb-post-card fade-in" data-post-id="${post.id}">
@@ -121,7 +143,10 @@ function renderCareersFeed() {
                 <p class="fb-post-text">
                     <span>${post.desc}</span>
                     <br><br>
-                    📍 <strong>Location:</strong> ${post.location || 'Phnom Penh'} &nbsp; | &nbsp; 🕒 <strong>Type:</strong> ${post.type || 'Full Time'}
+                    <span style="font-size: 0.9em; color: #555; line-height: 1.6; display: block; background: #f0f2f5; padding: 12px; border-radius: 8px;">
+                        📍 <strong>Location:</strong> ${post.location || 'Phnom Penh'} &nbsp; | &nbsp; 🕒 <strong>Type:</strong> ${post.type || 'Full Time'}<br>
+                        💰 <strong>Salary:</strong> ${post.salary || 'Negotiable'} &nbsp; | &nbsp; 👥 <strong>Vacancies:</strong> ${post.vacancies || 1} &nbsp; | &nbsp; 🏷️ <strong>Status:</strong> <span style="color:${post.status === 'Closed' ? 'red' : 'green'}; font-weight:bold;">${post.status || 'Open'}</span>
+                    </span>
                 </p>
             </div>
             ${post.image ? `
@@ -131,16 +156,26 @@ function renderCareersFeed() {
             </div>` : ''}
             <div class="fb-post-footer">
                 <div class="fb-stats">
-                    <div class="fb-reactions" data-base="${post.likes}" ${isLiked ? 'data-liked="true"' : ''}>
+                    <div class="fb-reactions" data-base="${post.likes}" ${reaction ? 'data-liked="true"' : ''}>
                         <i class="fa-solid fa-thumbs-up" style="color:#0866ff"></i> <i class="fa-solid fa-heart" style="color:#f33e58"></i> 
-                        ${formatNumber(totalLikes)} ${isLiked ? '<span class="you-liked">(You)</span>' : ''}
+                        ${formatNumber(totalLikes)} ${reaction ? '<span class="you-liked">(You)</span>' : ''}
                     </div>
                     <div class="fb-comments" data-base="${post.commentsCount}">${formatNumber(totalComments)} Comments · ${post.shares} Shares</div>
                 </div>
                 <div class="fb-actions">
-                    <button class="fb-btn ${isLiked ? 'liked' : ''}" style="${isLiked ? 'color: #0866ff;' : ''}" onclick="toggleFbLike(this)">
-                        <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-thumbs-up"></i> <span>${isLiked ? 'Liked' : 'Like'}</span>
-                    </button>
+                    <div class="fb-like-wrapper">
+                        <button class="fb-btn ${ui.class}" style="${ui.color ? `color: ${ui.color};` : ''}" onclick="toggleFbLike(this)">
+                            <i class="${ui.icon}"></i> <span>${ui.text}</span>
+                        </button>
+                        <div class="fb-reaction-box">
+                            <div class="fb-reaction-icon r-like" onclick="setReaction(event, this, '${post.id}', 'like')"><i class="fa-solid fa-thumbs-up"></i></div>
+                            <div class="fb-reaction-icon r-love" onclick="setReaction(event, this, '${post.id}', 'love')"><i class="fa-solid fa-heart"></i></div>
+                            <div class="fb-reaction-icon r-haha" onclick="setReaction(event, this, '${post.id}', 'haha')"><i class="fa-regular fa-face-laugh-squint"></i></div>
+                            <div class="fb-reaction-icon r-wow" onclick="setReaction(event, this, '${post.id}', 'wow')"><i class="fa-solid fa-face-surprise"></i></div>
+                            <div class="fb-reaction-icon r-sad" onclick="setReaction(event, this, '${post.id}', 'sad')"><i class="fa-regular fa-face-sad-tear"></i></div>
+                            <div class="fb-reaction-icon r-angry" onclick="setReaction(event, this, '${post.id}', 'angry')"><i class="fa-solid fa-face-angry"></i></div>
+                        </div>
+                    </div>
                     <button class="fb-btn" onclick="toggleFbComment(this)"><i class="fa-regular fa-comment"></i> <span>Comment</span></button>
                     <button class="fb-btn" onclick="shareFbPost(this)"><i class="fa-solid fa-share"></i> <span>Share</span></button>
                     <a href="contact.html" class="fb-btn fb-btn-primary"><i class="fa-solid fa-paper-plane"></i> <span>Apply</span></a>
@@ -201,36 +236,32 @@ function updatePostReactionsAndCommentsUI(postId) {
     if(!post) return;
     
     const data = fbData[postId];
-    const isLiked = data.liked;
+    const reaction = data.reaction;
     const totalComments = post.commentsCount + data.comments.length;
-    const totalLikes = post.likes + (isLiked ? 1 : 0);
+    const totalLikes = post.likes + (reaction ? 1 : 0);
     const htmlComments = data.comments.map(c => createCommentHtmlString(postId, c)).join('');
+    const ui = getReactionUI(reaction);
 
     [card, (sidebar && sidebar.getAttribute('data-post-id') === postId ? sidebar : null)].forEach(el => {
         if(!el) return;
         
         // Update Like btn
-        const likeBtn = el.querySelector('.fb-actions .fb-btn:first-child');
+        const likeBtn = el.querySelector('.fb-like-wrapper .fb-btn');
         if (likeBtn) {
             const icon = likeBtn.querySelector('i');
             const text = likeBtn.querySelector('span');
-            if (isLiked) {
-                likeBtn.classList.add('liked');
-                likeBtn.style.color = '#0866ff';
-                icon.className = 'fa-solid fa-thumbs-up';
-                if(text) text.innerText = 'Liked';
-            } else {
-                likeBtn.classList.remove('liked');
-                likeBtn.style.color = '';
-                icon.className = 'fa-regular fa-thumbs-up';
-                if(text) text.innerText = 'Like';
-            }
+            
+            // Remove previous reaction classes
+            likeBtn.className = `fb-btn ${ui.class}`;
+            likeBtn.style.color = ui.color || '';
+            if (icon) icon.className = ui.icon;
+            if (text) text.innerText = ui.text;
         }
 
         // Update stats
         const reactionsSpan = el.querySelector('.fb-reactions');
         if (reactionsSpan) {
-            reactionsSpan.innerHTML = `<i class="fa-solid fa-thumbs-up" style="color:#0866ff"></i> <i class="fa-solid fa-heart" style="color:#f33e58"></i> ${formatNumber(totalLikes)} ${isLiked ? '<span class="you-liked">(You)</span>' : ''}`;
+            reactionsSpan.innerHTML = `<i class="fa-solid fa-thumbs-up" style="color:#0866ff"></i> <i class="fa-solid fa-heart" style="color:#f33e58"></i> ${formatNumber(totalLikes)} ${reaction ? '<span class="you-liked">(You)</span>' : ''}`;
         }
         
         const commentsSpan = el.querySelector('.fb-comments');
@@ -252,10 +283,38 @@ function toggleFbLike(btn) {
     let postId = card.getAttribute('data-post-id');
     if (!postId) return;
     
-    if(!fbData[postId]) fbData[postId] = { liked: false, comments: [] };
-    fbData[postId].liked = !fbData[postId].liked;
-    saveFbData();
+    if(!fbData[postId]) fbData[postId] = { reaction: null, comments: [] };
     
+    // Default toggle is 'like' if currently null, or null if currently has any reaction
+    if (fbData[postId].reaction) {
+        fbData[postId].reaction = null;
+    } else {
+        fbData[postId].reaction = 'like';
+    }
+    
+    saveFbData();
+    updatePostReactionsAndCommentsUI(postId);
+}
+
+function setReaction(event, btn, postId, reactionType) {
+    event.stopPropagation(); // prevent triggering parent clicks
+    
+    if (!postId) {
+        let card = btn.closest('.fb-post-card') || btn.closest('.fb-lightbox-sidebar');
+        if (card) postId = card.getAttribute('data-post-id');
+    }
+    if (!postId) return;
+    
+    if(!fbData[postId]) fbData[postId] = { reaction: null, comments: [] };
+    
+    // If clicking the same reaction, toggle it off
+    if (fbData[postId].reaction === reactionType) {
+        fbData[postId].reaction = null;
+    } else {
+        fbData[postId].reaction = reactionType;
+    }
+    
+    saveFbData();
     updatePostReactionsAndCommentsUI(postId);
 }
 
