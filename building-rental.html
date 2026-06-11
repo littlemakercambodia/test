@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Rental | LITTLEMAKER CAMBODIA</title>
+
+    <!-- Favicon / Logo Code Added Here -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700;900&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css?v=3.1">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo" aria-label="LittleMaker Cambodia Home">
+                <img src="images/Logo.png" alt="LittleMaker Cambodia logo" class="logo-img">
+            </a>
+            
+            <!-- Desktop Menu -->
+            <ul class="nav-menu">
+                <li><a href="about.html" class="nav-link"><i class="fa-solid fa-circle-info"></i> <span data-translate="nav_about">Our Story</span></a></li>
+                <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> <span data-translate="nav_services">Services</span></a></li>
+                <li><a href="products.html" class="nav-link"><i class="fa-solid fa-shop"></i> <span data-translate="nav_shop">Shop</span></a></li>
+                <li><a href="contact.html" class="nav-link"><i class="fa-solid fa-envelope"></i> <span data-translate="nav_contact">Contact</span></a></li>
+            </ul>
+
+            <!-- Right Controls -->
+            <div class="nav-controls">
+                <div class="theme-toggle" id="themeBtn">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+                <div class="cart-wrapper cart-trigger">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </div>
+                <div class="lang-dropdown">
+                    <button class="lang-btn" id="langBtn">
+                        <i class="fa-solid fa-globe"></i> <span id="currentLang">EN</span>
+                    </button>
+                    <div class="lang-menu" id="langMenu">
+                        <a href="#" data-lang="en">English</a>
+                        <a href="#" data-lang="kh">ខ្មែរ</a>
+                        <a href="#" data-lang="cn">中文</a>
+                    </div>
+                </div>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1 data-translate="rental_header">Building & Factory Rental</h1>
+            <p data-translate="rental_sub">Premium commercial spaces for your business</p>
+        </div>
+    </header>
+
+    <!-- Style for Premium Real Estate Layout & Custom Slider Lightbox -->
+    <style>
+        .rental-intro { text-align: center; max-width: 800px; margin: 0 auto 60px; }
+        
+        .property-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 35px; 
+        }
+        
+        .property-card { 
+            background: var(--card); 
+            border-radius: 16px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            border: 1px solid var(--border); 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease; 
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+        }
+        
+        .property-card:hover { 
+            transform: translateY(-12px); 
+            box-shadow: 0 20px 40px rgba(0,77,153,0.12); 
+        }
+        
+        .property-img-wrapper { 
+            position: relative; 
+            height: 260px; 
+            overflow: hidden; 
+            background: #e8edf5; 
+            cursor: pointer; 
+        }
+        
+        .property-main-img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.6s ease; 
+        }
+        
+        .property-card:hover .property-main-img { 
+            transform: scale(1.08); 
+        }
+
+        .img-overlay-top {
+            position: absolute;
+            top: 15px; left: 15px; right: 15px;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            z-index: 2; pointer-events: none;
+        }
+        .prop-badge {
+            background: linear-gradient(135deg, var(--red), #ff4d4d);
+            color: #fff; padding: 6px 14px; border-radius: 50px;
+            font-family: 'Barlow Condensed', 'Battambang', sans-serif; font-weight: 700; font-size: 0.85rem;
+            letter-spacing: 1px; text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(204,0,0,0.3);
+        }
+        .prop-view-hint {
+            background: rgba(255,255,255,0.9); color: var(--dark);
+            padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700;
+            display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            backdrop-filter: blur(4px); transition: opacity 0.3s;
+        }
+        .property-card:hover .prop-view-hint { background: var(--orange); color: #fff; }
+        
+        .property-gallery { 
+            display: flex; gap: 8px; padding: 12px 20px; 
+            background: #fff; border-bottom: 1px solid var(--border); 
+            overflow-x: auto; scrollbar-width: none; 
+        }
+        .property-gallery::-webkit-scrollbar { display: none; }
+        .property-gallery img { 
+            width: 60px; height: 42px; object-fit: cover; border-radius: 6px; 
+            cursor: pointer; border: 2px solid transparent; opacity: 0.5; 
+            transition: all 0.2s; flex-shrink: 0; 
+        }
+        .property-gallery img:hover, .property-gallery img.active-thumb { 
+            opacity: 1; border-color: var(--blue); 
+        }
+        
+        .property-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+        
+        .prop-location {
+            color: var(--muted); font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;
+            display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+            font-family: 'Battambang', 'Barlow', sans-serif;
+        }
+        .prop-location i { color: var(--blue); font-size: 1rem; }
+
+        .property-title { 
+            font-family: 'Battambang', 'Barlow Condensed', sans-serif; font-size: 1.55rem; 
+            color: var(--dark); margin-bottom: 18px; font-weight: 800; line-height: 1.3; 
+            transition: color 0.3s;
+        }
+        .property-card:hover .property-title { color: var(--blue); }
+        
+        .property-specs { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+            margin-bottom: 18px; background: var(--light); padding: 15px; border-radius: 12px;
+        }
+        .spec-item { display: flex; align-items: center; gap: 10px; }
+        .spec-icon { 
+            width: 34px; height: 34px; background: #fff; border-radius: 8px; 
+            display: flex; align-items: center; justify-content: center; 
+            color: var(--blue); font-size: 0.95rem; box-shadow: var(--sh1);
+        }
+        .spec-info { display: flex; flex-direction: column; }
+        .spec-lbl { font-family: 'Battambang', 'Barlow', sans-serif; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; font-weight: 700; line-height: 1.2; margin-bottom: 3px; }
+        .spec-val { font-family: 'Battambang', 'Barlow', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--text); line-height: 1.2; }
+        
+        .property-desc { 
+            font-family: 'Battambang', 'Barlow', sans-serif;
+            font-size: 0.95rem; color: var(--text); line-height: 1.6; margin-bottom: 20px;
+            display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+
+        .prop-amenities {
+            display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; flex: 1; align-items: flex-start;
+        }
+        .amenity-tag {
+            font-family: 'Battambang', 'Barlow', sans-serif;
+            background: #fff; color: var(--muted); font-size: 0.75rem;
+            padding: 5px 12px; border-radius: 50px; font-weight: 600;
+            display: flex; align-items: center; gap: 5px; border: 1px solid var(--border);
+            transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .property-card:hover .amenity-tag { border-color: #cbd5e0; }
+        .amenity-tag i { color: var(--orange); font-size: 0.8rem; }
+        .amenity-tag:hover { background: var(--blue-ll); color: var(--blue); border-color: var(--blue); }
+        .amenity-tag:hover i { color: var(--blue); }
+        
+        .property-footer { 
+            display: flex; justify-content: space-between; align-items: flex-end; 
+            flex-wrap: wrap; gap: 15px;
+            padding-top: 20px; border-top: 1px dashed var(--border); margin-top: auto; 
+        }
+        .property-price-wrap { display: flex; flex-direction: column; flex: 1; min-width: 130px; gap: 10px; }
+        .price-row { display: flex; flex-direction: column; }
+        .price-lbl { font-family: 'Battambang', 'Barlow', sans-serif; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+        .property-price { display: flex; align-items: baseline; gap: 3px; flex-wrap: wrap; }
+        .price-val { 
+            font-family: 'Barlow Condensed', sans-serif; font-size: 1.6rem;
+            font-weight: 800; color: var(--red); line-height: 1.1; word-break: break-word;
+        }
+        .price-val.sqm-val { font-size: 1.2rem; color: var(--orange); }
+        .price-period { font-size: 0.9rem; color: var(--muted); font-weight: 700; text-transform: lowercase; }
+        
+        .btn-inquire { 
+            font-family: 'Battambang', 'Barlow', sans-serif;
+            padding: 10px 22px; font-size: 0.95rem; background: var(--blue); 
+            color: #fff; border-radius: 8px; font-weight: 700; border: none;
+            box-shadow: 0 4px 10px rgba(0,77,153,0.2); transition: all 0.3s;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            white-space: nowrap; flex-shrink: 0;
+            height: fit-content;
+        }
+        .btn-inquire:hover { background: var(--dark); transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+
+        .btn-map { 
+            font-family: 'Battambang', 'Barlow', sans-serif;
+            padding: 10px 16px; font-size: 0.95rem; background: var(--light); 
+            color: var(--blue); border-radius: 8px; font-weight: 700; border: 1px solid var(--border);
+            transition: all 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            white-space: nowrap; flex-shrink: 0; height: fit-content; text-decoration: none;
+        }
+        .btn-map:hover { background: var(--blue); color: #fff; border-color: var(--blue); transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+
+
+        /* =========================================
+           RENTAL IMAGE SLIDER LIGHTBOX
+           ========================================= */
+        .rental-lightbox {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 100050;
+            display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px);
+        }
+        .rental-lightbox.open { display: flex; animation: fadeIn .3s ease; }
+        .rl-img { 
+            max-width: 85vw; max-height: 85vh; border-radius: 8px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,.5); object-fit: contain; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .rental-lightbox.open .rl-img { transform: scale(1); }
+        .rl-close, .rl-prev, .rl-next {
+            position: absolute; color: #fff; background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s; border-radius: 50%;
+        }
+        .rl-close:hover, .rl-prev:hover, .rl-next:hover { background: var(--orange); color: #fff; transform: scale(1.1); }
+        .rl-close { top: 20px; right: 30px; width: 45px; height: 45px; font-size: 1.8rem; z-index: 2; }
+        .rl-prev { left: 30px; top: 50%; transform: translateY(-50%); width: 55px; height: 55px; font-size: 1.8rem; }
+        .rl-next { right: 30px; top: 50%; transform: translateY(-50%); width: 55px; height: 55px; font-size: 1.8rem; }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 992px) {
+            .property-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+            .rental-intro h2 { font-size: 2.4rem !important; }
+        }
+
+        @media (max-width: 768px) {
+            .rental-intro { margin-bottom: 30px; padding: 0 15px; }
+            .rental-intro h2 { font-size: 2rem !important; margin-bottom: 12px; }
+            
+            .property-grid { grid-template-columns: 1fr; gap: 20px; padding: 0 10px; }
+            .property-card { border-radius: 12px; }
+            .property-img-wrapper { height: 210px; }
+            .property-gallery { padding: 10px 15px; }
+            .property-gallery img { width: 55px; height: 40px; }
+            .property-body { padding: 20px; }
+            .property-title { font-size: 1.35rem; margin-bottom: 15px; }
+            
+            .property-specs { padding: 12px; gap: 10px; }
+            .spec-icon { width: 30px; height: 30px; font-size: 0.85rem; }
+            .prop-amenities { gap: 6px; margin-bottom: 18px; }
+            .amenity-tag { font-size: 0.7rem; padding: 4px 10px; }
+            
+            .property-footer { flex-direction: column; align-items: stretch; gap: 15px; }
+            .property-price-wrap { flex-direction: row; justify-content: space-between; align-items: center; }
+            .price-val { font-size: 1.6rem; }
+            .btn-inquire { padding: 12px; font-size: 1rem; width: 100%; }
+
+            /* Mobile Lightbox fixes */
+            .rl-close { top: 15px; right: 15px; width: 40px; height: 40px; font-size: 1.5rem; }
+            .rl-prev { left: 10px; width: 40px; height: 40px; font-size: 1.2rem; }
+            .rl-next { right: 10px; width: 40px; height: 40px; font-size: 1.2rem; }
+            .rl-img { max-width: 95vw; }
+        }
+
+        @media (max-width: 480px) {
+            .property-img-wrapper { height: 190px; }
+            .property-specs { grid-template-columns: 1fr; } 
+            .property-price-wrap { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+
+    <!-- Rental Content -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            
+            <div class="rental-intro fade-in">
+                <h4 class="sub-heading" id="lbl_btn_rental" data-translate="btn_rental">Building Rental</h4>
+                <h2 style="font-family:'Battambang', 'Barlow Condensed',sans-serif; font-size:2.8rem; color:var(--dark); font-weight:900; margin-bottom:18px; letter-spacing:-0.5px;" id="lbl_prop_intro_title" data-translate="prop_intro_title">Available Properties for Rent</h2>
+                <p style="font-family:'Battambang', 'Barlow', sans-serif; color:var(--muted); font-size:1.1rem; max-width:650px; margin:0 auto;" id="lbl_prop_intro_desc" data-translate="prop_intro_desc">Explore our premium spaces designed to support your business growth. We offer strategic locations with flexible terms.</p>
+            </div>
+
+            <!-- Dynamic Property Grid -->
+            <div class="property-grid" id="dynamicRentalGrid">
+                <!-- Loading State -->
+                <div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--muted);">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 15px;"></i>
+                    <p>Loading available properties...</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- RENTAL SLIDER LIGHTBOX HTML -->
+    <div class="rental-lightbox" id="rentalLightbox">
+        <span class="rl-close" onclick="closeRentalLightbox()"><i class="fa-solid fa-xmark"></i></span>
+        <span class="rl-prev" onclick="prevRentalImage(event)"><i class="fa-solid fa-chevron-left"></i></span>
+        <span class="rl-next" onclick="nextRentalImage(event)"><i class="fa-solid fa-chevron-right"></i></span>
+        <img class="rl-img" id="rlImg" src="">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                                        <div class="footer-brand">
+                        <img src="images/Logo.png" alt="LittleMaker Cambodia logo">
+                        <div>
+                            <h3>LITTLEMAKER</h3>
+                            <small>CAMBODIA</small>
+                        </div>
+                    </div>
+                    <p data-translate="footer_desc">Professional metal fabrication and engineering solutions tailored for the Cambodian market.</p>
+                </div>
+                <div class="footer-col">
+                    <h3 data-translate="footer_quick">Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html" data-translate="nav_about">Our Story</a></li>
+                        <li><a href="products.html" data-translate="nav_shop">Shop</a></li>
+                        <li><a href="contact.html" data-translate="nav_contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-translate="footer_contact">Contact</h3>
+                    <div class="social-links">
+                        <a href="https://t.me/samnangkhiev" target="_blank" class="nav-icon-btn telegram" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://web.facebook.com/littlemaker.kh/" target="_blank" class="nav-icon-btn facebook" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="tel:+855719716888" class="nav-icon-btn phone" title="Call Us"><i class="fa-solid fa-phone"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-translate="footer_copy">&copy; 2026 LittleMaker Cambodia. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/translations.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/invoice.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/chat-widget.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Mobile Bottom Tab Bar -->
+    <ul class="mobile-bottom-bar" id="mobileBottomBar">
+        <li><a href="about.html" class="nav-link"><i class="fa-solid fa-circle-info"></i> <span data-translate="nav_about">Our Story</span></a></li>
+        <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> <span data-translate="nav_services">Services</span></a></li>
+        <li><a href="products.html" class="nav-link"><i class="fa-solid fa-shop"></i> <span data-translate="nav_shop">Shop</span></a></li>
+        <li><a href="contact.html" class="nav-link"><i class="fa-solid fa-envelope"></i> <span data-translate="nav_contact">Contact</span></a></li>
+    </ul>
+
+    <!-- DYNAMIC FETCH & RENDER SCRIPT (CONSOLIDATED) -->
+    <script>
+        // FULL MULTILINGUAL DEFAULTS
+        const defaultRentals = [
+            { 
+                id: "default_1", 
+                title: "Standard Industrial Factory", title_kh: "អគាររោងចក្រស្តង់ដារ", title_cn: "标准工业厂房",
+                location: "Svay Rieng Zone A", location_kh: "តំបន់ស្វាយរៀង", location_cn: "柴桢省 A 区",
+                price: "$3,500", price_sqm: "$1.40",
+                desc: "A spacious factory building ideal for heavy manufacturing.", 
+                desc_kh: "អគាររោងចក្រធំទូលាយស័ក្តិសមសម្រាប់ផលិតកម្មធុនធ្ងន់ មានដំបូលខ្ពស់ និងសន្តិសុខល្អ។", 
+                desc_cn: "宽敞的厂房，非常适合重型制造。",
+                image: "images/backgroud_1.png", gallery:["images/backgroud_1.png"], 
+                specs:{"Total Area":"2,500 sqm", "Power":"1000 kVA"},
+                badge_en: "For Rent", badge_kh: "សម្រាប់ជួល", badge_cn: "出租", badge_color: "#ff4d4d", badge_icon: "fa-solid fa-key"
+            },
+            { 
+                id: "default_2", 
+                title: "Premium Warehouse Space", title_kh: "ឃ្លាំងស្តុកទំនិញកម្រិតខ្ពស់", title_cn: "高级仓库空间",
+                location: "Phnom Penh Outskirts", location_kh: "ជាយក្រុងភ្នំពេញ", location_cn: "金边市郊",
+                price: "$2,200", price_sqm: "$1.83",
+                desc: "Modern warehousing facility with loading docks.", 
+                desc_kh: "ឃ្លាំងស្តុកទំនិញទំនើបមានកន្លែងទម្លាក់ទំនិញ និងមានខ្យល់ចេញចូលល្អ។", 
+                desc_cn: "现代化的仓储设施，设有装卸码头。",
+                image: "images/cabinet.jpg", gallery:["images/cabinet.jpg"], 
+                specs:{"Total Area":"1,200 sqm", "Power":"500 kVA"},
+                badge_en: "For Rent", badge_kh: "សម្រាប់ជួល", badge_cn: "出租", badge_color: "#ff4d4d", badge_icon: "fa-solid fa-key"
+            },
+            { 
+                id: "default_3", 
+                title: "Commercial Office Building", title_kh: "អគារការិយាល័យពាណិជ្ជកម្ម", title_cn: "商业办公楼",
+                location: "City Center", location_kh: "កណ្តាលទីក្រុង", location_cn: "市中心",
+                price: "$1,500", price_sqm: "$1.87",
+                desc: "Multi-level office space perfect for corporate headquarters.", 
+                desc_kh: "ការិយាល័យច្រើនជាន់ស័ក្តិសមសម្រាប់ទីស្នាក់ការកណ្តាលក្រុមហ៊ុន បំពាក់ដោយប្រព័ន្ធអ៊ីនធឺណិតល្បឿនលឿន។", 
+                desc_cn: "多层办公空间，非常适合企业总部。",
+                image: "images/Husky1.png", gallery:["images/Husky1.png"], 
+                specs:{"Total Area":"800 sqm", "Power":"Standard"},
+                badge_en: "For Rent", badge_kh: "សម្រាប់ជួល", badge_cn: "出租", badge_color: "#ff4d4d", badge_icon: "fa-solid fa-key"
+            }
+        ];
+
+        let currentGallery = [];
+        let currentIndex = 0;
+
+        function changeRentalImage(element, newSrc) {
+            event.stopPropagation();
+            const card = element.closest('.property-card');
+            const mainImg = card.querySelector('.property-main-img');
+            mainImg.src = newSrc;
+            card.querySelectorAll('.property-gallery img').forEach(img => img.classList.remove('active-thumb'));
+            element.classList.add('active-thumb');
+        }
+
+        function attachLightboxEvents() {
+            document.querySelectorAll('.property-img-wrapper').forEach(wrapper => {
+                wrapper.addEventListener('click', function(e) {
+                    e.stopPropagation(); 
+                    const card = this.closest('.property-card');
+                    const galleryImgs = card.querySelectorAll('.property-gallery img');
+                    currentGallery = Array.from(galleryImgs).map(img => img.src);
+                    const mainImgSrc = card.querySelector('.property-main-img').src;
+                    currentIndex = currentGallery.indexOf(mainImgSrc);
+                    if (currentIndex === -1) currentIndex = 0;
+
+                    const lb = document.getElementById('rentalLightbox');
+                    if(lb) {
+                        document.getElementById('rlImg').src = currentGallery[currentIndex];
+                        lb.classList.add('open');
+                    }
+                });
+            });
+        }
+
+        function closeRentalLightbox() { document.getElementById('rentalLightbox')?.classList.remove('open'); }
+
+        function prevRentalImage(event) {
+            if(event) event.stopPropagation();
+            if (currentGallery.length === 0) return;
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            document.getElementById('rlImg').src = currentGallery[currentIndex];
+        }
+
+        function nextRentalImage(event) {
+            if(event) event.stopPropagation();
+            if (currentGallery.length === 0) return;
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            document.getElementById('rlImg').src = currentGallery[currentIndex];
+        }
+
+        document.getElementById('rentalLightbox')?.addEventListener('click', function(e) {
+            if (e.target.id === 'rentalLightbox') closeRentalLightbox();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            const lb = document.getElementById('rentalLightbox');
+            if (lb && lb.classList.contains('open')) {
+                if (e.key === 'ArrowRight') nextRentalImage();
+                if (e.key === 'ArrowLeft') prevRentalImage();
+                if (e.key === 'Escape') closeRentalLightbox();
+            }
+        });
+
+        function generatePropertyCardHTML(r) {
+            // ទាញយកភាសាដែលកំពុងប្រើពី LocalStorage
+            const lang = localStorage.getItem('lm_lang') || 'en';
+            
+            // Map ភាសាសម្រាប់ឈ្មោះ ទីតាំង និងការពិពណ៌នា
+            const title = lang === 'kh' ? (r.title_kh || r.title) : (lang === 'cn' ? (r.title_cn || r.title) : r.title);
+            const loc = lang === 'kh' ? (r.location_kh || r.location) : (lang === 'cn' ? (r.location_cn || r.location) : r.location);
+            const desc = lang === 'kh' ? (r.desc_kh || r.description || r.desc) : (lang === 'cn' ? (r.desc_cn || r.description || r.desc) : (r.description || r.desc));
+            
+            // ទាញយកទិន្នន័យ Badge ដែល Admin បានកំណត់
+            const badgeTxt = lang === 'kh' ? (r.badge_kh || 'សម្រាប់ជួល') : (lang === 'cn' ? (r.badge_cn || '出租') : (r.badge_en || 'For Rent'));
+            const badgeColor = r.badge_color || '#ff4d4d';
+            const badgeIcon = r.badge_icon || 'fa-solid fa-key';
+
+            let mainImg = r.image || 'images/cabinet.jpg';
+            const galArr = r.gallery && r.gallery.length ? r.gallery : [mainImg];
+            
+            let galleryHTML = galArr.map(src => `<img src="${src}" onclick="changeRentalImage(this, '${src}')" class="${src===mainImg?'active-thumb':''}">`).join('');
+            
+            // បង្កើតបញ្ជី Specs ដែលអាចកែបានដោយសេរីពី Admin
+            let specsHTML = '';
+            if(r.specs) {
+                Object.entries(r.specs).forEach(([k,v]) => {
+                    specsHTML += `
+                    <div class="spec-item">
+                        <div class="spec-icon"><i class="fa-solid fa-check"></i></div>
+                        <div class="spec-info">
+                            <span class="spec-lbl">${k}</span>
+                            <span class="spec-val">${v}</span>
+                        </div>
+                    </div>`;
+                });
+            } else {
+                // Fallback for old data
+                if(r.area) specsHTML += `<div class="spec-item"><div class="spec-icon"><i class="fa-solid fa-chart-area"></i></div><div class="spec-info"><span class="spec-lbl" data-translate="spec_area">Total Area</span><span class="spec-val">${r.area}</span></div></div>`;
+                if(r.power) specsHTML += `<div class="spec-item"><div class="spec-icon"><i class="fa-solid fa-bolt-lightning"></i></div><div class="spec-info"><span class="spec-lbl" data-translate="spec_power">Power</span><span class="spec-val">${r.power}</span></div></div>`;
+            }
+
+            let am1 = `<i class="fa-solid fa-check-circle"></i> <span data-translate="am_sec">Verified</span>`;
+            let am2 = `<i class="fa-solid fa-star"></i> <span data-translate="am_elev">Premium</span>`;
+
+            // បង្កើតប៊ូតុង Map ប្រសិនបើមាន Link បញ្ចូលដោយ Admin
+            let mapBtnHTML = '';
+            if(r.map_link && r.map_link.trim() !== '') {
+                mapBtnHTML = `<a href="${r.map_link}" target="_blank" class="btn-map"><i class="fa-solid fa-map-location-dot"></i> Map</a>`;
+            }
+
+            // ការរៀបចំទម្រង់តម្លៃ (បង្ហាញតម្លៃម៉ែត្រការ៉េ បើមាន)
+            let priceSqmHTML = '';
+            if (r.price_sqm && r.price_sqm.trim() !== '') {
+                priceSqmHTML = `
+                    <div class="price-row" style="margin-top:6px; padding-top:6px; border-top:1px solid #edf2f7;">
+                        <span class="price-lbl" data-translate="lbl_rent_sqm">Price per m²</span>
+                        <div class="property-price">
+                            <span class="price-val sqm-val">${r.price_sqm}</span><span class="price-period">/m²</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="property-card fade-in">
+                    <div class="property-img-wrapper" title="Click to view full image">
+                        <div class="img-overlay-top">
+                            <!-- កែប្រែ Badge អោយដើរតាមការកំណត់របស់ Admin -->
+                            <span class="prop-badge" style="background: ${badgeColor}; box-shadow: 0 4px 10px ${badgeColor}4D;">
+                                <i class="${badgeIcon}"></i> <span>${badgeTxt}</span>
+                            </span>
+                            <span class="prop-view-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> <span data-translate="badge_view">View</span></span>
+                        </div>
+                        <img src="${mainImg}" class="property-main-img" alt="${title}">
+                    </div>
+                    <div class="property-gallery">
+                        ${galleryHTML}
+                    </div>
+                    <div class="property-body">
+                        <div class="prop-location"><i class="fa-solid fa-map-location-dot"></i> <span>${loc || 'N/A'}</span></div>
+                        <h3 class="property-title">${title || 'Untitled Property'}</h3>
+                        
+                        <div class="property-specs">
+                            ${specsHTML}
+                        </div>
+
+                        <p class="property-desc">${desc || ''}</p>
+                        
+                        <div class="prop-amenities">
+                            <span class="amenity-tag">${am1}</span>
+                            <span class="amenity-tag">${am2}</span>
+                        </div>
+
+                        <div class="property-footer">
+                            <div class="property-price-wrap">
+                                <div class="price-row">
+                                    <span class="price-lbl" data-translate="lbl_rent_mo">Monthly Rent</span>
+                                    <div class="property-price">
+                                        <span class="price-val">${r.price || 'Contact Us'}</span><span class="price-period" data-translate="price_mo">/mo</span>
+                                    </div>
+                                </div>
+                                ${priceSqmHTML}
+                            </div>
+                            <!-- បន្ថែមប៊ូតុង Map នៅទីនេះក្បែរ Inquire Now -->
+                            <div style="display:flex; gap:8px;">
+                                ${mapBtnHTML}
+                                <a href="contact.html" class="btn-inquire"><i class="fa-solid fa-paper-plane"></i> <span data-translate="btn_inquire">Inquire Now</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function checkFirebaseAndRender() {
+            const grid = document.getElementById('dynamicRentalGrid');
+            if (!grid) return;
+
+            let rentalsToDisplay = [...defaultRentals];
+
+            if(window.fsDB && window.fsCollection && window.fsGetDocs) {
+                window.fsGetDocs(window.fsCollection(window.fsDB, "rentals"))
+                .then(snap => {
+                    if(!snap.empty) {
+                        const fetchedRentals = [];
+                        snap.forEach(doc => fetchedRentals.push({ id: doc.id, ...doc.data() }));
+                        if (fetchedRentals.length > 0) rentalsToDisplay = fetchedRentals;
+                    }
+                    finalizeRender(grid, rentalsToDisplay);
+                })
+                .catch(e => {
+                    console.error("Firebase fetch error, using defaults.", e);
+                    finalizeRender(grid, rentalsToDisplay);
+                });
+            } else {
+                finalizeRender(grid, rentalsToDisplay);
+            }
+        }
+
+        function finalizeRender(grid, items) {
+            grid.innerHTML = items.map(r => generatePropertyCardHTML(r)).join('');
+            if(typeof loadCustomTranslations === 'function') loadCustomTranslations();
+            if(typeof applyLang === 'function') applyLang(localStorage.getItem('lm_lang') || 'en');
+            attachLightboxEvents();
+
+            if(typeof IntersectionObserver !== 'undefined') {
+                const io = new IntersectionObserver(entries => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+                    });
+                }, { threshold: 0.1 });
+                grid.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+            } else {
+                grid.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            let attempts = 0;
+            const interval = setInterval(() => {
+                if ((window.fsDB && window.fsGetDocs) || attempts > 10) {
+                    clearInterval(interval);
+                    checkFirebaseAndRender();
+                }
+                attempts++;
+            }, 200);
+
+            // បន្ថែម Event ពេលអតិថិជនចុចប្តូរភាសា ឱ្យវាទាញទិន្នន័យមកបង្ហាញម្តងទៀត (Re-render)
+            document.querySelectorAll('.lang-menu a').forEach(a => {
+                a.addEventListener('click', () => {
+                    setTimeout(() => checkFirebaseAndRender(), 50);
+                });
+            });
+        });
+    </script>
+
+    <!-- Auto Inject New Translations for Rental Features -->
+    <script>
+    function injectRentalTranslations() {
+      try {
+        var trs = JSON.parse(localStorage.getItem('lm_translations') || '{"en":{}, "kh":{}, "cn":{}}');
+        if (!trs.en) trs = {en:{}, kh:{}, cn:{}};
+        
+        // Inject Base UI translations to ensure they exist
+        Object.assign(trs.en, {
+          badge_rent: "For Rent", badge_view: "View", spec_area: "Total Area", spec_power: "Power", spec_net: "Network",
+          lbl_rent_mo: "Monthly Rent", price_mo: "/mo", btn_inquire: "Inquire Now",
+          lbl_rent_sqm: "Price per m²",
+          am_sec: "Verified", am_elev: "Premium"
+        });
+
+        Object.assign(trs.kh, {
+          badge_rent: "សម្រាប់ជួល", badge_view: "មើលរូបភាព", spec_area: "ទំហំសរុប", spec_power: "ទំហំភ្លើង", spec_net: "បណ្តាញ",
+          lbl_rent_mo: "តម្លៃជួលប្រចាំខែ", price_mo: "/ខែ", btn_inquire: "សាកសួរព័ត៌មាន",
+          lbl_rent_sqm: "តម្លៃក្នុង ១ម៉ែត្រការ៉េ",
+          am_sec: "បានបញ្ជាក់", am_elev: "គុណភាពខ្ពស់"
+        });
+
+        Object.assign(trs.cn, {
+          badge_rent: "出租", badge_view: "查看", spec_area: "总面积", spec_power: "电源", spec_net: "网络",
+          lbl_rent_mo: "月租金", price_mo: "/月", btn_inquire: "立即咨询",
+          lbl_rent_sqm: "每平方米价格",
+          am_sec: "已验证", am_elev: "优质的"
+        });
+
+        localStorage.setItem('lm_translations', JSON.stringify(trs));
+      } catch(e) { console.error("Translation injection failed", e); }
+    }
+    injectRentalTranslations();
+    </script>
+
+    <!-- Custom Translation Loader -->
+    <script>
+    function loadCustomTranslations() {
+      try {
+        var saved = localStorage.getItem('lm_translations');
+        if (!saved) return;
+        var allTR = JSON.parse(saved);
+        var lang = localStorage.getItem('lm_lang') || 'en';
+        var tr = allTR[lang];
+        if (!tr) return;
+        
+        document.querySelectorAll('[data-translate]').forEach(function(el) {
+          var k = el.getAttribute('data-translate');
+          if (tr[k] !== undefined) {
+            if (tr[k].includes('<')) el.innerHTML = tr[k];
+            else el.textContent = tr[k];
+          }
+        });
+      } catch(e) {}
+    }
+    window.addEventListener('load', loadCustomTranslations);
+    </script>
+    
+    <!-- Secret Admin Access -->
+    <script>
+    function initSecretAdmin() {
+      var n=0,t;
+      document.addEventListener('click',function(e){
+        var ft=e.target.closest('.footer-bottom,.footer-copy,footer p');
+        if(!ft)return;
+        n++;clearTimeout(t);
+        if(n>=5){n=0;window.location.href='admin.html';}
+        t=setTimeout(function(){n=0;},1200);
+      });
+    }
+    initSecretAdmin();
+    </script>
+</body>
+</html>

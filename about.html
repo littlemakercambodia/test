@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | LITTLEMAKER CAMBODIA</title>
+
+    <!-- Favicon / Logo Code Added Here -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css?v=3.1">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+                        <a href="index.html" class="logo" aria-label="LittleMaker Cambodia Home">
+                <img src="images/Logo.png" alt="LittleMaker Cambodia logo" class="logo-img">
+            </a>
+            
+            <!-- Desktop Menu -->
+            <ul class="nav-menu">
+                <li><a href="about.html" class="nav-link active"><i class="fa-solid fa-circle-info"></i> <span data-translate="nav_about">Our Story</span></a></li>
+                <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> <span data-translate="nav_services">Services</span></a></li>
+                <li><a href="products.html" class="nav-link"><i class="fa-solid fa-shop"></i> <span data-translate="nav_shop">Shop</span></a></li>
+                <li><a href="contact.html" class="nav-link"><i class="fa-solid fa-envelope"></i> <span data-translate="nav_contact">Contact</span></a></li>
+            </ul>
+
+            <!-- Right Controls -->
+            <div class="nav-controls">
+                <!-- Theme Toggle -->
+                <div class="theme-toggle" id="themeBtn">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+
+                <!-- Cart -->
+                <div class="cart-wrapper cart-trigger">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </div>
+
+                <!-- Lang -->
+                <div class="lang-dropdown">
+                    <button class="lang-btn" id="langBtn">
+                        <i class="fa-solid fa-globe"></i> <span id="currentLang">EN</span>
+                    </button>
+                    <div class="lang-menu" id="langMenu">
+                        <a href="#" data-lang="en">English</a>
+                        <a href="#" data-lang="kh">ខ្មែរ</a>
+                        <a href="#" data-lang="cn">中文</a>
+                    </div>
+                </div>
+
+                <!-- Mobile Toggle -->
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1 data-translate="about_header">Our Story</h1>
+        </div>
+    </header>
+
+    <!-- About Content -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-half fade-in">
+                    <div class="modern-chart-container">
+                        <h3 class="chart-title" data-translate="chart_title">Company Growth & Capacity</h3>
+                        
+                        <div class="chart-bar-group">
+                            <div class="chart-label">
+                                <span data-translate="chart_prod">Production Capacity</span>
+                                <span class="counter-num">95%</span>
+                            </div>
+                            <div class="chart-track">
+                                <div class="chart-fill" style="--target-width: 95%; background: linear-gradient(90deg, #ff9900, #e67e22);"></div>
+                            </div>
+                        </div>
+
+                        <div class="chart-bar-group">
+                            <div class="chart-label">
+                                <span data-translate="chart_export">Export Growth (YoY)</span>
+                                <span class="counter-num">82%</span>
+                            </div>
+                            <div class="chart-track">
+                                <div class="chart-fill" style="--target-width: 82%; background: linear-gradient(90deg, #004d99, #0073e6);"></div>
+                            </div>
+                        </div>
+
+                        <div class="chart-bar-group">
+                            <div class="chart-label">
+                                <span data-translate="chart_sat">Client Satisfaction</span>
+                                <span class="counter-num">98%</span>
+                            </div>
+                            <div class="chart-track">
+                                <div class="chart-fill" style="--target-width: 98%; background: linear-gradient(90deg, #2ecc71, #27ae60);"></div>
+                            </div>
+                        </div>
+
+                        <div class="chart-stats-row">
+                            <div class="c-stat-box">
+                                <i class="fa-solid fa-industry"></i>
+                                <strong class="counter-num">3+</strong>
+                                <span data-translate="chart_factories">Facilities</span>
+                            </div>
+                            <div class="c-stat-box">
+                                <i class="fa-solid fa-users-gear"></i>
+                                <strong class="counter-num">120+</strong>
+                                <span data-translate="chart_engineers">Skilled Staff</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-half content-center fade-in">
+                    <div class="modern-text-block">
+                        <h4 class="sub-heading" data-translate="story_company_title">About Our Company</h4>
+                        <p data-translate="story_company_desc">LITTLEMAKER (CAMBODIA) CO., LTD. is a manufacturing company established in Cambodia, specializing in metal components, furniture hardware, and related products. The company operates manufacturing, quality control, warehousing, and supporting functions in accordance with customer, statutory, and regulatory requirements.</p>
+                        <div class="pt-20"></div>
+                        <h4 class="sub-heading" data-translate="story_commit_title">Our Commitment & Quality</h4>
+                        <p data-translate="story_commit_desc">The company is committed to providing stable quality products, on-time delivery, and continual improvement through the effective implementation of a Quality Management System (QMS) that complies with ISO 9001:2015. We are committed to continuously improving our quality management system.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 data-translate="story_products_title">Our Core Products</h2>
+                <p data-translate="story_products_sub">Key product categories we manufacture</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="icon-box"><i class="fa-solid fa-table"></i></div>
+                    <h3 data-translate="story_prod_tables_title">Tables</h3>
+                    <p data-translate="story_prod_tables_desc">Including versatile workbenches and ergonomic height-adjustable desks.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="icon-box"><i class="fa-solid fa-warehouse"></i></div>
+                    <h3 data-translate="story_prod_office_title">Office &amp; Storage Solutions</h3>
+                    <p data-translate="story_prod_office_desc">Office cabinets, specialized toolboxes, and utility carts.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="icon-box"><i class="fa-solid fa-fire-burner"></i></div>
+                    <h3 data-translate="story_prod_cooking_title">Outdoor &amp; Cooking Equipment</h3>
+                    <p data-translate="story_prod_cooking_desc">High-performance BBQ grills and pellet stoves.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="icon-box"><i class="fa-solid fa-briefcase"></i></div>
+                    <h3 data-translate="story_prod_custom_title">Custom Metalwork</h3>
+                    <p data-translate="story_prod_custom_desc">Stainless steel products.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 data-translate="story_market_title">Our Consumer Market</h2>
+            </div>
+            <ul class="market-grid">
+                <li class="market-card fade-in">
+                    <i class="fa-solid fa-flag-usa"></i>
+                    <span data-translate="story_market_us">America / United States</span>
+                </li>
+                <li class="market-card fade-in">
+                    <i class="fa-brands fa-canadian-maple-leaf"></i>
+                    <span data-translate="story_market_ca">Canada</span>
+                </li>
+                <li class="market-card fade-in">
+                    <i class="fa-solid fa-earth-oceania"></i>
+                    <span data-translate="story_market_au">Australia</span>
+                </li>
+                <li class="market-card fade-in">
+                    <i class="fa-solid fa-star"></i>
+                    <span data-translate="story_market_vn">Vietnam</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                                        <div class="footer-brand">
+                        <img src="images/Logo.png" alt="LittleMaker Cambodia logo">
+                        <div>
+                            <h3>LITTLEMAKER</h3>
+                            <small>CAMBODIA</small>
+                        </div>
+                    </div>
+                    <p data-translate="footer_desc">Professional metal fabrication and engineering solutions tailored for the Cambodian market.</p>
+                </div>
+                <div class="footer-col">
+                    <h3 data-translate="footer_quick">Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html" data-translate="nav_about">Our Story</a></li>
+                        <li><a href="products.html" data-translate="nav_shop">Shop</a></li>
+                        <li><a href="contact.html" data-translate="nav_contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-translate="footer_contact">Contact</h3>
+                    <div class="social-links">
+                        <a href="https://t.me/samnangkhiev" target="_blank" class="nav-icon-btn telegram" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://web.facebook.com/littlemaker.kh/" target="_blank" class="nav-icon-btn facebook" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="tel:+855719716888" class="nav-icon-btn phone" title="Call Us"><i class="fa-solid fa-phone"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-translate="footer_copy">&copy; 2026 LittleMaker Cambodia. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/translations.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/invoice.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/chat-widget.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Mobile Bottom Tab Bar -->
+    <ul class="mobile-bottom-bar" id="mobileBottomBar">
+        <li><a href="about.html" class="nav-link active"><i class="fa-solid fa-circle-info"></i> <span data-translate="nav_about">Our Story</span></a></li>
+        <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> <span data-translate="nav_services">Services</span></a></li>
+        <li><a href="products.html" class="nav-link"><i class="fa-solid fa-shop"></i> <span data-translate="nav_shop">Shop</span></a></li>
+        <li><a href="contact.html" class="nav-link"><i class="fa-solid fa-envelope"></i> <span data-translate="nav_contact">Contact</span></a></li>
+    </ul>
+
+
+    <!-- Custom Translation Loader (Admin overrides) -->
+    <script>
+    (function(){
+      try {
+        var saved = localStorage.getItem('lm_translations');
+        if (!saved) return;
+        var allTR = JSON.parse(saved);
+        var lang = localStorage.getItem('lm_lang') || 'en';
+        var tr = allTR[lang];
+        if (!tr) return;
+        window.addEventListener('load', function() {
+          /* Apply text translations */
+          document.querySelectorAll('[data-translate]').forEach(function(el) {
+            var k = el.getAttribute('data-translate');
+            if (tr[k] !== undefined) {
+              if (/</.test(tr[k])) el.innerHTML = tr[k];
+              else el.textContent = tr[k];
+            }
+          });
+          /* Apply admin-configured images */
+          document.querySelectorAll('[data-img-key]').forEach(function(el) {
+            var k = el.getAttribute('data-img-key');
+            if (tr[k]) {
+              el.src = tr[k];
+            }
+          });
+        });
+      } catch(e) {}
+    })();
+    </script>
+    <!-- Secret Admin Access: Click footer copyright 5x quickly -->
+    <script>
+    (function(){
+      var n=0,t;
+      document.addEventListener('click',function(e){
+        var ft=e.target.closest('.footer-bottom,.footer-copy,footer p');
+        if(!ft)return;
+        n++;clearTimeout(t);
+        if(n>=5){n=0;window.location.href='admin.html';}
+        t=setTimeout(function(){n=0;},1200);
+      });
+    })();
+    </script>
+</body>
+</html>
