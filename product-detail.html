@@ -25,8 +25,26 @@
             <!-- Desktop Menu -->
             <ul class="nav-menu">
                 <li><a href="about.html" class="nav-link"><i class="fa-solid fa-circle-info"></i> <span data-translate="nav_about">Our Story</span></a></li>
-                <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> <span data-translate="nav_services">Services</span></a></li>
-                <li><a href="products.html" class="nav-link active"><i class="fa-solid fa-shop"></i> <span data-translate="nav_shop">Shop</span></a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-link active"><i class="fa-solid fa-building"></i> <span data-translate="nav_business">Our Business</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="products.html" class="nav-dropdown-item active">
+                            <i class="fa-solid fa-shop"></i>
+                            <div>
+                                <div data-translate="nav_shop" style="font-weight: 600;">Shop</div>
+                                <div style="font-size: 0.8em; color: #888; margin-top: 2px;" data-translate="nav_manufacturing_desc">CNC parts & office furniture</div>
+                            </div>
+                        </a>
+                        <a href="building-rental.html" class="nav-dropdown-item">
+                            <i class="fa-solid fa-industry"></i>
+                            <div>
+                                <div data-translate="nav_rental" style="font-weight: 600;">Factory & Office Rental</div>
+                                <div style="font-size: 0.8em; color: #888; margin-top: 2px;" data-translate="nav_rental_desc">Premium industrial spaces</div>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> <span data-translate="nav_services">Careers</span></a></li>
                 <li><a href="contact.html" class="nav-link"><i class="fa-solid fa-envelope"></i> <span data-translate="nav_contact">Contact</span></a></li>
             </ul>
 

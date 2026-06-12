@@ -1,0 +1,163 @@
+/* drive.css - Custom layout for Our Story */
+.drive-banner {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-image: url('../images/backgroud 1.png');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+}
+.drive-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+.drive-banner-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 20px;
+}
+.drive-banner-slogan {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--or);
+    margin-bottom: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 1px;
+}
+.drive-banner-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    font-family: 'Barlow', sans-serif;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.drive-section {
+    padding: 80px 0;
+}
+.drive-section.bg-light {
+    background-color: #f7f9fc;
+}
+.drive-split {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 50px;
+}
+.drive-split.reverse {
+    flex-direction: row-reverse;
+}
+.drive-img {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+.drive-img::after {
+    content: '';
+    display: block;
+    padding-bottom: 70%; /* Aspect ratio */
+}
+.drive-img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.drive-img:hover img {
+    transform: scale(1.06);
+}
+.drive-text {
+    flex: 1.2;
+    min-width: 300px;
+}
+.drive-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--blue);
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+}
+.drive-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.8;
+}
+.drive-products-banner {
+    background: url('../images/backgroud_1.png') center/cover no-repeat;
+    position: relative;
+    padding: 100px 0;
+    color: #fff;
+    text-align: center;
+}
+.drive-products-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 30, 80, 0.85);
+}
+.drive-products-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.drive-products-content .drive-title {
+    color: #fff;
+}
+.drive-products-content .drive-desc {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+}
+.drive-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+.drive-product-item {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 12px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+.drive-product-item:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.15);
+}
+.drive-product-item i {
+    font-size: 3rem;
+    color: var(--or);
+    margin-bottom: 20px;
+}
+.drive-product-item h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+.drive-product-item p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+}
+@media (max-width: 768px) {
+    .drive-banner-title { font-size: 2.5rem; }
+    .drive-split { flex-direction: column !important; gap: 30px; }
+    .drive-title { font-size: 2.2rem; }
+    .drive-section { padding: 50px 0; }
+}

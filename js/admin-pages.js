@@ -18,51 +18,91 @@ const ANIM_SELECT = `<select id="LANG_ANIM_ID"><option value="fade">Fade In/Out<
 /* ── HOME PAGE EDITOR ── */
 function homePageHTML() {
   return `<div class="lang-tabs"><button class="lang-tab active" onclick="switchLang('home','en',this)"><span class="flag">🇺🇸</span> English</button><button class="lang-tab" onclick="switchLang('home','kh',this)"><span class="flag">🇰🇭</span> ខ្មែរ</button><button class="lang-tab" onclick="switchLang('home','cn',this)"><span class="flag">🇨🇳</span> 中文</button></div>
-  <div class="lang-panel active" id="home-en">${heroSection('en')}${featuresSection('en')}</div>
-  <div class="lang-panel" id="home-kh">${heroSection('kh')}${featuresSection('kh')}</div>
-  <div class="lang-panel" id="home-cn">${heroSection('cn')}${featuresSection('cn')}</div>
-  <div class="save-bar"><div class="sb-info">Changes are saved to <strong>localStorage</strong> & <strong>Firebase</strong></div><button class="btn bp" onclick="saveTranslations('home')"><i class="fa-solid fa-save"></i> Save Home Page</button></div>`;
+  <div class="lang-panel active" id="home-en">${homeSections('en')}</div>
+  <div class="lang-panel" id="home-kh">${homeSections('kh')}</div>
+  <div class="lang-panel" id="home-cn">${homeSections('cn')}</div>
+  <div class="save-bar"><div class="sb-info">Changes are saved to <strong>Firebase</strong></div><button class="btn bp" onclick="saveTranslations('home')"><i class="fa-solid fa-save"></i> Save Home Page</button></div>`;
 }
-function heroSection(lang) {
+
+function homeSections(lang) {
   const f = lang==='en'?'🇺🇸 English':lang==='kh'?'🇰🇭 ខ្មែរ':'🇨🇳 中文';
-  const animId = lang+'_h_hero_anim';
-  return `<div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-image"></i> Hero Section (${f})</div><span style="font-size:.73rem;color:var(--mu)">index.html</span></div><div class="peb"><div class="pe-grid">
-    <div class="pg pe-full"><label>Hero Title</label>${RTE_TOOLBAR}${rteEditor(lang+'_h_hero_title')}</div>
-    <div class="pg pe-full"><label>Hero Description</label>${RTE_TOOLBAR_SIMPLE}${rteEditor(lang+'_h_hero_desc')}</div>
-    <div class="pg"><label>ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID',animId)}</div>
-    <div class="pg pe-full"><label>រូបភាពទី១ (Image 1)</label>${muHTML(lang+'_h_hero_bg',lang+'HeroBgImg',lang+'HeroBgPh','Image 1 - Background')}</div>
-    <div class="pg pe-full"><label>រូបភាពទី២ (Image 2)</label>${muHTML(lang+'_h_hero_bg2',lang+'HeroBgImg2',lang+'HeroBgPh2','Image 2 - Background')}</div>
-    <div class="pg pe-full"><label>រូបភាពទី៣ (Image 3)</label>${muHTML(lang+'_h_hero_bg3',lang+'HeroBgImg3',lang+'HeroBgPh3','Image 3 - Background')}</div>
-  </div></div></div>`;
-}
-function featuresSection(lang) {
-  const f = lang==='en'?'🇺🇸 English':lang==='kh'?'🇰🇭 ខ្មែរ':'🇨🇳 中文';
-  return `<div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-th-large"></i> Features Section (${f})</div></div><div class="peb"><div class="pe-grid">
-    <div class="pg"><label>Section Label</label><input type="text" id="${lang}_h_feat_title"></div>
-    <div class="pg"><label>Section Main Title</label><input type="text" id="${lang}_h_feat_sub"></div>
-    <div class="pg"><label>Feature 1 Title</label><input type="text" id="${lang}_h_feat_off"></div>
-    <div class="pg"><label>Feature 1 Desc</label><input type="text" id="${lang}_h_feat_off_desc"></div>
-    <div class="pg"><label>Feature 1 - ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID',lang+'_h_feat_off_anim')}</div>
-    <div class="pg pe-full"><label>Feature 1 - រូបភាពទី១ (Image 1)</label>${muHTML(lang+'_h_feat_off_bg',lang+'FeatOffImg',lang+'FeatOffPh','Feature 1 - Image 1')}</div>
-    <div class="pg pe-full"><label>Feature 1 - រូបភាពទី២ (Image 2)</label>${muHTML(lang+'_h_feat_off_bg2',lang+'FeatOffImg2',lang+'FeatOffPh2','Feature 1 - Image 2')}</div>
-    <div class="pg pe-full"><label>Feature 1 - រូបភាពទី៣ (Image 3)</label>${muHTML(lang+'_h_feat_off_bg3',lang+'FeatOffImg3',lang+'FeatOffPh3','Feature 1 - Image 3')}</div>
-    <div class="pg"><label>Feature 2 Title</label><input type="text" id="${lang}_h_feat_ind"></div>
-    <div class="pg"><label>Feature 2 Desc</label><input type="text" id="${lang}_h_feat_ind_desc"></div>
-    <div class="pg"><label>Feature 2 - ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID',lang+'_h_feat_ind_anim')}</div>
-    <div class="pg pe-full"><label>Feature 2 - រូបភាពទី១ (Image 1)</label>${muHTML(lang+'_h_feat_ind_bg',lang+'FeatIndImg',lang+'FeatIndPh','Feature 2 - Image 1')}</div>
-    <div class="pg pe-full"><label>Feature 2 - រូបភាពទី២ (Image 2)</label>${muHTML(lang+'_h_feat_ind_bg2',lang+'FeatIndImg2',lang+'FeatIndPh2','Feature 2 - Image 2')}</div>
-    <div class="pg pe-full"><label>Feature 2 - រូបភាពទី៣ (Image 3)</label>${muHTML(lang+'_h_feat_ind_bg3',lang+'FeatIndImg3',lang+'FeatIndPh3','Feature 2 - Image 3')}</div>
-    <div class="pg"><label>Building Rental Title</label><input type="text" id="${lang}_serv_rental"></div>
-    <div class="pg"><label>Building Rental Desc</label><input type="text" id="${lang}_serv_rental_desc"></div>
-    <div class="pg"><label>Rental - ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID',lang+'_h_serv_rental_anim')}</div>
-    <div class="pg pe-full"><label>Building Rental - រូបភាពទី១ (Image 1)</label>${muHTML(lang+'_h_serv_rental_bg',lang+'ServRentalImg',lang+'ServRentalPh','Rental - Image 1')}</div>
-    <div class="pg pe-full"><label>Building Rental - រូបភាពទី២ (Image 2)</label>${muHTML(lang+'_h_serv_rental_bg2',lang+'ServRentalImg2',lang+'ServRentalPh2','Rental - Image 2')}</div>
-    <div class="pg pe-full"><label>Building Rental - រូបភាពទី៣ (Image 3)</label>${muHTML(lang+'_h_serv_rental_bg3',lang+'ServRentalImg3',lang+'ServRentalPh3','Rental - Image 3')}</div>
-    <div class="pg"><label>CTA Title</label><input type="text" id="${lang}_h_cta_title"></div>
-    <div class="pg"><label>CTA Description</label><input type="text" id="${lang}_h_cta_desc"></div>
-    <div class="pg"><label>Button Shop</label><input type="text" id="${lang}_btn_shop"></div>
-    <div class="pg"><label>Button Quote</label><input type="text" id="${lang}_btn_quote"></div>
-  </div></div></div>`;
+  return `
+  <!-- 1. Hero Section -->
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-image"></i> 1. Hero Section (${f})</div><span style="font-size:.73rem;color:var(--mu)">index.html</span></div><div class="peb"><div class="pe-grid">
+    <div class="pg pe-full"><label>Hero Title</label>${RTE_TOOLBAR}${rteEditor(lang+'_hero_title')}</div>
+    <div class="pg pe-full"><label>Hero Description</label>${RTE_TOOLBAR_SIMPLE}${rteEditor(lang+'_hero_desc')}</div>
+    <div class="pg"><label>Button Text</label><input type="text" id="${lang}_about_preview_btn"></div>
+    <div class="pg"><label>ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID', lang+'_h_hero_anim')}</div>
+    <div class="pg pe-full"><label>Hero Background Image</label>${muHTML(lang+'_h_hero_bg',lang+'HeroBg',lang+'HeroBgPh','Hero Image')}</div>
+    <div class="pg"><label>Stat: Projects</label><input type="text" id="${lang}_stat_projects"></div>
+    <div class="pg"><label>Stat: Years</label><input type="text" id="${lang}_stat_years"></div>
+  </div></div></div>
+
+  <!-- 2. Matrix Cards (Office, Careers, Rental) -->
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-th-large"></i> 2. Matrix Cards (${f})</div></div><div class="peb"><div class="pe-grid">
+    <div class="pg"><label>Card 1 (Office) Title</label><input type="text" id="${lang}_feat_off"></div>
+    <div class="pg"><label>Card 1 Desc</label><input type="text" id="${lang}_feat_off_desc"></div>
+    <div class="pg"><label>Card 1 - ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID', lang+'_h_feat_off_anim')}</div>
+    <div class="pg pe-full"><label>Card 1 Background</label>${muHTML(lang+'_h_feat_off_bg',lang+'FeatOffBg',lang+'FeatOffBgPh','Office Image')}</div>
+    
+    <div class="pg"><label>Card 2 (Careers) Title</label><input type="text" id="${lang}_nav_careers"></div>
+    <div class="pg"><label>Card 2 Desc</label><input type="text" id="${lang}_car_sub"></div>
+    <div class="pg"><label>Card 2 - ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID', lang+'_h_feat_ind_anim')}</div>
+    <div class="pg pe-full"><label>Card 2 Background</label>${muHTML(lang+'_h_feat_ind_bg',lang+'FeatIndBg',lang+'FeatIndBgPh','Careers Image')}</div>
+
+    <div class="pg"><label>Card 3 (Rental) Title</label><input type="text" id="${lang}_serv_rental"></div>
+    <div class="pg"><label>Card 3 Desc</label><input type="text" id="${lang}_serv_rental_desc"></div>
+    <div class="pg"><label>Card 3 - ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID', lang+'_h_serv_rental_anim')}</div>
+    <div class="pg pe-full"><label>Card 3 Background</label>${muHTML(lang+'_h_serv_rental_bg',lang+'FeatRentBg',lang+'FeatRentBgPh','Rental Image')}</div>
+  </div></div></div>
+
+  <!-- 3. Corporate Culture (Split Section) -->
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-users"></i> 3. Corporate Culture (${f})</div></div><div class="peb"><div class="pe-grid">
+    <div class="pg"><label>Sub Heading</label><input type="text" id="${lang}_about_who"></div>
+    <div class="pg"><label>Main Title</label><input type="text" id="${lang}_why_sub"></div>
+    <div class="pg pe-full"><label>Description</label><textarea id="${lang}_about_preview_desc" rows="3"></textarea></div>
+    <div class="pg pe-full"><label>Side Image</label>${muHTML(lang+'_h_about_img',lang+'AboutImg',lang+'AboutImgPh','Corporate Culture Image')}</div>
+
+    <div class="pg"><label>Feature 1 Title (Quality)</label><input type="text" id="${lang}_why_quality"></div>
+    <div class="pg"><label>Feature 1 Desc</label><textarea id="${lang}_why_quality_desc" rows="2"></textarea></div>
+    <div class="pg"><label>Feature 2 Title (Custom)</label><input type="text" id="${lang}_why_custom"></div>
+    <div class="pg"><label>Feature 2 Desc</label><textarea id="${lang}_why_custom_desc" rows="2"></textarea></div>
+    <div class="pg"><label>Feature 3 Title (Fast)</label><input type="text" id="${lang}_why_fast"></div>
+    <div class="pg"><label>Feature 3 Desc</label><textarea id="${lang}_why_fast_desc" rows="2"></textarea></div>
+  </div></div></div>
+
+  <!-- 4. Product Matrix & Video -->
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-boxes-stacked"></i> 4. Product Matrix (${f})</div></div><div class="peb"><div class="pe-grid">
+    <div class="pg pe-full"><label>Main Title</label><input type="text" id="${lang}_matrix_title"></div>
+    <div class="pg pe-full"><label>Description</label><textarea id="${lang}_matrix_desc" rows="2"></textarea></div>
+    <div class="pg pe-full"><label>Background Image (Fallback)</label>${muHTML(lang+'_h_matrix_bg',lang+'MatrixBg',lang+'MatrixBgPh','Matrix BG Image')}</div>
+    <div class="pg pe-full"><label>Video URL (Leave blank to use image)</label><input type="text" id="${lang}_h_matrix_video" placeholder="images/Video1.mp4"></div>
+    
+    <div class="pg"><label>Category 1 (Metal)</label><input type="text" id="${lang}_cat_metal"></div>
+    <div class="pg"><label>Category 2 (Office)</label><input type="text" id="${lang}_cat_office"></div>
+    <div class="pg"><label>Category 3 (Steel)</label><input type="text" id="${lang}_cat_steel"></div>
+    <div class="pg"><label>Category 4 (Custom)</label><input type="text" id="${lang}_cat_custom"></div>
+  </div></div></div>
+
+  <!-- 5. Featured Products & Careers -->
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-star"></i> 5. Featured & Careers (${f})</div></div><div class="peb"><div class="pe-grid">
+    <div class="pg"><label>Products Sub Heading</label><input type="text" id="${lang}_featured_products_sub"></div>
+    <div class="pg"><label>Products Main Title</label><input type="text" id="${lang}_featured_products"></div>
+    <div class="pg"><label>View Catalog Button</label><input type="text" id="${lang}_btn_view_cat"></div>
+    <div class="pg"><label>Careers Main Title</label><input type="text" id="${lang}_car_header"></div>
+  </div></div></div>
+
+  <!-- 6. Global Presence (Map) -->
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-globe"></i> 6. Global Map (${f})</div></div><div class="peb"><div class="pe-grid">
+    <div class="pg"><label>Sub Heading</label><input type="text" id="${lang}_map_sub"></div>
+    <div class="pg"><label>Main Title</label><input type="text" id="${lang}_map_title"></div>
+    <div class="pg pe-full"><label>Description</label><textarea id="${lang}_map_desc" rows="2"></textarea></div>
+    <div class="pg pe-full"><label>Timeline 1 (Taiwan)</label><input type="text" id="${lang}_map_t1"></div>
+    <div class="pg pe-full"><label>Timeline 2 (Vietnam)</label><input type="text" id="${lang}_map_v1"></div>
+    <div class="pg pe-full"><label>Timeline 3 (Cambodia)</label><input type="text" id="${lang}_map_c1"></div>
+    <div class="pg"><label>Button Text</label><input type="text" id="${lang}_map_btn"></div>
+  </div></div></div>
+  `;
 }
 
 /* ── ABOUT US EDITOR ── */
@@ -71,22 +111,57 @@ function aboutPageHTML() {
   <div class="lang-panel active" id="about-en">${aboutSection('en')}</div>
   <div class="lang-panel" id="about-kh">${aboutSection('kh')}</div>
   <div class="lang-panel" id="about-cn">${aboutSection('cn')}</div>
-  <div class="save-bar"><div class="sb-info">Changes are saved to <strong>localStorage</strong> & <strong>Firebase</strong></div><button class="btn bp" onclick="saveTranslations('about')"><i class="fa-solid fa-save"></i> Save About Us</button></div>`;
+  <div class="save-bar"><div class="sb-info">Changes are saved to <strong>Firebase</strong></div><button class="btn bp" onclick="saveTranslations('about')"><i class="fa-solid fa-save"></i> Save About Us</button></div>`;
 }
 function aboutSection(lang) {
   const f = lang==='en'?'🇺🇸 English':lang==='kh'?'🇰🇭 ខ្មែរ':'🇨🇳 中文';
-  return `<div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-circle-info"></i> About Us Section (${f})</div><span style="font-size:.73rem;color:var(--mu)">about.html</span></div><div class="peb"><div class="pe-grid">
-    <div class="pg pe-full"><label>Page Header Title</label><input type="text" id="${lang}_about_header"></div>
-    <div class="pg pe-full"><label>Page Subtitle</label><input type="text" id="${lang}_about_sub"></div>
-    <div class="pg pe-full"><label>Section Title (Who We Are)</label><input type="text" id="${lang}_about_title"></div>
-    <div class="pg pe-full"><label>Paragraph 1</label><textarea id="${lang}_about_p1" rows="3"></textarea></div>
-    <div class="pg pe-full"><label>Paragraph 2</label><textarea id="${lang}_about_p2" rows="3"></textarea></div>
-    <div class="pg pe-full"><label>About Page Image</label>${muHTML(lang+'_a_img',lang+'AboutImg',lang+'AboutPh','About Image')}</div>
+  return `<div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-circle-info"></i> Our Story - Header & Welcome (${f})</div><span style="font-size:.73rem;color:var(--mu)">about.html</span></div><div class="peb"><div class="pe-grid">
+    <div class="pg pe-full"><label>Welcome Banner Text</label><input type="text" id="${lang}_story_welcome"></div>
   </div></div></div>
-  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-star"></i> Feature List (${f})</div></div><div class="peb"><div class="pe-grid">
-    <div class="pg"><label>Feature 1</label><input type="text" id="${lang}_feat_iso"></div>
-    <div class="pg"><label>Feature 2</label><input type="text" id="${lang}_feat_high"></div>
-    <div class="pg"><label>Feature 3</label><input type="text" id="${lang}_feat_fast"></div>
+
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-history"></i> Heritage & Expansion (${f})</div></div><div class="peb"><div class="pe-grid">
+    <div class="pg pe-full"><label>Title</label><input type="text" id="${lang}_story_heritage_title"></div>
+    <div class="pg pe-full"><label>Description</label><textarea id="${lang}_story_heritage_desc" rows="3"></textarea></div>
+    <div class="pg pe-full"><label>Image</label>${muHTML(lang+'_story_heritage_img',lang+'StoryHerImg',lang+'StoryHerPh','Heritage Image')}</div>
+  </div></div></div>
+
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-cogs"></i> Engineering Excellence (${f})</div></div><div class="peb"><div class="pe-grid">
+    <div class="pg pe-full"><label>Title</label><input type="text" id="${lang}_story_eng_title"></div>
+    <div class="pg pe-full"><label>Description</label><textarea id="${lang}_story_eng_desc" rows="3"></textarea></div>
+    <div class="pg pe-full"><label>Image</label>${muHTML(lang+'_story_eng_img',lang+'StoryEngImg',lang+'StoryEngPh','Engineering Image')}</div>
+  </div></div></div>
+
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-check-circle"></i> Committed to Quality Standards (${f})</div></div><div class="peb"><div class="pe-grid">
+    <div class="pg pe-full"><label>Title</label><input type="text" id="${lang}_story_commit_title"></div>
+    <div class="pg pe-full"><label>Description</label><textarea id="${lang}_story_commit_desc" rows="3"></textarea></div>
+    <div class="pg pe-full"><label>Image</label>${muHTML(lang+'_story_commit_img',lang+'StoryComImg',lang+'StoryComPh','Quality Image')}</div>
+  </div></div></div>
+
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-eye"></i> Looking Forward (${f})</div></div><div class="peb"><div class="pe-grid">
+    <div class="pg pe-full"><label>Title</label><input type="text" id="${lang}_story_future_title"></div>
+    <div class="pg pe-full"><label>Description</label><textarea id="${lang}_story_future_desc" rows="3"></textarea></div>
+  </div></div></div>
+
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-box-open"></i> Core Products (${f})</div></div><div class="peb"><div class="pe-grid">
+    <div class="pg pe-full"><label>Main Title</label><input type="text" id="${lang}_story_products_title"></div>
+    <div class="pg pe-full"><label>Main Description</label><textarea id="${lang}_story_products_main_desc" rows="2"></textarea></div>
+    
+    <div class="pg"><label>Product 1 Title (Office)</label><input type="text" id="${lang}_story_prod_office_title"></div>
+    <div class="pg"><label>Product 1 Desc</label><textarea id="${lang}_story_prod_office_desc" rows="2"></textarea></div>
+
+    <div class="pg"><label>Product 2 Title (Tools)</label><input type="text" id="${lang}_story_prod_tools_title"></div>
+    <div class="pg"><label>Product 2 Desc</label><textarea id="${lang}_story_prod_tools_desc" rows="2"></textarea></div>
+
+    <div class="pg"><label>Product 3 Title (BBQ)</label><input type="text" id="${lang}_story_prod_bbq_title"></div>
+    <div class="pg"><label>Product 3 Desc</label><textarea id="${lang}_story_prod_bbq_desc" rows="2"></textarea></div>
+  </div></div></div>
+
+  <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-globe"></i> Consumer Market (${f})</div></div><div class="peb"><div class="pe-grid">
+    <div class="pg pe-full"><label>Market Title</label><input type="text" id="${lang}_story_market_title"></div>
+    <div class="pg"><label>US</label><input type="text" id="${lang}_story_market_us"></div>
+    <div class="pg"><label>Canada</label><input type="text" id="${lang}_story_market_ca"></div>
+    <div class="pg"><label>Australia</label><input type="text" id="${lang}_story_market_au"></div>
+    <div class="pg"><label>Vietnam</label><input type="text" id="${lang}_story_market_vn"></div>
   </div></div></div>`;
 }
 
@@ -94,28 +169,45 @@ function aboutSection(lang) {
 let adminCareerPosts = [];
 
 function loadAdminCareerPosts() {
+    if (window.firestoreDB && window.fsCollection && window.fsGetDocs) {
+        window.fsGetDocs(window.fsCollection(window.firestoreDB, "careers"))
+        .then(snap => {
+            if (!snap.empty) {
+                adminCareerPosts = [];
+                snap.forEach(doc => adminCareerPosts.push({ id: doc.id, ...doc.data() }));
+                renderCareerPostsTable();
+            } else {
+                adminCareerPosts = [];
+                renderCareerPostsTable();
+            }
+        })
+        .catch(e => {
+            console.error("Firebase fetch error", e);
+            fallbackLoadAdminCareerPosts();
+        });
+    } else {
+        fallbackLoadAdminCareerPosts();
+    }
+}
+
+function fallbackLoadAdminCareerPosts() {
     try {
         const stored = localStorage.getItem('lm_career_posts');
         if (stored) {
             adminCareerPosts = JSON.parse(stored);
         } else {
-            // Default 3 posts if empty
-            adminCareerPosts = [
-                {id: "job1", title: "CNC Machine Operator", desc: "We are looking for an experienced CNC operator to handle our high-precision milling machines.", location: "Phnom Penh", type: "Full Time", image: "images/cabinet.jpg", timestamp: Date.now() - 2 * 60 * 60 * 1000, likes: 1200, commentsCount: 120, shares: 45},
-                {id: "job2", title: "Sales Executive", desc: "Join our dynamic sales team to promote our premium office furniture and industrial parts.", location: "Phnom Penh", type: "Full Time", image: "images/Husky1.png", timestamp: Date.now() - 5 * 60 * 60 * 1000, likes: 845, commentsCount: 89, shares: 21},
-                {id: "job3", title: "Mechanical Engineer", desc: "Seeking a skilled mechanical engineer for CAD design and product development.", location: "Svay Rieng", type: "Full Time", image: "images/backgroud_1.png", timestamp: Date.now() - 24 * 60 * 60 * 1000, likes: 2100, commentsCount: 340, shares: 150}
-            ];
-            localStorage.setItem('lm_career_posts', JSON.stringify(adminCareerPosts));
+            adminCareerPosts = [];
         }
     } catch(e) {
         adminCareerPosts = [];
     }
+    renderCareerPostsTable();
 }
 
 function saveAdminCareerPosts() {
+    // Only used for fallback now
     localStorage.setItem('lm_career_posts', JSON.stringify(adminCareerPosts));
     renderCareerPostsTable();
-    window.toast('Careers Posts Saved successfully!', 'success');
 }
 
 function servicesPageHTML() {
@@ -167,6 +259,10 @@ function servicesPageHTML() {
                   <div class="pg" style="flex:1;"><label>Base Likes</label><input type="number" id="cpLikes" min="0"></div>
                   <div class="pg" style="flex:1;"><label>Base Comments</label><input type="number" id="cpComments" min="0"></div>
                   <div class="pg" style="flex:1;"><label>Base Shares</label><input type="number" id="cpShares" min="0"></div>
+              </div>
+              <div class="pg" style="margin-top:12px;">
+                  <label>Facebook Link (Optional)</label>
+                  <input type="url" id="cpFbLink" placeholder="https://www.facebook.com/...">
               </div>
               <div class="pg pe-full" style="margin-top:12px;">
                   <label>Post Image</label>
@@ -232,6 +328,7 @@ window.openCareerPostModal = function(id = null) {
     const salary = document.getElementById('cpSalary');
     const vacancies = document.getElementById('cpVacancies');
     const status = document.getElementById('cpStatus');
+    const fbLink = document.getElementById('cpFbLink');
 
     if(id) {
         const post = adminCareerPosts.find(p => p.id === id);
@@ -249,6 +346,7 @@ window.openCareerPostModal = function(id = null) {
         salary.value = post.salary || '';
         vacancies.value = post.vacancies || 1;
         status.value = post.status || 'Open';
+        fbLink.value = post.fbLink || '';
         
         if(post.image) {
             imgPrev.src = post.image;
@@ -272,13 +370,14 @@ window.openCareerPostModal = function(id = null) {
         salary.value = 'Negotiable';
         vacancies.value = 1;
         status.value = 'Open';
+        fbLink.value = '';
         imgPrev.classList.remove('show');
         imgPh.style.display = 'flex';
     }
     openMo('moCareerPost');
 };
 
-window.saveCareerPostForm = function() {
+window.saveCareerPostForm = async function() {
     const id = document.getElementById('cpId').value;
     const title = document.getElementById('cpTitle').value.trim();
     const desc = document.getElementById('cpDesc').value.trim();
@@ -291,52 +390,58 @@ window.saveCareerPostForm = function() {
     const salary = document.getElementById('cpSalary').value.trim();
     const vacancies = parseInt(document.getElementById('cpVacancies').value) || 1;
     const status = document.getElementById('cpStatus').value;
+    const fbLink = document.getElementById('cpFbLink').value.trim();
 
     if(!title) { window.toast('Job Title is required!', 'error'); return; }
 
+    let post = null;
     if(id) {
-        // Edit existing
-        const post = adminCareerPosts.find(p => p.id === id);
+        post = adminCareerPosts.find(p => p.id === id);
         if(post) {
-            post.title = title;
-            post.desc = desc;
-            post.location = loc;
-            post.type = type;
-            post.image = img;
-            post.likes = likes;
-            post.commentsCount = comments;
-            post.shares = shares;
-            post.salary = salary;
-            post.vacancies = vacancies;
-            post.status = status;
+            post.title = title; post.desc = desc; post.location = loc; post.type = type; post.image = img;
+            post.likes = likes; post.commentsCount = comments; post.shares = shares; post.salary = salary;
+            post.vacancies = vacancies; post.status = status; post.fbLink = fbLink;
         }
     } else {
-        // Add new
-        adminCareerPosts.push({
-            id: 'job_' + Date.now(),
-            title: title,
-            desc: desc,
-            location: loc,
-            type: type,
-            image: img,
-            timestamp: Date.now(),
-            likes: likes,
-            commentsCount: comments,
-            shares: shares,
-            salary: salary,
-            vacancies: vacancies,
-            status: status
-        });
+        post = {
+            id: 'job_' + Date.now(), title: title, desc: desc, location: loc, type: type, image: img,
+            timestamp: Date.now(), likes: likes, commentsCount: comments, shares: shares, salary: salary,
+            vacancies: vacancies, status: status, fbLink: fbLink
+        };
+        adminCareerPosts.push(post);
     }
     
-    saveAdminCareerPosts();
+    try {
+        if(window.firestoreDB && window.fsSetDoc && window.fsDoc) {
+            await window.fsSetDoc(window.fsDoc(window.firestoreDB, "careers", post.id), post);
+            window.toast('Post saved to Firebase successfully!', 'success');
+        } else {
+            saveAdminCareerPosts();
+            window.toast('Saved locally (Firebase not ready)', 'info');
+        }
+    } catch(e) {
+        console.error("Save error", e);
+        window.toast('Error saving post', 'error');
+    }
+    
+    renderCareerPostsTable();
     closeMo('moCareerPost');
 };
 
-window.deleteCareerPost = function(id) {
+window.deleteCareerPost = async function(id) {
     if(!confirm('Are you sure you want to delete this career post?')) return;
-    adminCareerPosts = adminCareerPosts.filter(p => p.id !== id);
-    saveAdminCareerPosts();
+    
+    try {
+        if(window.firestoreDB && window.fsDeleteDoc && window.fsDoc) {
+            await window.fsDeleteDoc(window.fsDoc(window.firestoreDB, "careers", id));
+            window.toast('Deleted successfully!', 'success');
+        }
+        adminCareerPosts = adminCareerPosts.filter(p => p.id !== id);
+        renderCareerPostsTable();
+    } catch(e) {
+        console.error("Delete error", e);
+        window.toast('Error deleting post', 'error');
+    }
 };
 
 
@@ -356,36 +461,76 @@ window.switchLang = function(page,lang,btn) {
 
 /* ── FIELD MAP ── */
 const FIELD_MAP = {
-  'h_hero_title':{type:'rte'},'h_hero_desc':{type:'rte'},
-  'h_hero_bg':{type:'image'},'h_hero_bg2':{type:'image'},'h_hero_bg3':{type:'image'},
-  'h_hero_anim':{type:'text'},
-  'h_feat_title':{type:'text'},'h_feat_sub':{type:'text'},
-  'h_feat_off':{type:'text'},'h_feat_off_desc':{type:'text'},
-  'h_feat_off_bg':{type:'image'},'h_feat_off_bg2':{type:'image'},'h_feat_off_bg3':{type:'image'},
-  'h_feat_off_anim':{type:'text'},
-  'h_feat_ind':{type:'text'},'h_feat_ind_desc':{type:'text'},
-  'h_feat_ind_bg':{type:'image'},'h_feat_ind_bg2':{type:'image'},'h_feat_ind_bg3':{type:'image'},
-  'h_feat_ind_anim':{type:'text'},
-  'serv_rental':{type:'text'},'serv_rental_desc':{type:'text'},
-  'h_serv_rental_bg':{type:'image'},'h_serv_rental_bg2':{type:'image'},'h_serv_rental_bg3':{type:'image'},
-  'h_serv_rental_anim':{type:'text'},
-  'h_cta_title':{type:'text'},'h_cta_desc':{type:'text'},'btn_shop':{type:'text'},'btn_quote':{type:'text'},
-  'about_header':{type:'text'},'about_sub':{type:'text'},'about_title':{type:'text'},
-  'about_p1':{type:'textarea'},'about_p2':{type:'textarea'},'a_img':{type:'image'},
-  'feat_iso':{type:'text'},'feat_high':{type:'text'},'feat_fast':{type:'text'},
-  'serv_header':{type:'text'},'serv_sub':{type:'text'},
-  'serv_cnc':{type:'text'},'serv_cnc_desc':{type:'text'},'serv_laser':{type:'text'},'serv_laser_desc':{type:'text'},
-  'serv_weld':{type:'text'},'serv_weld_desc':{type:'text'},'serv_finish':{type:'text'},'serv_finish_desc':{type:'text'},
-  'serv_cad':{type:'text'},'serv_cad_desc':{type:'text'},'serv_ass':{type:'text'},'serv_ass_desc':{type:'text'}
+  // Home Page
+  'hero_title':{type:'rte'}, 'hero_desc':{type:'rte'}, 'about_preview_btn':{type:'text'}, 'stat_projects':{type:'text'}, 'stat_years':{type:'text'}, 'h_hero_bg':{type:'image'}, 'h_hero_anim':{type:'text'},
+  'feat_off':{type:'text'}, 'feat_off_desc':{type:'text'}, 'h_feat_off_bg':{type:'image'}, 'h_feat_off_anim':{type:'text'},
+  'nav_careers':{type:'text'}, 'car_sub':{type:'text'}, 'h_feat_ind_bg':{type:'image'}, 'h_feat_ind_anim':{type:'text'},
+  'serv_rental':{type:'text'}, 'serv_rental_desc':{type:'text'}, 'h_serv_rental_bg':{type:'image'}, 'h_serv_rental_anim':{type:'text'},
+  'about_who':{type:'text'}, 'why_sub':{type:'text'}, 'about_preview_desc':{type:'textarea'}, 'h_about_img':{type:'image'},
+  'why_quality':{type:'text'}, 'why_quality_desc':{type:'textarea'}, 'why_custom':{type:'text'}, 'why_custom_desc':{type:'textarea'}, 'why_fast':{type:'text'}, 'why_fast_desc':{type:'textarea'},
+  'matrix_title':{type:'text'}, 'matrix_desc':{type:'textarea'}, 'h_matrix_bg':{type:'image'}, 'h_matrix_video':{type:'text'},
+  'cat_metal':{type:'text'}, 'cat_office':{type:'text'}, 'cat_steel':{type:'text'}, 'cat_custom':{type:'text'},
+  'featured_products_sub':{type:'text'}, 'featured_products':{type:'text'}, 'btn_view_cat':{type:'text'}, 'car_header':{type:'text'},
+  'map_sub':{type:'text'}, 'map_title':{type:'text'}, 'map_desc':{type:'textarea'}, 'map_t1':{type:'text'}, 'map_v1':{type:'text'}, 'map_c1':{type:'text'}, 'map_btn':{type:'text'},
+  
+  // About Us Page
+  'story_welcome':{type:'text'},
+  'story_heritage_title':{type:'text'},'story_heritage_desc':{type:'textarea'},'story_heritage_img':{type:'image'},
+  'story_eng_title':{type:'text'},'story_eng_desc':{type:'textarea'},'story_eng_img':{type:'image'},
+  'story_commit_title':{type:'text'},'story_commit_desc':{type:'textarea'},'story_commit_img':{type:'image'},
+  'story_future_title':{type:'text'},'story_future_desc':{type:'textarea'},
+  'story_products_title':{type:'text'},'story_products_main_desc':{type:'textarea'},
+  'story_prod_office_title':{type:'text'},'story_prod_office_desc':{type:'textarea'},
+  'story_prod_tools_title':{type:'text'},'story_prod_tools_desc':{type:'textarea'},
+  'story_prod_bbq_title':{type:'text'},'story_prod_bbq_desc':{type:'textarea'},
+  'story_market_title':{type:'text'},'story_market_us':{type:'text'},'story_market_ca':{type:'text'},'story_market_au':{type:'text'},'story_market_vn':{type:'text'}
+};
+
+/* ── DEFAULT IMAGES ── */
+const DEFAULT_IMAGES = {
+  h_hero_bg: "images/backgroud_1.png",
+  h_feat_off_bg: "images/cabinet.jpg",
+  h_feat_ind_bg: "images/Husky1.png",
+  h_serv_rental_bg: "images/backgroud_1.png",
+  h_about_img: "images/R2.png",
+  h_matrix_bg: "images/matrix_bg.png",
+  story_heritage_img: "images/backgroud_1.png",
+  story_eng_img: "images/cabinet.jpg",
+  story_commit_img: "images/R2.png"
 };
 
 /* ── LOAD TRANSLATIONS ── */
-window.loadTranslations = function() {
+window.loadTranslations = async function() {
+  if (window.firestoreDB && window.fsGetDoc && window.fsDoc) {
+    try {
+      const docSnap = await window.fsGetDoc(window.fsDoc(window.firestoreDB, 'settings', 'translations'));
+      if (docSnap.exists()) {
+        localStorage.setItem('lm_translations', JSON.stringify(docSnap.data()));
+      }
+    } catch(e) {
+      console.error("Firebase fetch error", e);
+    }
+  }
+
   let all={}; try{all=JSON.parse(localStorage.getItem('lm_translations')||'{}');}catch(e){}
   ['en','kh','cn'].forEach(lang=>{
     const data=all[lang]||{};
+    const defText = (typeof T !== 'undefined' && T[lang]) ? T[lang] : {};
+    
     for(const key in FIELD_MAP){
-      const cfg=FIELD_MAP[key]; const val=data[key]||''; const el=document.getElementById(lang+'_'+key);
+      const cfg=FIELD_MAP[key]; 
+      let val=data[key];
+      
+      // Fallback to translations.js text or default images if empty
+      if (val === undefined || val === '') {
+        if (cfg.type === 'image') {
+          val = DEFAULT_IMAGES[key] || '';
+        } else {
+          val = defText[key] || '';
+        }
+      }
+      
+      const el=document.getElementById(lang+'_'+key);
       if(!el) continue;
       if(cfg.type==='rte'){el.innerHTML=val;}
       else if(cfg.type==='image'){
@@ -401,8 +546,34 @@ window.loadTranslations = function() {
   });
 };
 
-function findPrevImg(lang,key){const m={'h_hero_bg':lang+'HeroBgImg','h_hero_bg2':lang+'HeroBgImg2','h_hero_bg3':lang+'HeroBgImg3','h_feat_off_bg':lang+'FeatOffImg','h_feat_off_bg2':lang+'FeatOffImg2','h_feat_off_bg3':lang+'FeatOffImg3','h_feat_ind_bg':lang+'FeatIndImg','h_feat_ind_bg2':lang+'FeatIndImg2','h_feat_ind_bg3':lang+'FeatIndImg3','h_serv_rental_bg':lang+'ServRentalImg','h_serv_rental_bg2':lang+'ServRentalImg2','h_serv_rental_bg3':lang+'ServRentalImg3','a_img':lang+'AboutImg'};return document.getElementById(m[key]||'');}
-function findPhPlaceholder(lang,key){const m={'h_hero_bg':lang+'HeroBgPh','h_hero_bg2':lang+'HeroBgPh2','h_hero_bg3':lang+'HeroBgPh3','h_feat_off_bg':lang+'FeatOffPh','h_feat_off_bg2':lang+'FeatOffPh2','h_feat_off_bg3':lang+'FeatOffPh3','h_feat_ind_bg':lang+'FeatIndPh','h_feat_ind_bg2':lang+'FeatIndPh2','h_feat_ind_bg3':lang+'FeatIndPh3','h_serv_rental_bg':lang+'ServRentalPh','h_serv_rental_bg2':lang+'ServRentalPh2','h_serv_rental_bg3':lang+'ServRentalPh3','a_img':lang+'AboutPh'};return document.getElementById(m[key]||'');}
+function findPrevImg(lang,key){
+  const m = {
+    'h_hero_bg': lang+'HeroBg',
+    'h_feat_off_bg': lang+'FeatOffBg',
+    'h_feat_ind_bg': lang+'FeatIndBg',
+    'h_serv_rental_bg': lang+'FeatRentBg',
+    'h_about_img': lang+'AboutImg',
+    'h_matrix_bg': lang+'MatrixBg',
+    'story_heritage_img': lang+'StoryHerImg',
+    'story_eng_img': lang+'StoryEngImg',
+    'story_commit_img': lang+'StoryComImg'
+  };
+  return document.getElementById(m[key]||'');
+}
+function findPhPlaceholder(lang,key){
+  const m = {
+    'h_hero_bg': lang+'HeroBgPh',
+    'h_feat_off_bg': lang+'FeatOffBgPh',
+    'h_feat_ind_bg': lang+'FeatIndBgPh',
+    'h_serv_rental_bg': lang+'FeatRentBgPh',
+    'h_about_img': lang+'AboutImgPh',
+    'h_matrix_bg': lang+'MatrixBgPh',
+    'story_heritage_img': lang+'StoryHerPh',
+    'story_eng_img': lang+'StoryEngPh',
+    'story_commit_img': lang+'StoryComPh'
+  };
+  return document.getElementById(m[key]||'');
+}
 
 /* ── SAVE TRANSLATIONS ── */
 window.saveTranslations=function(section){

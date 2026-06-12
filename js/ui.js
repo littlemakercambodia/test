@@ -106,8 +106,9 @@ function applyLang(lang) {
       slideshow.className = 'hero-slideshow';
       el.insertBefore(slideshow, el.firstChild);
     }
-    // Remove old animation classes
-    slideshow.className = 'hero-slideshow' + (animType ? ' anim-' + animType : '');
+    // Remove old animation classes but preserve 'visible' for scroll reveal
+    const vis = slideshow.classList.contains('visible') ? ' visible' : '';
+    slideshow.className = 'hero-slideshow' + (animType ? ' anim-' + animType : '') + vis;
     slideshow.innerHTML = imgs.map((src, i) => `<div class="slide${i===0?' active':''}" style="background-image:url('${src}')"></div>`).join('') +
       '<div class="slide-dots">' + imgs.map((_, i) => `<button class="slide-dot${i===0?' active':''}" onclick="this.parentElement.parentElement._goSlide(${i})"></button>`).join('') + '</div>';
     slideshow._idx = 0;
@@ -284,7 +285,7 @@ function setupUI() {
       if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
   }, { threshold:.1 });
-  document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale').forEach(el => io.observe(el));
+  document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale, .anim-fade, .anim-slide-left, .anim-slide-right, .anim-zoom-in, .anim-zoom-out, .anim-blur').forEach(el => io.observe(el));
 
   /* ── Counter Animation ── */
   const cio = new IntersectionObserver(entries => {

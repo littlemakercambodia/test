@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css?v=3.1">
+    <link rel="stylesheet" href="css/drive.css?v=1.0">
 </head>
 <body>
 
@@ -26,8 +27,26 @@
             <!-- Desktop Menu -->
             <ul class="nav-menu">
                 <li><a href="about.html" class="nav-link active"><i class="fa-solid fa-circle-info"></i> <span data-translate="nav_about">Our Story</span></a></li>
-                <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> <span data-translate="nav_services">Services</span></a></li>
-                <li><a href="products.html" class="nav-link"><i class="fa-solid fa-shop"></i> <span data-translate="nav_shop">Shop</span></a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-link"><i class="fa-solid fa-building"></i> <span data-translate="nav_business">Our Business</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="products.html" class="nav-dropdown-item">
+                            <i class="fa-solid fa-shop"></i>
+                            <div>
+                                <div data-translate="nav_shop" style="font-weight: 600;">Shop</div>
+                                <div style="font-size: 0.8em; color: #888; margin-top: 2px;" data-translate="nav_manufacturing_desc">CNC parts & office furniture</div>
+                            </div>
+                        </a>
+                        <a href="building-rental.html" class="nav-dropdown-item">
+                            <i class="fa-solid fa-industry"></i>
+                            <div>
+                                <div data-translate="nav_rental" style="font-weight: 600;">Factory & Office Rental</div>
+                                <div style="font-size: 0.8em; color: #888; margin-top: 2px;" data-translate="nav_rental_desc">Premium industrial spaces</div>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-briefcase"></i> <span data-translate="nav_services">Careers</span></a></li>
                 <li><a href="contact.html" class="nav-link"><i class="fa-solid fa-envelope"></i> <span data-translate="nav_contact">Contact</span></a></li>
             </ul>
 
@@ -66,104 +85,91 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <header class="page-header">
-        <div class="container">
-            <h1 data-translate="about_header">Our Story</h1>
+    <!-- Drive Banner -->
+    <div class="drive-banner fade-in">
+        <div class="drive-banner-content">
+            <h2 class="drive-banner-title" data-translate="story_welcome">Welcome to LITTLEMAKER (CAMBODIA)., LTD.</h2>
         </div>
-    </header>
+    </div>
 
-    <!-- About Content -->
-    <section class="section-padding">
+    <!-- Heritage & Expansion -->
+    <section class="drive-section">
         <div class="container">
-            <div class="row">
-                <div class="col-half fade-in">
-                    <div class="modern-chart-container">
-                        <h3 class="chart-title" data-translate="chart_title">Company Growth & Capacity</h3>
-                        
-                        <div class="chart-bar-group">
-                            <div class="chart-label">
-                                <span data-translate="chart_prod">Production Capacity</span>
-                                <span class="counter-num">95%</span>
-                            </div>
-                            <div class="chart-track">
-                                <div class="chart-fill" style="--target-width: 95%; background: linear-gradient(90deg, #ff9900, #e67e22);"></div>
-                            </div>
-                        </div>
-
-                        <div class="chart-bar-group">
-                            <div class="chart-label">
-                                <span data-translate="chart_export">Export Growth (YoY)</span>
-                                <span class="counter-num">82%</span>
-                            </div>
-                            <div class="chart-track">
-                                <div class="chart-fill" style="--target-width: 82%; background: linear-gradient(90deg, #004d99, #0073e6);"></div>
-                            </div>
-                        </div>
-
-                        <div class="chart-bar-group">
-                            <div class="chart-label">
-                                <span data-translate="chart_sat">Client Satisfaction</span>
-                                <span class="counter-num">98%</span>
-                            </div>
-                            <div class="chart-track">
-                                <div class="chart-fill" style="--target-width: 98%; background: linear-gradient(90deg, #2ecc71, #27ae60);"></div>
-                            </div>
-                        </div>
-
-                        <div class="chart-stats-row">
-                            <div class="c-stat-box">
-                                <i class="fa-solid fa-industry"></i>
-                                <strong class="counter-num">3+</strong>
-                                <span data-translate="chart_factories">Facilities</span>
-                            </div>
-                            <div class="c-stat-box">
-                                <i class="fa-solid fa-users-gear"></i>
-                                <strong class="counter-num">120+</strong>
-                                <span data-translate="chart_engineers">Skilled Staff</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="drive-split">
+                <div class="drive-img fade-in">
+                    <img src="images/backgroud_1.png" alt="Heritage & Expansion" data-img-key="story_heritage_img">
                 </div>
-                <div class="col-half content-center fade-in">
-                    <div class="modern-text-block">
-                        <h4 class="sub-heading" data-translate="story_company_title">About Our Company</h4>
-                        <p data-translate="story_company_desc">LITTLEMAKER (CAMBODIA) CO., LTD. is a manufacturing company established in Cambodia, specializing in metal components, furniture hardware, and related products. The company operates manufacturing, quality control, warehousing, and supporting functions in accordance with customer, statutory, and regulatory requirements.</p>
-                        <div class="pt-20"></div>
-                        <h4 class="sub-heading" data-translate="story_commit_title">Our Commitment & Quality</h4>
-                        <p data-translate="story_commit_desc">The company is committed to providing stable quality products, on-time delivery, and continual improvement through the effective implementation of a Quality Management System (QMS) that complies with ISO 9001:2015. We are committed to continuously improving our quality management system.</p>
-                    </div>
+                <div class="drive-text fade-in">
+                    <h3 class="drive-title" data-translate="story_heritage_title">Our Heritage & Expansion</h3>
+                    <p class="drive-desc" data-translate="story_heritage_desc">Our journey began with our first establishment in Taiwan in 1993. Building on a solid foundation of industrial expertise, we expanded our operations by establishing our second factory in Vietnam in 2005. Continuing our legacy of growth and our strong commitment to the region, we established our third factory in Cambodia in 2025, strategically located in Svay Rieng province.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding bg-light">
+    <!-- Engineering Excellence -->
+    <section class="drive-section bg-light">
+        <div class="container">
+            <div class="drive-split reverse">
+                <div class="drive-img fade-in">
+                    <img src="images/cabinet.jpg" alt="Engineering Excellence" data-img-key="story_eng_img">
+                </div>
+                <div class="drive-text fade-in">
+                    <h3 class="drive-title" data-translate="story_eng_title">Engineering Excellence</h3>
+                    <p class="drive-desc" data-translate="story_eng_desc">We are more than just a production company; we are dedicated problem solvers. Our technical team specializes in translating complex requirements into tangible reality. Utilizing industry-standard tools like AutoCAD and SolidWorks, we design, draft, and execute projects with meticulous attention to detail. From comprehensive factory layouts to precise mechanical components, we build the foundation for operational efficiency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Committed to Quality Standards -->
+    <section class="drive-section">
+        <div class="container">
+            <div class="drive-split">
+                <div class="drive-img fade-in">
+                    <img src="images/R2.png" alt="Committed to Quality Standards" data-img-key="story_commit_img">
+                </div>
+                <div class="drive-text fade-in">
+                    <h3 class="drive-title" data-translate="story_commit_title">Committed to Quality Standards</h3>
+                    <p class="drive-desc" data-translate="story_commit_desc">Quality is at the core of everything we do. We operate strictly under the principles of ISO 9001 quality management, seamlessly integrating Lean Manufacturing and 5S methodologies into our daily operations. This rigorous approach ensures that every project and product we deliver is not only technically sound but also fully optimized for maximum productivity and safety.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Looking Forward -->
+    <section class="drive-timeline-section">
+        <div class="container">
+            <div class="drive-timeline-content fade-in">
+                <h3 class="drive-title" data-translate="story_future_title">Looking Forward</h3>
+                <p class="drive-desc" data-translate="story_future_desc">As we continue to expand our capabilities across Asia, our vision remains clear: to be the most trusted engineering and manufacturing partner in Cambodia and beyond. We are LITTLEMAKER (CAMBODIA)., LTD. — building the future of industry, one precise solution at a time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Products -->
+    <section class="drive-section bg-light" style="padding-bottom: 120px;">
         <div class="container">
             <div class="section-header fade-in">
-                <h2 data-translate="story_products_title">Our Core Products</h2>
-                <p data-translate="story_products_sub">Key product categories we manufacture</p>
+                <h2 data-translate="story_products_title" class="drive-title" style="text-align: center; margin-bottom: 15px;">Our Core Products</h2>
+                <p data-translate="story_products_main_desc" style="text-align: center; max-width: 800px; margin: 0 auto 40px; font-size: 1.1rem; color: var(--muted);">We take immense pride in manufacturing and supplying a diverse range of high-quality products tailored to our clients' needs, including:</p>
             </div>
-            <div class="services-grid">
+            
+            <div class="drive-products-grid">
                 <div class="service-card fade-in">
                     <div class="icon-box"><i class="fa-solid fa-table"></i></div>
-                    <h3 data-translate="story_prod_tables_title">Tables</h3>
-                    <p data-translate="story_prod_tables_desc">Including versatile workbenches and ergonomic height-adjustable desks.</p>
+                    <h3 data-translate="story_prod_office_title">Office Furniture</h3>
+                    <p data-translate="story_prod_office_desc">Ergonomic office desks and cabinets meticulously designed to optimize your workspace and enhance productivity.</p>
                 </div>
                 <div class="service-card fade-in">
-                    <div class="icon-box"><i class="fa-solid fa-warehouse"></i></div>
-                    <h3 data-translate="story_prod_office_title">Office &amp; Storage Solutions</h3>
-                    <p data-translate="story_prod_office_desc">Office cabinets, specialized toolboxes, and utility carts.</p>
+                    <div class="icon-box"><i class="fa-solid fa-toolbox"></i></div>
+                    <h3 data-translate="story_prod_tools_title">Tools Cabinets</h3>
+                    <p data-translate="story_prod_tools_desc">Heavy-duty, industrial-grade tool cabinets built to withstand the demands of factories and professional technicians.</p>
                 </div>
                 <div class="service-card fade-in">
                     <div class="icon-box"><i class="fa-solid fa-fire-burner"></i></div>
-                    <h3 data-translate="story_prod_cooking_title">Outdoor &amp; Cooking Equipment</h3>
-                    <p data-translate="story_prod_cooking_desc">High-performance BBQ grills and pellet stoves.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="icon-box"><i class="fa-solid fa-briefcase"></i></div>
-                    <h3 data-translate="story_prod_custom_title">Custom Metalwork</h3>
-                    <p data-translate="story_prod_custom_desc">Stainless steel products.</p>
+                    <h3 data-translate="story_prod_bbq_title">BBQ Grills</h3>
+                    <p data-translate="story_prod_bbq_desc">Premium quality BBQ grills crafted for durability and long-lasting performance, along with various other customized metal products.</p>
                 </div>
             </div>
         </div>

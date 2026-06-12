@@ -48,18 +48,34 @@ let fbData = JSON.parse(localStorage.getItem('lm_fb_data')) || {};
 let careerPosts = [];
 let currentLightboxPostId = null;
 
-function loadCareerPosts() {
+function loadCareerPosts(callback) {
+    if (window.fsDB && window.fsCollection && window.fsGetDocs) {
+        window.fsGetDocs(window.fsCollection(window.fsDB, "careers"))
+        .then(snap => {
+            if (!snap.empty) {
+                careerPosts = [];
+                snap.forEach(doc => careerPosts.push({ id: doc.id, ...doc.data() }));
+            } else {
+                careerPosts = [];
+            }
+            if(callback) callback();
+        })
+        .catch(e => {
+            console.error("Firebase fetch error, using defaults.", e);
+            fallbackLoad(callback);
+        });
+    } else {
+        fallbackLoad(callback);
+    }
+}
+
+function fallbackLoad(callback) {
     try {
         const stored = localStorage.getItem('lm_career_posts');
-        if (stored) {
-            careerPosts = JSON.parse(stored);
-        } else {
-            careerPosts = [...DEFAULT_CAREER_POSTS];
-            localStorage.setItem('lm_career_posts', JSON.stringify(careerPosts));
-        }
-    } catch(e) {
-        careerPosts = [...DEFAULT_CAREER_POSTS];
-    }
+        if (stored) { careerPosts = JSON.parse(stored); }
+        else { careerPosts = []; }
+    } catch(e) { careerPosts = []; }
+    if(callback) callback();
 }
 
 function saveFbData() {
@@ -101,7 +117,14 @@ function renderCareersFeed() {
     const feed = document.getElementById('dynamic-careers-feed');
     if (!feed) return;
 
-    loadCareerPosts();
+    feed.innerHTML = '<div style="text-align:center; padding: 50px; color: #666;"><i class="fa-solid fa-spinner fa-spin" style="font-size:2rem; margin-bottom:10px;"></i><br>Loading career posts...</div>';
+
+    loadCareerPosts(() => {
+        finalizeRenderCareersFeed(feed);
+    });
+}
+
+function finalizeRenderCareersFeed(feed) {
 
     if (careerPosts.length === 0) {
         feed.innerHTML = '<div style="text-align:center; padding: 50px; color: #666;">No career posts available at the moment.</div>';
@@ -128,6 +151,17 @@ function renderCareersFeed() {
         const totalLikes = post.likes + (reaction ? 1 : 0);
         const ui = getReactionUI(reaction);
 
+        let displayDesc = post.desc || '';
+        const limit = 180;
+        if (displayDesc.length > limit) {
+            const shortText = displayDesc.substring(0, limit) + '...';
+            const safeFullText = displayDesc.replace(/'/g, "&#39;").replace(/"/g, "&quot;").replace(/\n/g, "<br>");
+            const safeShortText = shortText.replace(/\n/g, "<br>");
+            displayDesc = `<span class="desc-short">${safeShortText} <strong style="cursor:pointer; color:#65676b;" onclick="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='inline';">See more</strong></span><span class="desc-full" style="display:none;">${safeFullText}</span>`;
+        } else {
+            displayDesc = displayDesc.replace(/\n/g, "<br>");
+        }
+
         return `
         <div class="fb-post-card fade-in" data-post-id="${post.id}">
             <div class="fb-post-header">
@@ -141,7 +175,7 @@ function renderCareersFeed() {
             <div class="fb-post-content">
                 <h3>${post.title}</h3>
                 <p class="fb-post-text">
-                    <span>${post.desc}</span>
+                    <span>${displayDesc}</span>
                     <br><br>
                     <span style="font-size: 0.9em; color: #555; line-height: 1.6; display: block; background: #f0f2f5; padding: 12px; border-radius: 8px;">
                         📍 <strong>Location:</strong> ${post.location || 'Phnom Penh'} &nbsp; | &nbsp; 🕒 <strong>Type:</strong> ${post.type || 'Full Time'}<br>
@@ -178,6 +212,7 @@ function renderCareersFeed() {
                     </div>
                     <button class="fb-btn" onclick="toggleFbComment(this)"><i class="fa-regular fa-comment"></i> <span>Comment</span></button>
                     <button class="fb-btn" onclick="shareFbPost(this)"><i class="fa-solid fa-share"></i> <span>Share</span></button>
+                    ${post.fbLink ? `<a href="${post.fbLink}" target="_blank" class="fb-btn"><i class="fa-brands fa-facebook" style="color:var(--blue)"></i> <span>Facebook</span></a>` : ''}
                     <a href="contact.html" class="fb-btn fb-btn-primary"><i class="fa-solid fa-paper-plane"></i> <span>Apply</span></a>
                 </div>
                 <!-- Comments Section (Hidden initially unless toggled) -->
@@ -416,7 +451,6 @@ function closeFbLightbox() {
     currentLightboxPostId = null;
 }
 
-// Close on background click
 function initCareers() {
     const lb = document.getElementById('fbLightbox');
     if (lb) {
@@ -425,8 +459,15 @@ function initCareers() {
         });
     }
     
-    // Auto render on load
-    renderCareersFeed();
+    // Wait for Firebase to initialize before rendering
+    let attempts = 0;
+    const interval = setInterval(() => {
+        if ((window.fsDB && window.fsGetDocs) || attempts > 15) {
+            clearInterval(interval);
+            renderCareersFeed();
+        }
+        attempts++;
+    }, 200);
 }
 
 if (document.readyState === 'loading') {

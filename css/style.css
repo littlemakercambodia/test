@@ -266,6 +266,9 @@ body::before {
   content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
   width: 12px; height: 12px; background: #ffffff; border-left: 1px solid rgba(0,0,0,0.05); border-top: 1px solid rgba(0,0,0,0.05);
 }
+.nav-item-dropdown::after {
+  content: ''; position: absolute; top: 100%; left: 0; width: 100%; height: 25px; background: transparent;
+}
 .nav-dropdown-item {
   display: flex; align-items: center; gap: 12px; padding: 12px 20px;
   color: var(--text); text-decoration: none; font-weight: 500; font-family: 'Barlow', sans-serif;
@@ -2417,6 +2420,21 @@ body.dark-mode .about-experience-badge { box-shadow:0 8px 32px rgba(255,153,0,.3
 .fade-in-scale { opacity:0; transform:scale(.9); transition:opacity .5s ease, transform .5s ease }
 .fade-in-scale.visible { opacity:1; transform:scale(1) }
 
+/* Dynamic Animations from Admin Selector */
+.anim-fade { opacity:0; transition:opacity 1.5s ease }
+.anim-fade.visible { opacity:1; }
+.anim-slide-left { opacity:0; transform:translateX(100px); transition:opacity 1.2s ease, transform 1.2s ease }
+.anim-slide-left.visible { opacity:1; transform:translateX(0) }
+.anim-slide-right { opacity:0; transform:translateX(-100px); transition:opacity 1.2s ease, transform 1.2s ease }
+.anim-slide-right.visible { opacity:1; transform:translateX(0) }
+.anim-zoom-in { opacity:0; transform:scale(0.8); transition:opacity 1.2s ease, transform 1.2s ease }
+.anim-zoom-in.visible { opacity:1; transform:scale(1) }
+.anim-zoom-out { opacity:0; transform:scale(1.2); transition:opacity 1.2s ease, transform 1.2s ease }
+.anim-zoom-out.visible { opacity:1; transform:scale(1) }
+.anim-blur { opacity:0; filter:blur(10px); transition:opacity 1.2s ease, filter 1.2s ease }
+.anim-blur.visible { opacity:1; filter:blur(0) }
+
+
 /* ── Toast Enhanced ── */
 .toast {
   position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(80px);
@@ -3152,27 +3170,32 @@ body.dark-mode .about-experience-badge { box-shadow:0 8px 32px rgba(255,153,0,.3
 .fb-reactions i.fa-heart { color: #f33e58; background: #fff; border-radius: 50%; }
 .fb-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 .fb-btn {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   background: transparent;
   border: none;
   color: #65676b;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  padding: 8px 0;
+  padding: 8px 10px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  white-space: nowrap;
 }
 .fb-btn:hover {
   background: #f0f2f5;
+  transform: translateY(-3px) scale(1.05);
+  color: var(--blue);
 }
 
 /* ── FB Reactions Hover Box ── */
@@ -4366,4 +4389,26 @@ body.dark-mode .carousel-btn:hover {
     .product-carousel-wrapper { padding: 0; }
     .carousel-btn { display: none; }
     .products-carousel-track > * { flex: 0 0 280px; }
+}
+
+/* Fix hardcoded backgrounds and text colors in Dark Mode */
+body.dark-mode .sailun-split-section,
+body.dark-mode .modern-text-block,
+body.dark-mode .market-card,
+body.dark-mode .milestone-item,
+body.dark-mode .global-presence-card,
+body.dark-mode .sailun-matrix-grid,
+body.dark-mode .career-perk-card,
+body.dark-mode .products-carousel-section {
+    background: var(--card);
+}
+
+body.dark-mode .drive-section.bg-light {
+    background-color: var(--light);
+}
+
+body.dark-mode .split-feature-item p,
+body.dark-mode .modern-text-block p,
+body.dark-mode .market-card p {
+    color: var(--muted);
 }

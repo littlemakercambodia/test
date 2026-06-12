@@ -87,7 +87,7 @@
 
     <!-- Cinematic Hero Section -->
     <section class="sailun-hero fade-in">
-        <div class="sailun-hero-bg hero-slideshow" id="heroSlideshow">
+        <div class="sailun-hero-bg hero-slideshow anim-fade" id="heroSlideshow" data-anim-key="h_hero_anim">
             <div class="slide active" style="background-image:url('images/backgroud_1.png')" data-bg-key="h_hero_bg"></div>
         </div>
         <div class="sailun-hero-overlay"></div>
@@ -122,7 +122,7 @@
     <!-- Brand Matrix & Products Grid -->
     <section class="sailun-matrix">
         <div class="matrix-grid">
-            <a href="products.html" class="matrix-card fade-in">
+            <a href="products.html" class="matrix-card anim-fade" data-anim-key="h_feat_off_anim">
                 <div class="matrix-bg" style="background-image: url('images/cabinet.jpg');" data-bg-key="h_feat_off_bg"></div>
                 <div class="matrix-content">
                     <h2 data-translate="feat_off">Office Furniture</h2>
@@ -130,7 +130,7 @@
                     <span class="matrix-arrow"><i class="fa-solid fa-arrow-right"></i></span>
                 </div>
             </a>
-            <a href="careers.html" class="matrix-card fade-in">
+            <a href="careers.html" class="matrix-card anim-fade" data-anim-key="h_feat_ind_anim">
                 <div class="matrix-bg" style="background-image: url('images/Husky1.png');" data-bg-key="h_feat_ind_bg"></div>
                 <div class="matrix-content">
                     <h2 data-translate="nav_careers">Careers</h2>
@@ -138,7 +138,7 @@
                     <span class="matrix-arrow"><i class="fa-solid fa-arrow-right"></i></span>
                 </div>
             </a>
-            <a href="building-rental.html" class="matrix-card fade-in">
+            <a href="building-rental.html" class="matrix-card anim-fade" data-anim-key="h_serv_rental_anim">
                 <div class="matrix-bg" style="background-image: url('images/backgroud_1.png');" data-bg-key="h_serv_rental_bg"></div>
                 <div class="matrix-content">
                     <h2 data-translate="serv_rental">Building Rental</h2>
@@ -601,11 +601,32 @@
               else el.textContent = tr[k];
             }
           });
-          /* Apply admin-configured background images */
+          /* Apply admin-configured background images and videos */
           document.querySelectorAll('[data-bg-key]').forEach(function(el) {
             var k = el.getAttribute('data-bg-key');
             if (tr[k]) {
-              el.style.backgroundImage = 'url(' + tr[k] + ')';
+              if (el.tagName.toLowerCase() === 'video') {
+                el.src = tr[k];
+                el.load(); // Ensure the new video is loaded
+              } else {
+                el.style.backgroundImage = 'url(' + tr[k] + ')';
+              }
+            }
+          });
+          /* Apply admin-configured animations */
+          document.querySelectorAll('[data-anim-key]').forEach(function(el) {
+            var k = el.getAttribute('data-anim-key');
+            if (tr[k]) {
+              // Remove old anim classes
+              el.className = el.className.replace(/\banim-\S+/g, '');
+              el.classList.add('anim-' + tr[k]);
+              
+              // Trigger reflow for animation restart if it's visible
+              if(el.classList.contains('visible')) {
+                  el.classList.remove('visible');
+                  void el.offsetWidth;
+                  el.classList.add('visible');
+              }
             }
           });
         });
