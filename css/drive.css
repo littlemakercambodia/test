@@ -65,7 +65,7 @@
 .drive-img::after {
     content: '';
     display: block;
-    padding-bottom: 70%; /* Aspect ratio */
+    padding-bottom: 100%; /* Square aspect ratio for 1080x1080 */
 }
 .drive-img img {
     position: absolute;
@@ -78,6 +78,11 @@
 }
 .drive-img:hover img {
     transform: scale(1.06);
+}
+.drive-img .hero-slideshow .slide {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .drive-text {
     flex: 1.2;

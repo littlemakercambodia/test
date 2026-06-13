@@ -7,7 +7,11 @@
 
 /* ── Helpers ── */
 function muHTML(hiddenId, prevId, phId, label, sublabel) {
-  return `<div class="mu" onclick="openImgPicker('${hiddenId}','${prevId}','${phId}',false,event)"><div class="mu-ph" id="${phId}"><i class="fa-solid fa-image"></i></div><img class="mu-prev" id="${prevId}" src="" alt=""><div class="mu-txt"><strong>${label}</strong><span>${sublabel || 'Click to browse Image Library'}</span></div></div><input type="hidden" id="${hiddenId}">`;
+  return `<div class="mu" onclick="openImgPicker('${hiddenId}','${prevId}','${phId}',false,event)" style="flex-direction:row; padding:0; overflow:hidden; align-items:center; height:90px; border:1px solid var(--bd); border-radius:8px;">
+  <div class="mu-ph" id="${phId}" style="width:110px; height:100%; border:none; border-radius:0; border-right:1px solid var(--bd);"><i class="fa-solid fa-image"></i></div>
+  <img class="mu-prev" id="${prevId}" src="" alt="" style="width:110px; height:100%; border:none; border-radius:0; border-right:1px solid var(--bd); object-fit:cover;">
+  <div class="mu-txt" style="padding:10px 14px; text-align:left; flex:1;"><strong>${label}</strong><span style="display:block; margin-top:2px; font-size:.75rem;">${sublabel || 'Click to change image'}</span></div>
+</div><input type="hidden" id="${hiddenId}">`;
 }
 const RTE_TOOLBAR = `<div class="rte-toolbar"><select onchange="document.execCommand('fontName',false,this.value);this.selectedIndex=0;"><option value="">Font</option><option value="Battambang">Battambang</option><option value="Barlow Condensed">Barlow Condensed</option></select><input type="color" onchange="document.execCommand('foreColor',false,this.value)" title="Color"><button type="button" onclick="document.execCommand('bold',false,null)"><b>B</b></button><button type="button" onclick="document.execCommand('italic',false,null)"><i>I</i></button><button type="button" onclick="document.execCommand('removeFormat',false,null)"><i class="fa-solid fa-eraser"></i></button></div>`;
 const RTE_TOOLBAR_SIMPLE = `<div class="rte-toolbar"><input type="color" onchange="document.execCommand('foreColor',false,this.value)"><button type="button" onclick="document.execCommand('bold',false,null)"><b>B</b></button></div>`;
@@ -34,7 +38,6 @@ function homeSections(lang) {
     <div class="pg"><label>Button Text</label><input type="text" id="${lang}_about_preview_btn"></div>
     <div class="pg"><label>ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID', lang+'_h_hero_anim')}</div>
     <div class="pg pe-full"><label>Hero Background Image</label>${muHTML(lang+'_h_hero_bg',lang+'HeroBg',lang+'HeroBgPh','Hero Image')}</div>
-    <div class="pg"><label>Stat: Projects</label><input type="text" id="${lang}_stat_projects"></div>
     <div class="pg"><label>Stat: Years</label><input type="text" id="${lang}_stat_years"></div>
   </div></div></div>
 
@@ -122,19 +125,28 @@ function aboutSection(lang) {
   <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-history"></i> Heritage & Expansion (${f})</div></div><div class="peb"><div class="pe-grid">
     <div class="pg pe-full"><label>Title</label><input type="text" id="${lang}_story_heritage_title"></div>
     <div class="pg pe-full"><label>Description</label><textarea id="${lang}_story_heritage_desc" rows="3"></textarea></div>
-    <div class="pg pe-full"><label>Image</label>${muHTML(lang+'_story_heritage_img',lang+'StoryHerImg',lang+'StoryHerPh','Heritage Image')}</div>
+    <div class="pg"><label>ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID', lang+'_story_heritage_anim')}</div>
+    <div class="pg"><label>Image 1</label>${muHTML(lang+'_story_heritage_img',lang+'StoryHerImg1',lang+'StoryHerPh1','Image 1')}</div>
+    <div class="pg"><label>Image 2</label>${muHTML(lang+'_story_heritage_img2',lang+'StoryHerImg2',lang+'StoryHerPh2','Image 2')}</div>
+    <div class="pg"><label>Image 3</label>${muHTML(lang+'_story_heritage_img3',lang+'StoryHerImg3',lang+'StoryHerPh3','Image 3')}</div>
   </div></div></div>
 
   <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-cogs"></i> Engineering Excellence (${f})</div></div><div class="peb"><div class="pe-grid">
     <div class="pg pe-full"><label>Title</label><input type="text" id="${lang}_story_eng_title"></div>
     <div class="pg pe-full"><label>Description</label><textarea id="${lang}_story_eng_desc" rows="3"></textarea></div>
-    <div class="pg pe-full"><label>Image</label>${muHTML(lang+'_story_eng_img',lang+'StoryEngImg',lang+'StoryEngPh','Engineering Image')}</div>
+    <div class="pg"><label>ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID', lang+'_story_eng_anim')}</div>
+    <div class="pg"><label>Image 1</label>${muHTML(lang+'_story_eng_img',lang+'StoryEngImg1',lang+'StoryEngPh1','Image 1')}</div>
+    <div class="pg"><label>Image 2</label>${muHTML(lang+'_story_eng_img2',lang+'StoryEngImg2',lang+'StoryEngPh2','Image 2')}</div>
+    <div class="pg"><label>Image 3</label>${muHTML(lang+'_story_eng_img3',lang+'StoryEngImg3',lang+'StoryEngPh3','Image 3')}</div>
   </div></div></div>
 
   <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-check-circle"></i> Committed to Quality Standards (${f})</div></div><div class="peb"><div class="pe-grid">
     <div class="pg pe-full"><label>Title</label><input type="text" id="${lang}_story_commit_title"></div>
     <div class="pg pe-full"><label>Description</label><textarea id="${lang}_story_commit_desc" rows="3"></textarea></div>
-    <div class="pg pe-full"><label>Image</label>${muHTML(lang+'_story_commit_img',lang+'StoryComImg',lang+'StoryComPh','Quality Image')}</div>
+    <div class="pg"><label>ចលនា (Animation)</label>${ANIM_SELECT.replace('LANG_ANIM_ID', lang+'_story_commit_anim')}</div>
+    <div class="pg"><label>Image 1</label>${muHTML(lang+'_story_commit_img',lang+'StoryComImg1',lang+'StoryComPh1','Image 1')}</div>
+    <div class="pg"><label>Image 2</label>${muHTML(lang+'_story_commit_img2',lang+'StoryComImg2',lang+'StoryComPh2','Image 2')}</div>
+    <div class="pg"><label>Image 3</label>${muHTML(lang+'_story_commit_img3',lang+'StoryComImg3',lang+'StoryComPh3','Image 3')}</div>
   </div></div></div>
 
   <div class="pec"><div class="peh"><div class="pet"><i class="fa-solid fa-eye"></i> Looking Forward (${f})</div></div><div class="peb"><div class="pe-grid">
@@ -462,7 +474,7 @@ window.switchLang = function(page,lang,btn) {
 /* ── FIELD MAP ── */
 const FIELD_MAP = {
   // Home Page
-  'hero_title':{type:'rte'}, 'hero_desc':{type:'rte'}, 'about_preview_btn':{type:'text'}, 'stat_projects':{type:'text'}, 'stat_years':{type:'text'}, 'h_hero_bg':{type:'image'}, 'h_hero_anim':{type:'text'},
+  'hero_title':{type:'rte'}, 'hero_desc':{type:'rte'}, 'about_preview_btn':{type:'text'}, 'stat_years':{type:'text'}, 'h_hero_bg':{type:'image'}, 'h_hero_anim':{type:'text'},
   'feat_off':{type:'text'}, 'feat_off_desc':{type:'text'}, 'h_feat_off_bg':{type:'image'}, 'h_feat_off_anim':{type:'text'},
   'nav_careers':{type:'text'}, 'car_sub':{type:'text'}, 'h_feat_ind_bg':{type:'image'}, 'h_feat_ind_anim':{type:'text'},
   'serv_rental':{type:'text'}, 'serv_rental_desc':{type:'text'}, 'h_serv_rental_bg':{type:'image'}, 'h_serv_rental_anim':{type:'text'},
@@ -475,9 +487,9 @@ const FIELD_MAP = {
   
   // About Us Page
   'story_welcome':{type:'text'},
-  'story_heritage_title':{type:'text'},'story_heritage_desc':{type:'textarea'},'story_heritage_img':{type:'image'},
-  'story_eng_title':{type:'text'},'story_eng_desc':{type:'textarea'},'story_eng_img':{type:'image'},
-  'story_commit_title':{type:'text'},'story_commit_desc':{type:'textarea'},'story_commit_img':{type:'image'},
+  'story_heritage_title':{type:'text'},'story_heritage_desc':{type:'textarea'},'story_heritage_img':{type:'image'},'story_heritage_img2':{type:'image'},'story_heritage_img3':{type:'image'},'story_heritage_anim':{type:'text'},
+  'story_eng_title':{type:'text'},'story_eng_desc':{type:'textarea'},'story_eng_img':{type:'image'},'story_eng_img2':{type:'image'},'story_eng_img3':{type:'image'},'story_eng_anim':{type:'text'},
+  'story_commit_title':{type:'text'},'story_commit_desc':{type:'textarea'},'story_commit_img':{type:'image'},'story_commit_img2':{type:'image'},'story_commit_img3':{type:'image'},'story_commit_anim':{type:'text'},
   'story_future_title':{type:'text'},'story_future_desc':{type:'textarea'},
   'story_products_title':{type:'text'},'story_products_main_desc':{type:'textarea'},
   'story_prod_office_title':{type:'text'},'story_prod_office_desc':{type:'textarea'},
@@ -548,29 +560,29 @@ window.loadTranslations = async function() {
 
 function findPrevImg(lang,key){
   const m = {
-    'h_hero_bg': lang+'HeroBg',
-    'h_feat_off_bg': lang+'FeatOffBg',
-    'h_feat_ind_bg': lang+'FeatIndBg',
-    'h_serv_rental_bg': lang+'FeatRentBg',
-    'h_about_img': lang+'AboutImg',
-    'h_matrix_bg': lang+'MatrixBg',
-    'story_heritage_img': lang+'StoryHerImg',
-    'story_eng_img': lang+'StoryEngImg',
-    'story_commit_img': lang+'StoryComImg'
+    'h_hero_bg': lang+'HeroBg', 'h_hero_bg2': lang+'HeroBg2', 'h_hero_bg3': lang+'HeroBg3',
+    'h_feat_off_bg': lang+'FeatOffBg', 'h_feat_off_bg2': lang+'FeatOffBg2', 'h_feat_off_bg3': lang+'FeatOffBg3',
+    'h_feat_ind_bg': lang+'FeatIndBg', 'h_feat_ind_bg2': lang+'FeatIndBg2', 'h_feat_ind_bg3': lang+'FeatIndBg3',
+    'h_serv_rental_bg': lang+'FeatRentBg', 'h_serv_rental_bg2': lang+'FeatRentBg2', 'h_serv_rental_bg3': lang+'FeatRentBg3',
+    'h_about_img': lang+'AboutImg', 'h_about_img2': lang+'AboutImg2', 'h_about_img3': lang+'AboutImg3',
+    'h_matrix_bg': lang+'MatrixBg', 'h_matrix_bg2': lang+'MatrixBg2', 'h_matrix_bg3': lang+'MatrixBg3',
+    'story_heritage_img': lang+'StoryHerImg1', 'story_heritage_img2': lang+'StoryHerImg2', 'story_heritage_img3': lang+'StoryHerImg3',
+    'story_eng_img': lang+'StoryEngImg1', 'story_eng_img2': lang+'StoryEngImg2', 'story_eng_img3': lang+'StoryEngImg3',
+    'story_commit_img': lang+'StoryComImg1', 'story_commit_img2': lang+'StoryComImg2', 'story_commit_img3': lang+'StoryComImg3'
   };
   return document.getElementById(m[key]||'');
 }
 function findPhPlaceholder(lang,key){
   const m = {
-    'h_hero_bg': lang+'HeroBgPh',
-    'h_feat_off_bg': lang+'FeatOffBgPh',
-    'h_feat_ind_bg': lang+'FeatIndBgPh',
-    'h_serv_rental_bg': lang+'FeatRentBgPh',
-    'h_about_img': lang+'AboutImgPh',
-    'h_matrix_bg': lang+'MatrixBgPh',
-    'story_heritage_img': lang+'StoryHerPh',
-    'story_eng_img': lang+'StoryEngPh',
-    'story_commit_img': lang+'StoryComPh'
+    'h_hero_bg': lang+'HeroBgPh', 'h_hero_bg2': lang+'HeroBgPh2', 'h_hero_bg3': lang+'HeroBgPh3',
+    'h_feat_off_bg': lang+'FeatOffBgPh', 'h_feat_off_bg2': lang+'FeatOffBgPh2', 'h_feat_off_bg3': lang+'FeatOffBgPh3',
+    'h_feat_ind_bg': lang+'FeatIndBgPh', 'h_feat_ind_bg2': lang+'FeatIndBgPh2', 'h_feat_ind_bg3': lang+'FeatIndBgPh3',
+    'h_serv_rental_bg': lang+'FeatRentBgPh', 'h_serv_rental_bg2': lang+'FeatRentBgPh2', 'h_serv_rental_bg3': lang+'FeatRentBgPh3',
+    'h_about_img': lang+'AboutImgPh', 'h_about_img2': lang+'AboutImgPh2', 'h_about_img3': lang+'AboutImgPh3',
+    'h_matrix_bg': lang+'MatrixBgPh', 'h_matrix_bg2': lang+'MatrixBgPh2', 'h_matrix_bg3': lang+'MatrixBgPh3',
+    'story_heritage_img': lang+'StoryHerPh1', 'story_heritage_img2': lang+'StoryHerPh2', 'story_heritage_img3': lang+'StoryHerPh3',
+    'story_eng_img': lang+'StoryEngPh1', 'story_eng_img2': lang+'StoryEngPh2', 'story_eng_img3': lang+'StoryEngPh3',
+    'story_commit_img': lang+'StoryComPh1', 'story_commit_img2': lang+'StoryComPh2', 'story_commit_img3': lang+'StoryComPh3'
   };
   return document.getElementById(m[key]||'');
 }
@@ -592,7 +604,15 @@ window.saveTranslations=function(section){
   if(window.firestoreDB&&window.fsSetDoc&&window.fsDoc){
     window.fsSetDoc(window.fsDoc(window.firestoreDB,'settings','translations'),all)
       .then(()=>{window.toast('✓ Saved to Firebase!','success');window.logActivity('save',`${section} saved`);})
-      .catch(e=>{window.toast('✓ Saved locally','info');window.logActivity('save',`${section} saved locally`);});
+      .catch(e=>{
+        console.error('Firebase save error:', e);
+        if(e.message && e.message.includes('exceeds the maximum')) {
+           window.toast('❌ Error: Image sizes too large for Firebase!','error');
+        } else {
+           window.toast('✓ Saved locally (' + e.message + ')','info');
+        }
+        window.logActivity('save',`${section} saved locally`);
+      });
   } else {
     window.toast('✓ Saved to localStorage','success');
     window.logActivity('save',`${section} saved locally`);

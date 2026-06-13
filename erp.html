@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LittleMaker ERP System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/erp.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <nav class="erp-sidebar" id="erpSidebar">
+        <div class="sidebar-logo">
+            <img src="images/Logo.png" alt="LittleMaker">
+            <div class="logo-text">
+                <h2>LittleMaker</h2>
+                <span>ERP SYSTEM</span>
+            </div>
+        </div>
+        
+        <ul class="sidebar-nav">
+            <li class="nav-label">MAIN MENU</li>
+            <li><button class="nav-item active" onclick="switchTab('dashboard')"><i class="fa-solid fa-chart-line"></i> Dashboard</button></li>
+            <li><button class="nav-item" onclick="switchTab('hr')"><i class="fa-solid fa-users"></i> Human Resources</button></li>
+            <li><button class="nav-item" onclick="switchTab('finance')"><i class="fa-solid fa-file-invoice-dollar"></i> Finance & Invoices</button></li>
+            <li><button class="nav-item" onclick="switchTab('inventory')"><i class="fa-solid fa-boxes-stacked"></i> Inventory</button></li>
+            <li><button class="nav-item" onclick="switchTab('tasks')"><i class="fa-solid fa-list-check"></i> Tasks & Projects</button></li>
+            
+            <li class="nav-label" style="margin-top: 20px;">SYSTEM</li>
+            <li><button class="nav-item" onclick="switchTab('settings')"><i class="fa-solid fa-gear"></i> Settings</button></li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar">A</div>
+                <div class="user-info">
+                    <strong>Admin Manager</strong>
+                    <span>admin@littlemaker.com</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="erp-main">
+        <!-- Header -->
+        <header class="erp-header">
+            <div class="header-left">
+                <button class="menu-toggle" onclick="document.getElementById('erpSidebar').classList.toggle('collapsed')">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h2 id="pageTitle">Dashboard</h2>
+            </div>
+            
+            <div class="header-right">
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search across ERP...">
+                </div>
+                <button class="icon-btn notification-btn">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dynamic Content Area -->
+        <div class="erp-content">
+            
+            <!-- Dashboard View -->
+            <div id="view-dashboard" class="erp-view active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(0,102,204,0.1); color: #0066cc;"><i class="fa-solid fa-wallet"></i></div>
+                        <div class="stat-info">
+                            <span>Total Revenue</span>
+                            <h3>$124,500.00</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(26,158,90,0.1); color: #1a9e5a;"><i class="fa-solid fa-boxes-stacked"></i></div>
+                        <div class="stat-info">
+                            <span>Active Orders</span>
+                            <h3>142</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(255,153,0,0.1); color: #ff9900;"><i class="fa-solid fa-users"></i></div>
+                        <div class="stat-info">
+                            <span>Total Employees</span>
+                            <h3>48</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(204,51,51,0.1); color: #cc3333;"><i class="fa-solid fa-file-invoice"></i></div>
+                        <div class="stat-info">
+                            <span>Pending Invoices</span>
+                            <h3>12</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-widgets">
+                    <div class="widget">
+                        <div class="widget-header">
+                            <h3><i class="fa-solid fa-chart-area"></i> Revenue Overview</h3>
+                        </div>
+                        <div class="widget-body" style="height: 300px; display: flex; align-items: center; justify-content: center; background: #f8fafc; border-radius: 8px;">
+                            <span style="color: #94a3b8;"><i class="fa-solid fa-chart-line"></i> Chart Plugin Needed (e.g. Chart.js)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="widget">
+                        <div class="widget-header">
+                            <h3><i class="fa-solid fa-list-check"></i> Recent Tasks</h3>
+                        </div>
+                        <div class="widget-body">
+                            <ul class="task-list" id="dashboardTasks">
+                                <!-- Populated by JS -->
+                            </ul>
+                            <div class="add-task-form">
+                                <input type="text" id="newTaskInput" placeholder="Add a quick task..." onkeydown="if(event.key==='Enter') addQuickTask()">
+                                <button onclick="addQuickTask()"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Other Views (Placeholders) -->
+            <div id="view-hr" class="erp-view">
+                <div class="empty-state">
+                    <div class="empty-icon"><i class="fa-solid fa-users"></i></div>
+                    <h2>Human Resources Module</h2>
+                    <p>Employee management, payroll, and attendance tracking will be here.</p>
+                </div>
+            </div>
+            
+            <div id="view-finance" class="erp-view">
+                <div class="empty-state">
+                    <div class="empty-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <h2>Finance & Invoicing</h2>
+                    <p>Manage quotations, generate PDF invoices, and track expenses.</p>
+                </div>
+            </div>
+            
+            <div id="view-inventory" class="erp-view">
+                <div class="empty-state">
+                    <div class="empty-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                    <h2>Inventory Management</h2>
+                    <p>Track raw materials, finished products, and warehouse locations.</p>
+                </div>
+            </div>
+            
+            <div id="view-tasks" class="erp-view">
+                <div class="empty-state">
+                    <div class="empty-icon"><i class="fa-solid fa-list-check"></i></div>
+                    <h2>Project & Task Manager</h2>
+                    <p>Assign tasks to teams and track project progress.</p>
+                </div>
+            </div>
+            
+            <div id="view-settings" class="erp-view">
+                <div class="empty-state">
+                    <div class="empty-icon"><i class="fa-solid fa-gear"></i></div>
+                    <h2>System Settings</h2>
+                    <p>Configure ERP preferences and user roles.</p>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script src="js/erp.js"></script>
+</body>
+</html>

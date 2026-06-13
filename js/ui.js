@@ -139,6 +139,16 @@ function applyLang(lang) {
   if (featBoxes.length > 0) _buildSlideshow(featBoxes[0], [tr.h_feat_off_bg, tr.h_feat_off_bg2, tr.h_feat_off_bg3], tr.h_feat_off_anim);
   if (featBoxes.length > 1) _buildSlideshow(featBoxes[1], [tr.h_feat_ind_bg, tr.h_feat_ind_bg2, tr.h_feat_ind_bg3], tr.h_feat_ind_anim);
   if (featBoxes.length > 2) _buildSlideshow(featBoxes[2], [tr.h_serv_rental_bg, tr.h_serv_rental_bg2, tr.h_serv_rental_bg3], tr.h_serv_rental_anim);
+  
+  // About Page - Our Story Galleries
+  const herEl = document.querySelector('[data-img-gallery="story_heritage"]');
+  if (herEl) _buildSlideshow(herEl, [tr.story_heritage_img || DEFAULT_IMAGES['story_heritage_img'], tr.story_heritage_img2, tr.story_heritage_img3], tr.story_heritage_anim);
+
+  const engEl = document.querySelector('[data-img-gallery="story_eng"]');
+  if (engEl) _buildSlideshow(engEl, [tr.story_eng_img || DEFAULT_IMAGES['story_eng_img'], tr.story_eng_img2, tr.story_eng_img3], tr.story_eng_anim);
+
+  const comEl = document.querySelector('[data-img-gallery="story_commit"]');
+  if (comEl) _buildSlideshow(comEl, [tr.story_commit_img || DEFAULT_IMAGES['story_commit_img'], tr.story_commit_img2, tr.story_commit_img3], tr.story_commit_anim);
   if(tr.a_img && _isValidImgUrl(tr.a_img)) {
       const aboutImg = document.querySelector('.about-img');
       if(aboutImg) aboutImg.src = tr.a_img;

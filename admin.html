@@ -383,7 +383,12 @@ td{padding:11px 15px;font-size:.86rem;vertical-align:middle; font-family: 'Batta
       <button class="sb-link" id="nav-images" onclick="goto('images')"><i class="fa-solid fa-images"></i> Image Manager</button>
       <button class="sb-link" id="nav-users" onclick="goto('users')"><i class="fa-solid fa-user-circle"></i> Account & Users</button>
       <button class="sb-link" id="nav-log" onclick="goto('log')"><i class="fa-solid fa-clock-rotate-left"></i> Activity Log</button>
-      
+      <div class="sb-div"></div>
+      <div class="sb-lbl" style="color:var(--or)">COMPANY TOOLS</div>
+      <button class="sb-link" onclick="window.open('erp.html','_blank')" style="background:rgba(255,153,0,0.1);color:var(--or);">
+        <i class="fa-solid fa-toolbox"></i> GO TO ERP
+      </button>
+
       <div class="sb-div"></div>
       <button class="sb-link" onclick="window.open('index.html','_blank')"><i class="fa-solid fa-globe"></i> View Website</button>
     </div>
@@ -557,6 +562,7 @@ td{padding:11px 15px;font-size:.86rem;vertical-align:middle; font-family: 'Batta
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
   import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
   import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, getDoc, setDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+  import { getStorage, ref, uploadString, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyBGfVxJTpMJHjlWgUbbnAsot-c1gKrOgjM",
@@ -571,6 +577,7 @@ td{padding:11px 15px;font-size:.86rem;vertical-align:middle; font-family: 'Batta
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const storage = getStorage(app);
 
   window.firebaseAuth = auth;
   window.signInWithEmailAndPassword = signInWithEmailAndPassword;
@@ -587,6 +594,12 @@ td{padding:11px 15px;font-size:.86rem;vertical-align:middle; font-family: 'Batta
   window.fsGetDoc = getDoc;
   window.fsSetDoc = setDoc;
   window.fsGetDocs = getDocs; 
+
+  window.firebaseStorage = storage;
+  window.fsRef = ref;
+  window.fsUploadString = uploadString;
+  window.fsGetDownloadURL = getDownloadURL;
+  window.fsDeleteObject = deleteObject;
 </script>
 
 <!-- Scripts -->
@@ -787,15 +800,134 @@ window.renderImgManager = function() {
     <i class="fa-solid fa-cloud-arrow-up"></i>
     <p>Drag & Drop or <span>Click to Upload</span> images to library</p>
   </div>`;
+  
+  // Add a one-click fix button
+  grid.innerHTML += `<div style="grid-column: 1 / -1; margin-top: 20px; padding: 20px; background: #fff3cd; border-radius: 12px; border: 1px solid #ffe69c; text-align: center;">
+    <h4 style="color: #664d03; margin-bottom: 10px;">ជួសជុលបញ្ហា Error 1MB ពេល Save</h4>
+    <p style="color: #664d03; font-size: 14px; margin-bottom: 15px;">ប្រសិនបើលោកអ្នកជួបបញ្ហា Save មិនចូល សូមចុចប៊ូតុងខាងក្រោមនេះ ដើម្បីឲ្យប្រព័ន្ធបំប្លែងរូបចាស់ៗទាំងអស់ទៅជា Link ខ្លីដោយស្វ័យប្រវត្តិ។</p>
+    <button class="btn bp" onclick="migrateAllImagesToImgBB()"><i class="fa-solid fa-wand-magic-sparkles"></i> ជួសជុលរូបភាពចាស់ៗទាំងអស់ (Auto Fix)</button>
+  </div>`;
 };
 
-window.handleImgUpload = function(input, fromPicker) {
+window.migrateAllImagesToImgBB = async function() {
+  if(!confirm('ប្រព័ន្ធនឹងចាប់ផ្តើមបំប្លែងរូបភាពចាស់ៗទាំងអស់ទៅជា Link ថ្មី។ ដំណើរការនេះអាចប្រើពេលបន្តិច (ប្រហែល ១-២ នាទី)។ តើអ្នកចង់បន្តទេ?')) return;
+  const savedTranslations = localStorage.getItem('lm_translations');
+  const savedCustom = localStorage.getItem('lm_custom_images');
+  if(!savedTranslations && !savedCustom) { window.toast('គ្មានទិន្នន័យត្រូវជួសជុលទេ','info'); return; }
+  
+  let allTrans = savedTranslations ? JSON.parse(savedTranslations) : {};
+  let allCustom = savedCustom ? JSON.parse(savedCustom) : [];
+  
+  const apiKey = 'b9f646f349da8b386bcdbe62d69da728';
+  let changedCount = 0;
+  
+  window.toast('កំពុងដំណើរការ... សូមរង់ចាំ!', 'info');
+  
+  try {
+    // 1. Migrate Translations
+    if (savedTranslations) {
+      for(const lang in allTrans) {
+        for(const key in allTrans[lang]) {
+          let val = allTrans[lang][key];
+          if(typeof val !== 'string') continue;
+          
+          const regex = /data:image\/[^;]+;base64,[a-zA-Z0-9+/=]+/g;
+          let match;
+          let newVal = val;
+          while ((match = regex.exec(val)) !== null) {
+            const fullMatch = match[0];
+            const base64Data = fullMatch.split(',')[1];
+            
+            const formData = new FormData();
+            formData.append('image', base64Data);
+            formData.append('key', apiKey);
+            
+            try {
+              const res = await fetch('https://api.imgbb.com/1/upload', { method: 'POST', body: formData });
+              const json = await res.json();
+              if(json.success) {
+                newVal = newVal.replace(fullMatch, json.data.url);
+                changedCount++;
+              }
+            } catch(e) { console.error('Upload failed for translation image', e); }
+          }
+          allTrans[lang][key] = newVal;
+        }
+      }
+    }
+    
+    // 2. Migrate Custom Images Library
+    if (savedCustom) {
+      for (let i = 0; i < allCustom.length; i++) {
+        let val = allCustom[i].src;
+        if (typeof val === 'string' && val.startsWith('data:image/')) {
+          const base64Data = val.split(',')[1];
+          const formData = new FormData();
+          formData.append('image', base64Data);
+          formData.append('key', apiKey);
+          try {
+            const res = await fetch('https://api.imgbb.com/1/upload', { method: 'POST', body: formData });
+            const json = await res.json();
+            if(json.success) {
+              allCustom[i].src = json.data.url;
+              changedCount++;
+            }
+          } catch(e) { console.error('Upload failed for library image', e); }
+        }
+      }
+    }
+    
+    if(changedCount > 0) {
+      if (savedTranslations) localStorage.setItem('lm_translations', JSON.stringify(allTrans));
+      if (savedCustom) localStorage.setItem('lm_custom_images', JSON.stringify(allCustom));
+      
+      if(window.firestoreDB && window.fsSetDoc && window.fsDoc && savedTranslations) {
+         await window.fsSetDoc(window.fsDoc(window.firestoreDB, 'settings', 'translations'), allTrans);
+      }
+      window.toast(`ជួសជុលជោគជ័យ! រូបភាពចំនួន ${changedCount} ត្រូវបានបំប្លែង។ លោកអ្នកអាច Save បានធម្មតាហើយឥឡូវនេះ!`, 'success');
+      setTimeout(()=>window.location.reload(), 3000);
+    } else {
+      window.toast('មិនមានរូបភាពចាស់ដែលត្រូវបំប្លែងទេ!', 'success');
+    }
+  } catch(e) {
+    console.error(e);
+    window.toast('មានបញ្ហាពេលបំប្លែង: ' + e.message, 'error');
+  }
+};
+
+window.handleImgUpload = async function(input, fromPicker) {
   const files = Array.from(input.files); let done = 0;
-  const custom = loadCustomImgs();
+  let custom = loadCustomImgs();
+  
+  // Optional: show a loading toast for UX
+  if(files.length > 0) window.toast('Uploading to ImgBB...', 'info');
+
   files.forEach(file => {
-    window.compressImage(file, (compressedBase64) => {
+    window.compressImage(file, async (compressedBase64) => {
       const exists = custom.find(c => c.name === file.name);
-      if (!exists) custom.push({ name:file.name, src: compressedBase64 });
+      if (!exists) {
+        try {
+          const apiKey = 'b9f646f349da8b386bcdbe62d69da728';
+          const base64Data = compressedBase64.split(',')[1];
+          const formData = new FormData();
+          formData.append('image', base64Data);
+          formData.append('key', apiKey);
+          formData.append('name', file.name.split('.')[0]);
+
+          const res = await fetch('https://api.imgbb.com/1/upload', { method: 'POST', body: formData });
+          const json = await res.json();
+          if(json.success) {
+            custom.push({ name: file.name, src: json.data.url });
+          } else {
+            throw new Error(json.error?.message || 'ImgBB Error');
+          }
+        } catch(e) {
+          console.error('ImgBB Upload Error:', e);
+          window.toast('ImgBB Upload failed: ' + e.message + '. Falling back to local.', 'error');
+          custom.push({ name: file.name, src: compressedBase64 });
+        }
+      }
+      
       done++;
       if (done === files.length) {
         saveCustomImgs(custom);
@@ -878,7 +1010,8 @@ const SECTIONS = {
   images:   { title:'<i class="fa-solid fa-images" style="color:var(--or);margin-right:7px"></i>Image Manager', act:'' },
   users:    { title:'<i class="fa-solid fa-users-gear" style="color:var(--or);margin-right:7px"></i>Account & Users', act:'' },
   log:      { title:'<i class="fa-solid fa-clock-rotate-left" style="color:var(--or);margin-right:7px"></i>Activity Log', act:'' },
-  rentals:  { title:'<i class="fa-solid fa-building" style="color:var(--or);margin-right:7px"></i>Building Rentals', act:'' }
+  rentals:  { title:'<i class="fa-solid fa-building" style="color:var(--or);margin-right:7px"></i>Building Rentals', act:'' },
+  erp:      { title:'<i class="fa-solid fa-toolbox" style="color:var(--or);margin-right:7px"></i>Company ERP & Tools', act:'' }
 };
 
 window.goto = function(sec) {

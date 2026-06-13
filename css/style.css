@@ -274,12 +274,12 @@ body::before {
   color: var(--text); text-decoration: none; font-weight: 500; font-family: 'Barlow', sans-serif;
   transition: all 0.2s ease;
 }
-.nav-dropdown-item i { color: var(--primary); font-size: 1.1em; width: 24px; text-align: center; }
-.nav-dropdown-item:hover { background: rgba(255,107,0,0.05); color: var(--primary); padding-left: 24px; }
+.nav-dropdown-item i { color: var(--red); font-size: 1.1em; width: 24px; text-align: center; }
+.nav-dropdown-item:hover { background: rgba(204,0,0,0.05); color: var(--red); padding-left: 24px; }
 body.dark-mode .nav-dropdown-menu { background: #1c2230; border-color: rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 body.dark-mode .nav-dropdown-menu::before { background: #1c2230; border-color: rgba(255,255,255,0.05); }
 body.dark-mode .nav-dropdown-item { color: #e0e6ed; }
-body.dark-mode .nav-dropdown-item:hover { background: rgba(255,107,0,0.1); color: var(--primary); }
+body.dark-mode .nav-dropdown-item:hover { background: rgba(255,102,102,0.1); color: #ff6666; }
 
 .nav-link {
   font-family:'Barlow',sans-serif;
@@ -295,11 +295,11 @@ body.dark-mode .nav-dropdown-item:hover { background: rgba(255,107,0,0.1); color
   content:''; position:absolute;
   bottom:-2px; left:0;
   width:0; height:2px;
-  background:linear-gradient(90deg,var(--orange),var(--blue));
+  background:linear-gradient(90deg,var(--orange),var(--red));
   border-radius:2px;
   transition:width .3s var(--ease);
 }
-.nav-link:hover, .nav-link.active { color:var(--blue) }
+.nav-link:hover, .nav-link.active { color:var(--red) }
 .nav-link:hover::after, .nav-link.active::after { width:100% }
 
 .mobile-only { display:none }
@@ -1336,14 +1336,14 @@ body.dark-mode .nav-dropdown-item:hover { background: rgba(255,107,0,0.1); color
   font-size:.92rem; font-weight:700;
   margin-bottom:6px; color:var(--dark); line-height:1.35;
   transition:color .22s;
-  display:-webkit-box; -webkit-line-clamp:2;
+  display:-webkit-box; -webkit-line-clamp: 2; line-clamp: 2;
   -webkit-box-orient:vertical; overflow:hidden;
 }
 .product-card:hover .product-details h4 { color:var(--blue) }
 .product-desc {
   font-size:.85rem; color:var(--muted);
   margin-bottom:14px; line-height:1.55;
-  display:-webkit-box; -webkit-line-clamp:2;
+  display:-webkit-box; -webkit-line-clamp: 2; line-clamp: 2;
   -webkit-box-orient:vertical; overflow:hidden;
 }
 .product-bottom {
@@ -2014,8 +2014,8 @@ body.dark-mode .about-experience-badge { box-shadow:0 8px 32px rgba(255,153,0,.3
   }
   .mobile-bottom-bar .nav-link i { margin-right:0; font-size:1.15rem; opacity:1 }
   .mobile-bottom-bar .nav-link::after { display:none }
-  .mobile-bottom-bar .nav-link.active { color:var(--blue) }
-  .mobile-bottom-bar .nav-link.active i { color:var(--blue) }
+  .mobile-bottom-bar .nav-link.active { color:var(--red) }
+  .mobile-bottom-bar .nav-link.active i { color:var(--red) }
 
   /* Hide original nav-menu on mobile */
   .navbar .nav-menu { display:none !important }
@@ -2061,9 +2061,9 @@ body.dark-mode .about-experience-badge { box-shadow:0 8px 32px rgba(255,153,0,.3
   .products-grid { grid-template-columns:repeat(2,1fr); gap:12px }
   .product-img   { height:160px }
   .product-details { padding:10px 12px }
-  .product-details h4 { font-size:.82rem; -webkit-line-clamp:2 }
+  .product-details h4 { font-size:.82rem; -webkit-line-clamp: 2; line-clamp: 2 }
   .product-cat { font-size:.65rem; margin-bottom:4px; letter-spacing:1.5px }
-  .product-desc { font-size:.78rem; -webkit-line-clamp:2; margin-bottom:10px }
+  .product-desc { font-size:.78rem; -webkit-line-clamp: 2; line-clamp: 2; margin-bottom:10px }
   .price { font-size:.95rem }
   .btn-cart { padding:6px 10px; font-size:.72rem; white-space:nowrap }
   .product-bottom { flex-direction:column; align-items:flex-start; gap:8px }
@@ -2082,7 +2082,7 @@ body.dark-mode .about-experience-badge { box-shadow:0 8px 32px rgba(255,153,0,.3
   /* dark mode bottom bar */
   body.dark-mode .mobile-bottom-bar { background:#1c2230; border-top-color:#2a3345 }
   body.dark-mode .mobile-bottom-bar .nav-link { color:#5a6a7e }
-  body.dark-mode .mobile-bottom-bar .nav-link.active { color:#4da6ff }
+  body.dark-mode .mobile-bottom-bar .nav-link.active { color:#ff6666 }
 }
 
 /* ══════════════════════════════════════
@@ -3344,7 +3344,7 @@ body.dark-mode .about-experience-badge { box-shadow:0 8px 32px rgba(255,153,0,.3
   top: 100px;
   right: 20px;
   z-index: 999;
-  background: linear-gradient(135deg, var(--dark, #111) 0%, #000 100%);
+  background: linear-gradient(135deg, var(--red, #cc0000) 0%, #990000 100%);
   color: #fff;
   padding: 10px 24px 10px 18px;
   border-radius: 50px;
@@ -3352,12 +3352,12 @@ body.dark-mode .about-experience-badge { box-shadow:0 8px 32px rgba(255,153,0,.3
   font-family: 'Barlow Condensed', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 25px rgba(204,0,0,0.3);
   display: flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  border: 2px solid rgba(255,153,0,0.3);
+  border: 2px solid rgba(255,255,255,0.3);
   animation: floatPulse 3s ease-in-out infinite;
   overflow: hidden;
   transition: all 0.3s var(--ease, ease);
@@ -3857,9 +3857,10 @@ body.dark-mode .about-experience-badge { box-shadow:0 8px 32px rgba(255,153,0,.3
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 15, 35, 0.85);
+    background: linear-gradient(135deg, rgba(204, 0, 0, 0.9), rgba(153, 0, 0, 0.95));
     backdrop-filter: blur(15px);
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 -10px 30px rgba(204, 0, 0, 0.2);
     z-index: 3;
     padding: 24px 0;
 }
@@ -3872,21 +3873,27 @@ body.dark-mode .about-experience-badge { box-shadow:0 8px 32px rgba(255,153,0,.3
     text-align: center;
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+}
+.stat-item:hover {
+    transform: translateY(-8px) scale(1.05);
 }
 .stat-number {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 2.8rem;
+    font-size: 3.2rem;
     font-weight: 900;
-    color: var(--orange, #ff9900);
+    color: #ffffff;
     line-height: 1;
     margin-bottom: 6px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 .stat-label {
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.95rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.9);
 }
 
 /* ── Brand Matrix ── */
